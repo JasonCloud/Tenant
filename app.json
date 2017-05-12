@@ -1,0 +1,29 @@
+{
+  "pages":[
+    "pages/index/index",
+    "pages/homeSource/homeSource",
+    "pages/homeDetail/homeDetail",
+    "pages/logs/logs"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "租客",
+    "navigationBarTextStyle":"black"
+  },
+  "tabBar": {
+    "color":"#677075",
+    "selectedColor":"#344966",
+    "list": [{
+      "iconPath":"./images/tab_ic_home_mormal@3x.png",
+      "selectedIconPath":"./images/tab_ic_home_pressed@3x.png",
+      "pagePath": "pages/index/index",
+      "text": "首页"
+    }, {
+      "iconPath":"./images/tab_ic_housing_normal@3x.png",
+      "selectedIconPath":"./images/tab_ic_housing_pressed@3x.png",
+      "pagePath": "pages/homeSource/homeSource",
+      "text": "房源"
+    }]
+  }
+}

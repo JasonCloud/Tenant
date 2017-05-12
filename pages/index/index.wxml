@@ -1,0 +1,115 @@
+<!--index.wxml-->
+<view class="container">
+  <!--banner图块-->
+  <view class="bar">
+    <swiper indicator-dots="{{indicatorDots}}" bindchange="change"
+            autoplay="{{autoplay}}" circular="{{circular}}" interval="{{interval}}" duration="{{duration}}">
+      <block wx:for="{{imgs}}" wx:key="{{index}}">
+        <swiper-item>
+          <image src="{{item}}" class="slide-image" mode="aspectFill"/>
+        </swiper-item>
+      </block>
+    </swiper>
+    <view class="search">
+      <input type="text" placeholder="区域" placeholder-class="placeholder_input"/>
+      <input type="text" placeholder="面积" placeholder-class="placeholder_input"/>
+      <view class="search_btn">
+        <image src="../../images/ic_search.png" mode="aspectFill"></image>
+      </view>
+    </view>
+    <view class="dots">
+      <block wx:for="{{imgs}}" wx:key="{{index}}">
+        <view class="{{current_num == index ? 'checked' : ''}}"></view>
+      </block>
+    </view>
+    <view class="foot">
+      <view class="idx">
+        <text>会员</text>
+        <text>6658人</text>
+      </view>
+      <view class="idx">
+        <text>顾问</text>
+        <text>3325人</text>
+      </view>
+      <view class="idx">
+        <text>楼盘</text>
+        <text>8894</text>
+      </view>
+      <view class="idx">
+        <text>成交楼盘</text>
+      <text>7784</text>
+      </view>
+    </view>
+  </view>
+  <!--房源选择-->
+  <view class="nav-title">
+    <view class="idx">
+      <image src="../../images/ic_home_railwey_around.png" mode="scaleToFill"/>
+      <text>地铁周边</text>
+    </view>
+    <view class="idx">
+      <image src="../../images/ic_home_5A.png" mode="scaleToFill"/>
+      <text>5A写字楼</text>
+    </view>
+    <view class="idx">
+      <image src="../../images/ic_home_ceative_park.png" mode="scaleToFill"/>
+      <text>创意园</text>
+    </view>
+    <view class="idx">
+      <image src="../../images/ic_home_landmrk.png" mode="scaleToFill"/>
+      <text>地标建筑</text>
+    </view>
+  </view>
+  <view class="choice-box">
+    <view class="idx">
+      <view class="title border-bottom">
+        <image src="../../images/ico_around.png"/>
+        <text class="h1">全民招商</text>
+        <image src="../../images/ico_around.png"/>
+      </view>
+      <text>专业团队</text>
+      <text class="border-bottom">一对一极致服务</text>
+    </view>
+    <view class="idx">
+      <view class="title border-bottom">
+        <image src="../../images/ico_around.png"/>
+        <text class="h1">全民招商</text>
+        <image src="../../images/ico_around.png"/>
+      </view>
+      <text>专业团队</text>
+      <text class="border-bottom">一对一极致服务</text>
+    </view>
+    <view class="idx">
+      <view class="title border-bottom">
+        <image src="../../images/ico_around.png"/>
+        <text class="h1">全民招商</text>
+        <image src="../../images/ico_around.png"/>
+      </view>
+      <text>专业团队</text>
+      <text class="border-bottom">一对一极致服务</text>
+    </view>
+  </view>
+  <view class="banner margin20px">
+    <image src="{{imgs[3]}}" mode="aspectFill"/>
+  </view>
+  <view class="choice_lei_xing margin20px">
+    <text class="{{choice_checked_first == 0 ? 'checked': ''}}" data-index="0" bindtap="check" data-type="first">热门商圈</text>
+    <text class="{{choice_checked_first == 1 ? 'checked': ''}}" data-index="1" bindtap="check" data-type="first">团队规模</text>
+    <text class="{{choice_checked_first == 2 ? 'checked': ''}}" data-index="2" bindtap="check" data-type="first">办公类型</text>
+  </view>
+  <view class="img-box margin20px">
+    <image src="{{imgs[2]}}" mode="aspectFill" />
+    <text>#珠江新城#</text>
+  </view>
+  <view class=" margin20px one_choice">
+    <text class="checked">热门房源</text>
+  </view>
+  <view class="img-box margin20px" wx:for="{{imgs}}" wx:key="{{index}}">
+    <image src="{{item}}" mode="aspectFill" />
+    <text>#珠江新城#</text>
+  </view>
+
+  <view class="look_more">
+    <view class="btn">查看更多房源</view>
+  </view>
+</view>
