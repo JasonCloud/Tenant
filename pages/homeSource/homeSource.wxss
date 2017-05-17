@@ -33,18 +33,22 @@
 .placeholder_class{
     color: #aaaaaa;
 }
+.border{
+    height: 2rpx;
+    background-color: #bebebe;
+    width: 100%;
+}
 /*筛选Bar样式开始*/
 .container .nav{
-    background-color: #ffffff;
     display: flex;
     align-items: center;
     justify-content: space-around;
     padding: 30rpx 0;
-    border-bottom: 2rpx solid #bebebe;
+    /*border-bottom: 2rpx solid #bebebe;*/
+    background-color: #edeff1;
 }
 .container .nav .tow-ico{
     display:flex;
-    flex-warp:;
     flex-direction:column;
     height:27rpx;
     justify-content:space-between;
@@ -64,9 +68,86 @@
     font-size: 14px;
     margin-right: 12rpx;
 }
+.container .nav text.checked{
+    color: #141414;
+}
 .container .nav .item .ico{
     width: 20rpx;
     height: 10rpx;
+}
+.container .nav-box .filter-list-box{
+    position: relative;
+    width: 100%;
+}
+.container .nav-box .filter-list{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: space-around;
+    color:#555555;
+    align-items: flex-start;
+    z-index: 30;
+    padding-bottom: 40rpx;
+}
+.container .nav-box .filter-list .item{
+    display: flex;
+    flex-grow: 1;
+    justify-content: flex-start;
+    flex-direction: column;
+    margin-left: 30rpx;
+}
+.container .filter-list .item text{
+    display: block;
+    border-bottom: 1rpx solid #bebebe;
+    font-size: 36rpx;
+    line-height: 150%;
+    padding: 20rpx 0;
+}
+.container .filter-list .item text.checked{
+    color: #141414;
+}
+.container .nav-box .filter-condition{
+    background-color: #ffffff;
+    position: absolute;
+    width: 100%;
+    z-index: 30;
+}
+.container .nav-box .filter-condition .item{
+    padding: 30rpx 0;
+    border-bottom: 1rpx solid #bebebe;
+}
+.nav-box .filter-condition .item text{
+    display: block;
+    color:#555555;
+    font-size: 36rpx;
+}
+.nav-box .filter-condition .item .child-box{
+    padding-left: 30rpx;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.nav-box .filter-condition .item .child-box text{
+    margin-top: 30rpx;
+    flex-shrink: 0;
+    margin-right: 16rpx;
+    padding: 16rpx 0;
+    border: 1rpx solid #bebebe;
+    font-size: 28rpx;
+    -o-text-overflow: ellipsis;/*兼容opera*/
+    text-overflow: ellipsis;/*这就是省略号喽*/
+    overflow: hidden;/*设置超过的隐藏*/
+    white-space: nowrap;/*设置不折行*/
+    border-radius: 8rpx;
+    width: 160rpx;
+    text-align: center;
+}
+.nav-box .filter-condition .item text.title{
+    color: #141414;
+    padding-left: 30rpx;
 }
 /*筛选Bar样式结束*/
 

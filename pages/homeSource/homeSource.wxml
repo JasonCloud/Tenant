@@ -6,25 +6,58 @@
         </view>
     </view>
     <!--筛选bar-->
-    <view class="nav">
-        <view class="item">
-            <text>区域</text>
-            <image src="../../images/btn_down_gray.png" class="ico"></image>
+    <view class="nav-box">
+        <view class="nav">
+            <view class="item" catchtap="choiceCondition" data-type="area">
+                <text class="{{areaOrFilter == 'area' ? 'checked':''}}">区域</text>
+                <image src="{{areaOrFilter == 'area' ? '../../images/btn_up_check.png':'../../images/btn_down.png'}}" class="ico"></image>
+            </view>
+            <view class="item border"></view>
+            <view class="item" catchtap="choiceCondition" data-type="filter">
+                <text class="{{areaOrFilter == 'filter' ? 'checked':''}}">筛选</text>
+                <image src="{{areaOrFilter == 'filter' ? '../../images/btn_up_check.png':'../../images/btn_down.png'}}" class="ico"></image>
+            </view>
+            <view class="item border"></view>
+            <view class="item">
+                <text>价格</text>
+                <view class="tow-ico">
+                    <image src="../../images/btn_up_gray.png" class="ico"></image>
+                    <image src="../../images/btn_down_gray.png" class="ico"></image>
+                </view>
+            </view>
         </view>
-        <view class="item border"></view>
-        <view class="item">
-            <text>筛选</text>
-            <image src="../../images/btn_down_gray.png" class="ico"></image>
-        </view>
-        <view class="item border"></view>
-        <view class="item">
-            <text>价格</text>
-            <view class="tow-ico">
-                <image src="../../images/btn_up_gray.png" class="ico"></image>
-                <image src="../../images/btn_down_gray.png" class="ico"></image>
+        <view class="filter-list-box">
+            <view class="filter-list" wx:if="{{areaOrFilter == 'area'}}">
+                <view class="item" catchtap="changeArea">
+                    <text class="{{areaType=='area' ? 'checked' : ''}}" data-type="area">区域</text>
+                    <text class="{{areaType=='metro' ? 'checked' : ''}}" data-type="metro">地铁</text>
+                </view>
+                <view class="item" catchtap="changeCity">
+                    <block wx:for="{{listOne}}" wx:key="idx" wx:for-index="idx">
+                        <text class="{{selectId == item.id ? 'checked' : ''}}" data-id="{{item.id}}" data-index="{{idx}}" data-fatherId="{{item.fatherId}}">{{item.wordName}}</text>
+                    </block>
+                </view>
+                <view class="item">
+                    <block wx:for="{{listTow}}" wx:key="idx" wx:for-index="idx">
+                        <text class="item-child" data-id="{{item.id}}"  data-fatherId="{{item.fatherId}}">{{item.wordName}}</text>
+                    </block>
+                </view>
+            </view>
+            <view class="filter-condition" wx:if="{{areaOrFilter == 'filter'}}">
+                <block wx:for="{{conditionKey}}" wx:key="index">
+                    <view class="item">
+                        <text class="title">{{condition[item]['wordName']}}</text>
+                        <view class="child-box">
+                            <block wx:for="{{condition[item]['allChildrenKeyword']}}" wx:for-item="child_item" wx:key="child_idx" wx:for-index="child_idx">
+                                <text data-id="{{child_item.id}}" class="{{selectConditionId == child_item.id ? 'checked': ''}}">{{child_item.wordName}}</text>
+                            </block>
+                        </view>
+                    </view>
+                </block>
             </view>
         </view>
     </view>
+    <view class="border"></view>
     <!---列表-->
     <view class="list">
         <block wx:for="{{list}}" wx:key="index">
