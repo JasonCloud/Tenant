@@ -1,4 +1,5 @@
 // pages/homeDetail/homeDetail.js
+const http = require('../../utils/http')
 Page({
   data:{
     indicatorDots:true,
@@ -7,6 +8,8 @@ Page({
     duration:500,
     list:[1,2,3,4],
     mask:false,
+    page_num:1,
+    detail_obj:{},
     phone_num:'15216175693',
     btnType:'prevlook',
     imgUrls:[
@@ -58,8 +61,17 @@ Page({
       btnType:'zi_xun'
     })
   },
+  get_house_detail(id){
+    http.get('/api/mansion/detail',{id:id}).then(res => {
+      console.log(res)
+    }).catch(res =>{
+      console.log(res)
+    })
+  },
   onLoad:function(options){
     // 页面初始化 options为页面跳转所带来的参数
+    console.log(options)
+    this.get_house_detail(options.id)
   },
   onReady:function(){
     // 页面渲染完成

@@ -1,6 +1,7 @@
 //index.js
 //获取应用实例
 var app = getApp()
+const http = require('../../utils/http')
 Page({
   data: {
     motto: 'Hello World',
@@ -38,6 +39,11 @@ Page({
   onLoad: function () {
     console.log('onLoad')
     var that = this
+    http.get('/api/mansion/condition').then(res => {
+      console.log(res)
+    }).catch(err => {
+      console.log(err)
+    })
     //调用应用实例的方法获取全局数据
     app.getUserInfo(function(userInfo){
       //更新数据

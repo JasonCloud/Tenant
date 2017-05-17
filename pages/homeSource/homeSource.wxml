@@ -34,16 +34,16 @@
                     <text class="info"></text>
                 </view>
 
-                <view class="right" catchtap="gotoDetail">
+                <view class="right" catchtap="gotoDetail" data-id="{{item.id}}">
                     <view class="item_child">
-                        <text class="h1">房源名称1</text>
+                        <text class="h1">{{item.name}}</text>
                         <image src="../../images/jingpin.png" class="ico"></image>
                     </view>
                     <view class="item_child">
-                        <text class="h2">69元/m2/月起</text>
+                        <text class="h2">{{item.price}}起</text>
                     </view>
                     <view class="item_child">
-                        <text>天河-珠江新城 | 100-1250m2</text>
+                        <text>{{item.region}} | {{item.area}}</text>
                     </view>
                     <view class="item_child">
                         <text class="span">标签1</text>
