@@ -26,7 +26,7 @@
         </view>
     </view>
     <view class="list-box margin-bottom-20">
-            <view class="list" wx:for="{{list}}" wx:key="index">
+            <view class="list" wx:for="{{list}}" wx:key="index" catchtap="houseLook">
                 <view class="left"><text class="blue">90</text><texte class="fontcolor555">m2</texte></view>
                 <view class="middle"><text class="red">69</text><text class="fontcolor555">元/m2/月起</text></view>
                 <view class="right">

@@ -61,6 +61,12 @@ Page({
       btnType:'zi_xun'
     })
   },
+  houseLook(){
+    wx.navigateTo({
+      url:"../houseLook/houseLook"
+    })
+
+  },
   get_house_detail(id){
     http.get('/api/mansion/detail',{id:id}).then(res => {
       console.log(res)
