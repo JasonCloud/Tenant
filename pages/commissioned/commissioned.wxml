@@ -1,0 +1,8 @@
+<view class="commissioned-page">
+    <form>
+        <view class="name">
+            <view class="text">姓名</view>
+            <input type="text"/>
+        </view>
+    </form>
+</view>

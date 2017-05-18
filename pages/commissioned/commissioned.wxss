@@ -1,0 +1,11 @@
+.commissioned-page{
+    padding-top: 25rpx;
+}
+.commissioned-page .name{
+    background-color: #fff;
+    padding-left: 25rpx;
+}
+.commissioned-page .name .text{
+    color: #555555;
+    font-size: 16px;
+}
