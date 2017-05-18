@@ -110,14 +110,21 @@
     color: #141414;
 }
 .container .nav-box .filter-condition{
-    background-color: #ffffff;
+    background-color: #edeff1;
     position: absolute;
     width: 100%;
     z-index: 30;
 }
+.container .nav-box .filter-condition .item-box{
+    margin-bottom: 40rpx;
+}
 .container .nav-box .filter-condition .item{
     padding: 30rpx 0;
+    background-color: #ffffff;
     border-bottom: 1rpx solid #bebebe;
+}
+.nav-box .filter-condition .item:last-child{
+    border-bottom: none;
 }
 .nav-box .filter-condition .item text{
     display: block;
@@ -129,6 +136,16 @@
     display: flex;
     align-items: center;
     flex-wrap: wrap;
+}
+.nav-box .filter-condition .item .title-box{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.nav-box .filter-condition .item .title-box image{
+    width: 30rpx;
+    height: 18rpx;
+    margin-right: 20rpx;
 }
 .nav-box .filter-condition .item .child-box text{
     margin-top: 30rpx;
@@ -145,9 +162,38 @@
     width: 160rpx;
     text-align: center;
 }
+
 .nav-box .filter-condition .item text.title{
     color: #141414;
     padding-left: 30rpx;
+}
+.nav-box .filter-condition .item text.checked{
+    color: #ffffff;
+    background-color: #3399ff;
+    border: 1rpx solid #3399ff;
+}
+.container .filter-condition .btn-box{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 20rpx;
+}
+.container .filter-condition .btn-box button{
+    border-radius: 0;
+    flex-grow: 1;
+    box-sizing: border-box;
+    background-color: #ffffff;
+    color: #555555;
+    font-size: 36rpx;
+    border: none;
+}
+.container .filter-condition .btn-box button.confirm{
+    color: #ffffff;
+    background-color: #3399ff;
+}
+.container .filter-condition .btn-box button:after{
+    display: none;
 }
 /*筛选Bar样式结束*/
 

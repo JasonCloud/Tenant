@@ -7,7 +7,22 @@ Page({
     search_input:"",
     areaType:'area',//默认选择为区域
     page_num:1,
-    selectConditionId:-1,
+    tabType:{
+      area:'',
+      price:'',
+      subwayPerimeter:'',
+      landmarkBuilding:'',
+      office:'',
+      creativeGarden:''
+    },
+    selectConditionId:{
+      area:-1,
+      price:-1,
+      subwayPerimeter:-1,
+      landmarkBuilding:-1,
+      office:-1,
+      creativeGarden:-1
+    },
     condition:{},//所有的筛选条件
     selectId:-1,//区域选择二级id
     areaOrFilter:'filter',//区域和筛选切换
@@ -15,17 +30,29 @@ Page({
     listTow:[],
     conditionKey:['area','price','subwayPerimeter','landmarkBuilding','office','creativeGarden']
   },
+  //删除搜索
   dele(){
     this.setData({
       search_input:''
     })
   },
+  //跳转到详情
   gotoDetail(e){
     let id = e.currentTarget.dataset.id;
     wx.navigateTo({
       url:"../homeDetail/homeDetail?id="+id
     })
   },
+  //获取某一个区域的id
+  selectConditionId(e){
+    let id = e.target.dataset.id;
+    let type = e.target.dataset.type;
+    this.data.selectConditionId[type] = id;
+    this.setData({
+      selectConditionId:this.data.selectConditionId
+    })
+  },
+  //选择区域或者筛选切换
   choiceCondition(e){
     let type = e.currentTarget.dataset.type;
     if(type == this.data.areaOrFilter){
@@ -39,6 +66,22 @@ Page({
     }
 
   },
+  tab(e){
+    let type = e.currentTarget.dataset.type;
+    if(type == this.data.tabType[type]){
+      this.data.tabType[type] = '';
+      this.setData({
+        tabType:this.data.tabType
+      })
+    }else {
+      this.data.tabType[type] = type;
+      this.setData({
+        tabType:this.data.tabType
+      })
+    }
+
+  },
+  //获取房源列表
   get_house_list(obj){
     http.get('/api/mansion/list',obj).then(res => {
       console.log('====')
@@ -55,9 +98,11 @@ Page({
       }
     })
   },
+  //获取筛选条件
   getCondition(){
     return util.getStorage('condition')
   },
+  //选择区域和地铁线路
   changeArea(e){
     let areaType = e.target.dataset.type;
     if(areaType == 'area'){
@@ -77,6 +122,7 @@ Page({
     }
 
   },
+  //选择具体某个城市或者地铁的某个站点
   changeCity(e){
     let index = e.target.dataset.index
     let id = e.target.dataset.id
@@ -98,6 +144,7 @@ Page({
       listTow:condition.region.allChildrenKeyword[0].allChildrenKeyword,
     })
   },
+  //显示筛选数据的处理
   initCondition(condition){
     if(!condition)return {}
     condition.area.wordName = '面积(㎡)';
@@ -109,6 +156,23 @@ Page({
       v.wordName = v.wordName.match(/\d+/g).join('')
     })
     return condition;
+  },
+  //重置筛选条件
+  reset(){
+    let obj_condition = this.data.selectConditionId;
+    for(let key in obj_condition){
+      if(obj_condition.hasOwnProperty(key)){
+        obj_condition[key] = -1;
+      }
+    }
+    this.setData({
+      selectConditionId:obj_condition
+    })
+  },
+  confirm(){
+    this.setData({
+      areaOrFilter:''
+    })
   },
   onReady:function(){
     // 页面渲染完成

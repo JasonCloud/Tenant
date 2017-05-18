@@ -44,16 +44,24 @@
                 </view>
             </view>
             <view class="filter-condition" wx:if="{{areaOrFilter == 'filter'}}">
-                <block wx:for="{{conditionKey}}" wx:key="index">
-                    <view class="item">
-                        <text class="title">{{condition[item]['wordName']}}</text>
-                        <view class="child-box">
+                <view class="item-box" >
+                    <view class="item" wx:for="{{conditionKey}}" wx:key="index">
+                        <view class="title-box" data-index="{{index}}" catchtap="tab" data-type="{{item}}">
+                            <text class="title">{{condition[item]['wordName']}}</text>
+                            <image src="{{tabType[item] == item ? '../../images/btn_up_check.png':'../../images/btn_down.png'}}" mode="aspectFill" wx:if="{{index>1}}"/>
+                        </view>
+
+                        <view class="child-box" catchtap="selectConditionId" wx:if="{{index == 1 || index == 0 || tabType[item] == item}}">
                             <block wx:for="{{condition[item]['allChildrenKeyword']}}" wx:for-item="child_item" wx:key="child_idx" wx:for-index="child_idx">
-                                <text data-id="{{child_item.id}}" class="{{selectConditionId == child_item.id ? 'checked': ''}}">{{child_item.wordName}}</text>
+                                <text data-id="{{child_item.id}}" class="{{selectConditionId[item] == child_item.id ? 'checked': ''}}" data-type="{{item}}">{{child_item.wordName}}</text>
                             </block>
                         </view>
                     </view>
-                </block>
+                </view>
+                <view class="btn-box">
+                    <button class="btn reset" catchtap="reset">重置</button>
+                    <button class="btn confirm" catchtap="confirm">确定</button>
+                </view>
             </view>
         </view>
     </view>
