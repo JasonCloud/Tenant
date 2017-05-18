@@ -9,11 +9,11 @@
     </swiper>
     <view class="title-box margin-bottom-20">
         <view class="left">
-            <text class="h1">房源名称1</text>
-            <text class="h2">天河-珠江新城 | 8套在租</text>
+            <text class="h1">{{detailObject.name}}</text>
+            <text class="h2">{{detailObject.region}} | 8套在租</text>
         </view>
         <view class="right">
-            <text class="red">69</text><text class="fontcolor555">元/m2/月起</text>
+            <text class="red">{{detailObject.price}}</text><text class="fontcolor555">元/m2/月起</text>
         </view>
     </view>
     <view class="filter-box">
@@ -47,9 +47,9 @@
     <view class="built-introduction margin-bottom-20">
         <view class="h1">楼盘介绍</view>
         <view class="introduction-box">
-            <video src="{{videoSrc}}" class="video" controls="{{true}}" poster="../../images/video.png"></video>
+            <video src="{{detailObject.videoLink}}" class="video" controls="{{true}}"></video>
             <text class="content fontcolor555">
-                楼盘介绍内容楼盘介绍内容楼盘介绍内容楼盘介绍内容楼盘介绍内容楼盘介绍内容楼盘介绍内容楼盘介绍内容楼盘介绍内容楼盘介绍内容楼盘介
+                {{detailObject.info}}
             </text>
         </view>
     </view>
@@ -58,35 +58,35 @@
         <view class="info">
             <view class="item">
                 <text>总面积</text>
-                <text>5000m2</text>
+                <text>{{detailObject.property.area}}</text>
             </view>
             <view class="item">
                 <text>层高</text>
-                <text>净高2.8m2</text>
+                <text>{{detailObject.property.storyHeight}}</text>
             </view>
             <view class="item">
                 <text>层数</text>
-                <text>20层</text>
+                <text>{{detailObject.property.plies}}</text>
             </view>
             <view class="item">
                 <text>业主类型</text>
-                <text>大业主</text>
+                <text>{{detailObject.property.ownerType}}</text>
             </view>
             <view class="item">
                 <text>业主等级</text>
-                <text>甲级</text>
+                <text>{{detailObject.property.ownerLevel}}</text>
             </view>
             <view class="item">
                 <text>网络</text>
-                <text>文字内容内容内容内容内容内容内容内容 内容内容</text>
+                <text>{{detailObject.property.network}}</text>
             </view>
             <view class="item">
                 <text>空调</text>
-                <text>文字内容内容内容内容内容内容内容内容 内容内容</text>
+                <text>{{detailObject.property.airCondition}}</text>
             </view>
             <view class="item">
                 <text>停车位</text>
-                <text>文字内容内容内容内容内容内容内容内容 内容内容</text>
+                <text>{{detailObject.property.parkingSpace}}</text>
             </view>
         </view>
     </view>
@@ -95,35 +95,35 @@
         <view class="info">
             <view class="item">
                 <text>租金</text>
-                <text>文字内容 </text>
+                <text>{{detailObject.let.rental}}元</text>
             </view>
             <view class="item">
                 <text>物业费 </text>
-                <text>文字内容</text>
+                <text>{{detailObject.let.propertyFee}}元</text>
             </view>
             <view class="item">
                 <text>停车费</text>
-                <text>文字内容</text>
+                <text>{{detailObject.let.parkingFee}}元</text>
             </view>
             <view class="item">
                 <text>水电费</text>
-                <text>文字内容</text>
+                <text>{{detailObject.let.utilities}}元</text>
             </view>
             <view class="item">
                 <text>押付形式</text>
-                <text>文字内容</text>
+                <text>{{detailObject.let.oshitsuke}}</text>
             </view>
             <view class="item">
                 <text>合同租期</text>
-                <text>文字内容文字内容文字内容文字内容文字内容文字内容</text>
+                <text>{{detailObject.let.contract}}</text>
             </view>
             <view class="item">
                 <text>实用率</text>
-                <text>文字内容文字内容文字内容文字内容文字内容</text>
+                <text>{{detailObject.let.utilityRatio}}</text>
             </view>
             <view class="item">
                 <text>装修期</text>
-                <text>文字内容文字内容文字内容文字内容</text>
+                <text>{{detailObject.let.fitment}}</text>
             </view>
         </view>
     </view>

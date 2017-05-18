@@ -258,4 +258,10 @@
     margin-left: 6rpx;
     flex-wrap: wrap;
 }
+.container .list .info{
+    padding: 30rpx 0 0;
+    font-size: 36rpx;
+    color:#707070;
+    text-align: center;
+}
 /*列表样式结束*/

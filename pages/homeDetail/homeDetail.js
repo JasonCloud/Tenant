@@ -10,6 +10,7 @@ Page({
     mask:false,
     page_num:1,
     detail_obj:{},
+    detailObject:{},
     phone_num:'15216175693',
     btnType:'prevlook',
     imgUrls:[
@@ -18,8 +19,7 @@ Page({
         'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1494154720482&di=cf09b5974e321ce3aa9a580ba95923b9&imgtype=0&src=http%3A%2F%2Fimage.tianjimedia.com%2FuploadImages%2F2015%2F028%2F25%2F6Q1AIE18139Y.JPEG',
         'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1494154720482&di=24b13864d742c8e6fcc516eb7bd9dcb9&imgtype=0&src=http%3A%2F%2Fimage.tianjimedia.com%2FuploadImages%2F2015%2F028%2F28%2FIW4C75336797.JPEG'
     ],
-    videoSrc:'http://wxsnsdy.tc.qq.com/105/20210/snsdyvideodownload?filekey=30280201010421301f0201690402534804102ca905ce620b1241b726bc41dcff44e00204012882540400&bizid=1023&hy=SH&fileparam=302c020101042530230204136ffd93020457e3c4ff02024ef202031e8d7f02030f42400204045a320a0201000400'
-  },
+   },
   formSubmit(e){
     console.log(e)
   },
@@ -65,12 +65,19 @@ Page({
     http.get('/api/mansion/detail',{id:id}).then(res => {
       console.log(res)
     }).catch(res =>{
-      console.log(res)
+      let obj = this.initDetailData(res.data.data)
+      this.setData({
+        detailObject: obj
+      })
     })
+  },
+  initDetailData(obj){
+    if(!obj) return {};
+    obj.price = obj.price.replace(/\D/g,'');
+    return obj;
   },
   onLoad:function(options){
     // 页面初始化 options为页面跳转所带来的参数
-    console.log(options)
     this.get_house_detail(options.id)
   },
   onReady:function(){

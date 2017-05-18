@@ -1,13 +1,16 @@
 // pages/homeSource/homeSource.js
 const http = require('../../utils/http')
 const util = require('../../utils/util')
+const Throttle = util.Throttle();
 Page({
   data:{
     list:[],
     search_input:"",
     areaType:'area',//默认选择为区域
     page_num:1,
-    tabType:{
+    resultAreaId:'',
+    upChoiceValue:'',//价格排序图标控制
+    tabType:{ //展开控制
       area:'',
       price:'',
       subwayPerimeter:'',
@@ -16,16 +19,16 @@ Page({
       creativeGarden:''
     },
     selectConditionId:{
-      area:-1,
-      price:-1,
-      subwayPerimeter:-1,
-      landmarkBuilding:-1,
-      office:-1,
-      creativeGarden:-1
+      area:'',
+      price:'',
+      subwayPerimeter:'',
+      landmarkBuilding:'',
+      office:'',
+      creativeGarden:''
     },
     condition:{},//所有的筛选条件
     selectId:-1,//区域选择二级id
-    areaOrFilter:'filter',//区域和筛选切换
+    areaOrFilter:'',//区域和筛选切换
     listOne:[],
     listTow:[],
     conditionKey:['area','price','subwayPerimeter','landmarkBuilding','office','creativeGarden']
@@ -47,10 +50,41 @@ Page({
   selectConditionId(e){
     let id = e.target.dataset.id;
     let type = e.target.dataset.type;
-    this.data.selectConditionId[type] = id;
-    this.setData({
-      selectConditionId:this.data.selectConditionId
+
+    if(id == this.data.selectConditionId[type]){
+      this.data.selectConditionId[type] = '';
+      this.setData({
+        selectConditionId:this.data.selectConditionId
+      })
+    }else {
+      this.data.selectConditionId[type] = id;
+      this.setData({
+        selectConditionId:this.data.selectConditionId
+      })
+    }
+
+
+  },
+  //价格排序
+  priceSort(){
+    if(this.data.list.length <2) return;
+    Throttle(()=>{
+
+      if(this.data.upChoiceValue){
+        this.data.list.sort((a,b) =>{
+          return a.price - b.price;
+        })
+      }else{
+        this.data.list.sort((a,b) =>{
+          return b.price - a.price;
+        })
+      }
+      this.setData({
+        upChoiceValue:!this.data.upChoiceValue,
+        list:this.data.list
+      })
     })
+
   },
   //选择区域或者筛选切换
   choiceCondition(e){
@@ -61,7 +95,8 @@ Page({
       })
     }else{
       this.setData({
-        areaOrFilter:type
+        areaOrFilter:type,
+        resultAreaId:''
       })
     }
 
@@ -81,19 +116,41 @@ Page({
     }
 
   },
+  choiceArea(e){
+    let id = e.currentTarget.dataset.id;
+    this.setData({
+      areaOrFilter:'',
+      page_num:1
+    })
+    if(this.data.resultAreaId != id){
+      let obj = {
+        pageNo:this.data.page_num
+      }
+      this.data.areaType == 'metro'? obj.subway = id : obj.region = id;
+      console.log(obj)
+      this.get_house_list(obj,true).then(res => {
+        this.setData({
+          resultAreaId:id
+        })
+      })
+    }
+    console.log(this.data.resultAreaId)
+    console.log(id)
+
+  },
   //获取房源列表
-  get_house_list(obj){
-    http.get('/api/mansion/list',obj).then(res => {
+  get_house_list(obj,reset=false){
+   return http.get('/api/mansion/list',obj).then(res => {
       console.log('====')
       console.log(res)
     }).catch(res =>{
       let arr = res.data.data && res.data.data.result;
       if(!!arr){
         arr.forEach(res => {
-          res.price = res.price.replace('￥','元')
+          res.price = res.price.replace(/\D/g,'')
         })
         this.setData({
-          list:Array.prototype.concat(this.data.list,arr)
+          list:reset ? arr : Array.prototype.concat(this.data.list,arr)
         })
       }
     })
@@ -162,17 +219,43 @@ Page({
     let obj_condition = this.data.selectConditionId;
     for(let key in obj_condition){
       if(obj_condition.hasOwnProperty(key)){
-        obj_condition[key] = -1;
+        obj_condition[key] = '';
       }
     }
     this.setData({
       selectConditionId:obj_condition
     })
   },
+  //筛选条件确定
   confirm(){
     this.setData({
-      areaOrFilter:''
+      areaOrFilter:'',
+      page_num:1
     })
+    if(!this.objectEmpty()(this.data.selectConditionId)){
+      let obj = Object.assign({},this.data.selectConditionId);
+      this.data.areaType == 'metro'? obj.subway = this.data.resultAreaId : obj.region = this.data.resultAreaId;
+      this.get_house_list(obj,true)
+    }
+
+  },
+  objectEmpty(){
+    let flag = true;
+    return function fn(obj){
+      let arrKey = Object.keys(obj);
+      let len = arrKey.length;
+      if(len ===0 )return flag;
+      for(let i of arrKey){
+        if(typeof obj[i] == 'string' && !!obj[i].trim()){
+          flag = false
+        }else if(typeof obj[i] == 'object' && !!obj[i]){
+          fn(obj[i])
+        }else if(typeof obj[i] !== 'string'){
+          flag = false;
+        }
+      }
+      return flag;
+    }
   },
   onReady:function(){
     // 页面渲染完成

@@ -18,11 +18,11 @@
                 <image src="{{areaOrFilter == 'filter' ? '../../images/btn_up_check.png':'../../images/btn_down.png'}}" class="ico"></image>
             </view>
             <view class="item border"></view>
-            <view class="item">
+            <view class="item" catchtap="priceSort">
                 <text>价格</text>
-                <view class="tow-ico">
-                    <image src="../../images/btn_up_gray.png" class="ico"></image>
-                    <image src="../../images/btn_down_gray.png" class="ico"></image>
+                <view class="tow-ico" >
+                    <image src="{{upChoiceValue === false ? '../../images/btn_up_check.png':'../../images/btn_up.png'}}" class="ico"></image>
+                    <image src="{{upChoiceValue === true ? '../../images/btn_down_check.png':'../../images/btn_down.png'}}" class="ico"></image>
                 </view>
             </view>
         </view>
@@ -39,7 +39,7 @@
                 </view>
                 <view class="item">
                     <block wx:for="{{listTow}}" wx:key="idx" wx:for-index="idx">
-                        <text class="item-child" data-id="{{item.id}}"  data-fatherId="{{item.fatherId}}">{{item.wordName}}</text>
+                        <text class="item-child" data-id="{{item.id}}"  data-fatherId="{{item.fatherId}}" catchtap="choiceArea">{{item.wordName}}</text>
                     </block>
                 </view>
             </view>
@@ -71,7 +71,7 @@
         <block wx:for="{{list}}" wx:key="index">
             <view class="item">
                 <view class="left">
-                    <image src="../../images/eg.png" mode="aspectFill"></image>
+                    <image src="{{item.image}}" mode="aspectFill"></image>
                     <text class="info"></text>
                 </view>
 
@@ -81,7 +81,7 @@
                         <image src="../../images/jingpin.png" class="ico"></image>
                     </view>
                     <view class="item_child">
-                        <text class="h2">{{item.price}}起</text>
+                        <text class="h2">{{item.price}}元/㎡起</text>
                     </view>
                     <view class="item_child">
                         <text>{{item.region}} | {{item.area}}</text>
@@ -93,5 +93,6 @@
                 </view>
             </view>
         </block>
+        <view class="info" wx:if="{{list.length == 0}}">没有数据</view>
     </view>
 </view>
