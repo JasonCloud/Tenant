@@ -2,9 +2,9 @@
   "pages":[
     "pages/homeSource/homeSource",
     "pages/index/index",
-
     "pages/homeDetail/homeDetail",
-    "pages/logs/logs"
+    "pages/logs/logs",
+    "pages/commissioned/commissioned"
   ],
   "window":{
     "backgroundTextStyle":"light",
