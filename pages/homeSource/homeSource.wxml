@@ -18,11 +18,11 @@
                 <image src="{{areaOrFilter == 'filter' ? '../../images/btn_up_check.png':'../../images/btn_down.png'}}" class="ico"></image>
             </view>
             <view class="item border"></view>
-            <view class="item">
+            <view class="item" catchtap="priceSort">
                 <text>价格</text>
-                <view class="tow-ico">
-                    <image src="../../images/btn_up_gray.png" class="ico"></image>
-                    <image src="../../images/btn_down_gray.png" class="ico"></image>
+                <view class="tow-ico" >
+                    <image src="{{upChoiceValue === false ? '../../images/btn_up_check.png':'../../images/btn_up.png'}}" class="ico"></image>
+                    <image src="{{upChoiceValue === true ? '../../images/btn_down_check.png':'../../images/btn_down.png'}}" class="ico"></image>
                 </view>
             </view>
         </view>
@@ -39,21 +39,29 @@
                 </view>
                 <view class="item">
                     <block wx:for="{{listTow}}" wx:key="idx" wx:for-index="idx">
-                        <text class="item-child" data-id="{{item.id}}"  data-fatherId="{{item.fatherId}}">{{item.wordName}}</text>
+                        <text class="item-child" data-id="{{item.id}}"  data-fatherId="{{item.fatherId}}" catchtap="choiceArea">{{item.wordName}}</text>
                     </block>
                 </view>
             </view>
             <view class="filter-condition" wx:if="{{areaOrFilter == 'filter'}}">
-                <block wx:for="{{conditionKey}}" wx:key="index">
-                    <view class="item">
-                        <text class="title">{{condition[item]['wordName']}}</text>
-                        <view class="child-box">
+                <view class="item-box" >
+                    <view class="item" wx:for="{{conditionKey}}" wx:key="index">
+                        <view class="title-box" data-index="{{index}}" catchtap="tab" data-type="{{item}}">
+                            <text class="title">{{condition[item]['wordName']}}</text>
+                            <image src="{{tabType[item] == item ? '../../images/btn_up_check.png':'../../images/btn_down.png'}}" mode="aspectFill" wx:if="{{index>1}}"/>
+                        </view>
+
+                        <view class="child-box" catchtap="selectConditionId" wx:if="{{index == 1 || index == 0 || tabType[item] == item}}">
                             <block wx:for="{{condition[item]['allChildrenKeyword']}}" wx:for-item="child_item" wx:key="child_idx" wx:for-index="child_idx">
-                                <text data-id="{{child_item.id}}" class="{{selectConditionId == child_item.id ? 'checked': ''}}">{{child_item.wordName}}</text>
+                                <text data-id="{{child_item.id}}" class="{{selectConditionId[item] == child_item.id ? 'checked': ''}}" data-type="{{item}}">{{child_item.wordName}}</text>
                             </block>
                         </view>
                     </view>
-                </block>
+                </view>
+                <view class="btn-box">
+                    <button class="btn reset" catchtap="reset">重置</button>
+                    <button class="btn confirm" catchtap="confirm">确定</button>
+                </view>
             </view>
         </view>
     </view>
@@ -63,7 +71,7 @@
         <block wx:for="{{list}}" wx:key="index">
             <view class="item">
                 <view class="left">
-                    <image src="../../images/eg.png" mode="aspectFill"></image>
+                    <image src="{{item.image}}" mode="aspectFill"></image>
                     <text class="info"></text>
                 </view>
 
@@ -73,7 +81,7 @@
                         <image src="../../images/jingpin.png" class="ico"></image>
                     </view>
                     <view class="item_child">
-                        <text class="h2">{{item.price}}起</text>
+                        <text class="h2">{{item.price}}元/㎡起</text>
                     </view>
                     <view class="item_child">
                         <text>{{item.region}} | {{item.area}}</text>
@@ -85,5 +93,6 @@
                 </view>
             </view>
         </block>
+        <view class="info" wx:if="{{list.length == 0}}">没有数据</view>
     </view>
 </view>

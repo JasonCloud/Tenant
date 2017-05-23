@@ -1,0 +1,62 @@
+<!--pages/houseLook/houseLook.wxml-->
+<view class="container">
+    <image src="../../images/pic.jpg" class="bg" mode="aspectFill"></image>
+    <view class="cover">
+        <view class="price color_55"><text class="red">3000</text>/月</view>
+        <view class="item">
+            <view class="item_flex">
+                <view class="color_55">单位</view>
+                <view>
+                    <text class="red">69</text>
+                    <text class="color_14">元/m2/月起</text>
+                </view>
+            </view>
+            <view class="item_flex">
+                <view class="color_55">面积</view>
+                <view>
+                    <text class="red">74</text>
+                    <text class="color_14">m2</text>
+                </view>
+            </view>
+        </view>
+        <view class="item">
+            <view class="item_flex">
+                <view class="color_55">装修</view>
+                <view>
+                    <text class="color_14">简装</text>
+                </view>
+            </view>
+            <view class="item_flex">
+                <view class="color_55">可容纳工位</view>
+                <view>
+                    <text class="color_14">14~17</text>
+                </view>
+            </view>
+        </view>
+        <view class="btn-box">
+            <view class="btn zi-xun" bindtap="zi_xun">咨询</view>
+            <view class="btn prevlook" bindtap="prev_look_home">预约看房</view>
+        </view>
+    </view>
+    <view class="mask" wx:if="{{mask}}" catchtap="control_mask">
+        <view class="content" wx:if="{{btnType === 'prevlook'?true : false}}" catchtap="prevent">
+            <form bindsubmit="formSubmit" bindreset="formReset" >
+                <view class="title">
+                    <text class="left">预约信息</text>
+                    <button class="right" formType="reset">取消</button>
+                </view>
+                <view class="input">
+                    <label for="nickname">称谓</label><input type="text" name="nickname" id="nickname" auto-focus/>
+                </view>
+                <view class="input">
+                    <label for="phone">电话</label><input type="text" name="phone" id="phone"/>
+                </view>
+                <button class="btn" formType="submit">提交预约</button>
+            </form>
+        </view>
+        <view class="call" wx:else catchtap="prevent">
+            <text>{{phone_num}}</text>
+            <text catchtap="call">拨打</text>
+        </view>
+    </view>
+</view>

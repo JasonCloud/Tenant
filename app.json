@@ -4,6 +4,7 @@
     "pages/index/index",
     "pages/homeDetail/homeDetail",
     "pages/logs/logs",
+    "pages/houseLook/houseLook",
     "pages/commissioned/commissioned"
   ],
   "window":{

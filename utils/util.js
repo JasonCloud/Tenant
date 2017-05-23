@@ -50,6 +50,15 @@ function getStorage(key,cb,sync=true){
     })
   }
 };
+function Throttle () {
+  var time = null;
+  return function (fn,timerout=500) {
+    clearTimeout(time);
+    time = setTimeout(() => {
+      fn()
+    },timerout)
+  }
+}
 //移除缓存
 function removeStorage(key,cb,sync=true){
   if(sync){
@@ -99,5 +108,6 @@ module.exports = {
   getStorage: getStorage,
   removeStorage: removeStorage,
   alert: alert,
-  toThousands: toThousands
+  toThousands: toThousands,
+  Throttle:Throttle
 }
