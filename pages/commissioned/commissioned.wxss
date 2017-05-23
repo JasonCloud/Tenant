@@ -1,11 +1,108 @@
 .commissioned-page{
     padding-top: 25rpx;
 }
+/*姓名*/
+.commissioned-page .name-wrap{
+   padding-left: 25rpx;
+    background-color: #fff;
+}
 .commissioned-page .name{
     background-color: #fff;
-    padding-left: 25rpx;
+    display:flex;
+    align-items: center;
+    border-bottom:1px solid #bebebe;
 }
 .commissioned-page .name .text{
     color: #555555;
-    font-size: 16px;
+    font-size: 34rpx;
+    flex-shrink: 0;
+}
+.commissioned-page .name input{
+    display:block;
+    flex-grow: 1;
+    padding: 25rpx 25rpx 25rpx 185rpx ;
+    width: 100%;
+    color:#333;
+    font-size: 32rpx;
+}
+/*手机*/
+.commissioned-page .mobile-wrap{
+   padding-left: 25rpx;
+    background-color: #fff;
+}
+.commissioned-page .mobile{
+    background-color:#fff;
+    display:flex;
+    align-items: center;
+    /*border-bottom:1px solid #bebebe;*/
+}
+.commissioned-page .mobile .text{
+    color: #555555;
+    font-size: 34rpx;
+    flex-shrink: 0;
+}
+.commissioned-page .mobile input{
+    display:block;
+    flex-grow: 1;
+    padding: 25rpx 25rpx 25rpx 151rpx ;
+    width: 100%;
+    color:#333;
+    font-size: 32rpx;
+}
+/*区域,楼盘名称,面积,租金*/
+.area-wrap{
+    padding-left: 25rpx;
+    background-color: #fff;
+    margin-top:25rpx;
+}
+.estate-name-wrap,.size-wrap,.rent-wrap{
+    padding-left: 25rpx;
+    background-color: #fff;
+}
+.area,.estate-name,.size,.rent{
+    display:flex;
+    align-items: center;
+    border-bottom:1px solid #bebebe;
+}
+.rent{
+    border-bottom:none;
+}
+.text{
+    color: #555555;
+    font-size: 34rpx;
+    flex-shrink: 0;
+}
+input{
+    display:block;
+    flex-grow: 1;
+    width: 100%;
+    color:#333;
+    font-size: 32rpx;
+}
+.area input{
+    padding: 25rpx 25rpx 25rpx 185rpx;
+}
+.estate-name input{
+    padding: 25rpx 25rpx 25rpx 117rpx;
+}
+.size input{
+    padding: 25rpx 25rpx 25rpx 100rpx;
+}
+.rent input{
+    padding: 25rpx 25rpx 25rpx 32rpx;
+}
+/*按钮*/
+button{
+    margin: 50rpx 25rpx;
+    background-color: #344966;
+    color:#fff;
+}
+.button-hover{
+    opacity: 0.7;
+    background-color:#344966;
+    color:#fff;
+}
+button[disabled][type="default"],button[disabled]:not([type]){
+    color:#fff;
+    background-color:#c5c5c5;
 }
