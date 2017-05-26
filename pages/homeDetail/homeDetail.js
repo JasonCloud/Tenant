@@ -1,7 +1,9 @@
 // pages/homeDetail/homeDetail.js
-const http = require('../../utils/http')
+const http = require('../../utils/http');
+const util = require('../../utils/util');
 Page({
   data:{
+    id:null,
     indicatorDots:true,
     autoplay:true,
     interval:4000,
@@ -11,7 +13,7 @@ Page({
     page_num:1,
     detail_obj:{},
     detailObject:{},
-    phone_num:'15216175693',
+    phone_num:'',
     btnType:'prevlook',
     imgUrls:[
       'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1494154720483&di=189fc9c3663d9580aecf139880bf8623&imgtype=0&src=http%3A%2F%2Fimage.tianjimedia.com%2FuploadImages%2F2015%2F028%2F31%2FQ3U828G33506.JPEG',
@@ -21,10 +23,16 @@ Page({
     ],
    },
   formSubmit(e){
-    console.log(e)
+     var name = e.detail.value.nickname;
+     var phone = e.detail.value.phone;
+    http.post('/api/apply/wechat/order',{tenantsName:name,tenantsPhone:phone,mansionId:this.data.id},true).then(res=>{
+      this.formReset();
+      util.alert({title:res.msg});
+    }).catch(err=>{
+        util.alert({content:JSON.stringify(err)})
+    })
   },
   formReset(e){
-    console.log(e)
     this.setData({
       mask:false
     })
@@ -36,7 +44,7 @@ Page({
     })
   },
   prevent(){
-    console.log('pre')
+
   },
   call(){
     var self = this
@@ -61,30 +69,38 @@ Page({
       btnType:'zi_xun'
     })
   },
-  houseLook(){
+  houseLook(e){
+    var id = e.currentTarget.dataset.id;
     wx.navigateTo({
-      url:"../houseLook/houseLook"
+      url:`../houseLook/houseLook?id=${id}`
     })
 
   },
   get_house_detail(id){
     http.get('/api/mansion/detail',{id:id}).then(res => {
-      console.log(res)
-    }).catch(res =>{
-      let obj = this.initDetailData(res.data.data)
+      let obj = this.initDetailData(res.data);
       this.setData({
-        detailObject: obj
+        detailObject: obj,
+        phone_num:obj.telephone,
+        list:obj.apartments
       })
+    }).catch(res =>{
+
     })
   },
   initDetailData(obj){
     if(!obj) return {};
     obj.price = obj.price.replace(/\D/g,'');
+    obj.orders = obj.orders.map(function(item){
+      item.price = item .price.replace(/\D/g,'');
+      return item;
+    });
     return obj;
   },
   onLoad:function(options){
     // 页面初始化 options为页面跳转所带来的参数
-    this.get_house_detail(options.id)
+    this.get_house_detail(options.id);
+    this.setData({id:options.id});
   },
   onReady:function(){
     // 页面渲染完成

@@ -67,6 +67,15 @@ page{
     align-items: center;
     justify-content: space-between;
 }
+.cover .item .item_flex .unit_flex{
+    display:flex;
+    flex-grow: 1;
+    align-items: flex-start;
+}
+.cover .item .item_flex .unit_price{
+    flex-shrink: 0;
+    padding-right: 20rpx;
+}
 .cover .item .item_flex:first-child{
     border-right: 1rpx solid #bebebe;
 }

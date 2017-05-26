@@ -1,20 +1,20 @@
 <!--pages/houseLook/houseLook.wxml-->
 <view class="container">
-    <image src="../../images/pic.jpg" class="bg" mode="aspectFill"></image>
+    <image src="{{detailObj.bannerImage}}" class="bg" mode="aspectFill"></image>
     <view class="cover">
-        <view class="price color_55"><text class="red">3000</text>/月</view>
+        <view class="price color_55"><text class="red">{{detailObj.totalPrice}}</text>/月</view>
         <view class="item">
             <view class="item_flex">
-                <view class="color_55">单位</view>
-                <view>
-                    <text class="red">69</text>
-                    <text class="color_14">元/m2/月起</text>
-                </view>
+                    <view class="color_55 unit_price">单位</view>
+                    <view>
+                        <text class="red">{{detailObj.unitPrice}}</text>
+                        <text class="color_14">元/m2/月起</text>
+                    </view>
             </view>
             <view class="item_flex">
                 <view class="color_55">面积</view>
                 <view>
-                    <text class="red">74</text>
+                    <text class="red">{{detailObj.totalArea}}</text>
                     <text class="color_14">m2</text>
                 </view>
             </view>
@@ -23,13 +23,13 @@
             <view class="item_flex">
                 <view class="color_55">装修</view>
                 <view>
-                    <text class="color_14">简装</text>
+                    <text class="color_14">{{detailObj.renovation}}</text>
                 </view>
             </view>
             <view class="item_flex">
                 <view class="color_55">可容纳工位</view>
                 <view>
-                    <text class="color_14">14~17</text>
+                    <text class="color_14">{{detailObj.stationNumber}}</text>
                 </view>
             </view>
         </view>
@@ -46,10 +46,10 @@
                     <button class="right" formType="reset">取消</button>
                 </view>
                 <view class="input">
-                    <label for="nickname">称谓</label><input type="text" name="nickname" id="nickname" auto-focus/>
+                    <label for="nickname">称谓</label><input type="text" name="nickname" id="nickname" focus/>
                 </view>
                 <view class="input">
-                    <label for="phone">电话</label><input type="text" name="phone" id="phone"/>
+                    <label for="phone">电话</label><input type="number" name="phone" id="phone"/>
                 </view>
                 <button class="btn" formType="submit">提交预约</button>
             </form>

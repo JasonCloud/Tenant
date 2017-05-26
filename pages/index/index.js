@@ -41,12 +41,12 @@ Page({
     console.log('onLoad')
     var that = this
     http.get('/api/mansion/condition').then(res => {
-      console.log(res)
-    }).catch(res => {
-      console.log(res)
-      if(res.data && res.data.data){
-        util.setStorage('condition',res.data.data)
+      console.log(res);
+      if(res && res.data){
+        util.setStorage('condition',res.data)
       }
+    }).catch(res => {
+
     })
     //调用应用实例的方法获取全局数据
     app.getUserInfo(function(userInfo){
@@ -56,4 +56,4 @@ Page({
       })
     })
   }
-})
+});

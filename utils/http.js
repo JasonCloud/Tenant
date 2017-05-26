@@ -3,7 +3,7 @@
  */
 const _Promise = require('./bluebird');
 const  util = require('./util');
-const src = 'http://zua.51feijin.com';
+const src = 'https://zua.51feijin.com';
 const ignoreUrl = /(login)|(weixinUserInfo)$/g;
 let userInfo = {};
 function wxlogin(url,resolve,reject,param,model){
@@ -54,7 +54,7 @@ function wxlogin(url,resolve,reject,param,model){
         }
     });
 }
-function requireHttp(url,resolve,reject,data,model){
+function requireHttp(url,resolve,reject,data,model,contentType=false){
     // var unionid = util.getStorage('userInfo').unionId;
     // var token = util.getStorage('userInfo').token;
     // data.token = token;
@@ -63,16 +63,12 @@ function requireHttp(url,resolve,reject,data,model){
         url:src + url,
         data:data,
         header: {
-            'Content-Type': 'application/x-www-form-urlencoded'
+            'Content-Type': contentType ? 'application/json' :  'application/x-www-form-urlencoded'
         },
         method:model,
         success:function(res){
             if(res.errMsg=='request:ok'){
-                if(res.data.status == 0){
-                    resolve(res.data);
-                }else{
-                    reject(res);
-                }
+                resolve(res.data);
             }else{
                 reject(res);
             }
@@ -82,7 +78,8 @@ function requireHttp(url,resolve,reject,data,model){
         }
     });
 }
-function get(url,obj){
+function get(url,obj,contentType){
+    //contentType 为true是yi参数以json传给后台,false以表单(默认false)
     var data = obj||{};
     // var unionid = util.getStorage('userInfo').unionId;
     // var token = util.getStorage('userInfo').token;
@@ -93,7 +90,8 @@ function get(url,obj){
     //     data.token = token;
     // }
     return new _Promise((resolve,reject)=>{
-        requireHttp(url,resolve,reject,data,'GET')
+        //contentType 为true是yi参数以json传给后台,false以表单(默认false)
+        requireHttp(url,resolve,reject,data,'GET',contentType)
         // if(!!!unionid && !!!token && !!!ignoreUrl.test(url)){
         //     wxlogin(url,resolve,reject,data,'GET');
         // }else {
@@ -102,9 +100,11 @@ function get(url,obj){
     });
 };
 
-function post(url,obj){
+function post(url,obj,contentType){
     var data = obj||{};
-    requireHttp(url,resolve,reject,data,'POST')
+    return new _Promise((resolve,reject)=>{
+        requireHttp(url,resolve,reject,data,'POST',contentType);
+    })
     // var unionid = util.getStorage('userInfo').unionId;
     // var token = util.getStorage('userInfo').token;
     // if(unionid){

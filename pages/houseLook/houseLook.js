@@ -1,15 +1,25 @@
 // pages/houseLook/houseLook.js
+const http = require('../../utils/http');
+const util = require('../../utils/util');
 Page({
   data:{
+    id:null,
     mask:false,
     btnType:'prevlook',
-    phone_num:'110'
+    phone_num:'',
+    detailObj:{}
   },
   formSubmit(e){
-    console.log(e)
+    var name = e.detail.value.nickname;
+    var phone = e.detail.value.phone;
+    http.post('/api/apply/wechat/order',{tenantsName:name,tenantsPhone:phone,apartmentId:this.data.id},true).then(res=>{
+      this.formReset();
+      util.alert({title:res.msg});
+    }).catch(err=>{
+      util.alert({content:JSON.stringify(err)})
+    })
   },
   formReset(e){
-    console.log(e)
     this.setData({
       mask:false
     })
@@ -46,8 +56,19 @@ Page({
       btnType:'zi_xun'
     })
   },
+  getDetail(id){
+    http.get('/api/apartment/detail',{id:id}).then(res=>{
+      console.log(res);
+      this.setData({
+        phone_num:res.data.telephone,
+        detailObj:res.data
+      })
+    })
+  },
   onLoad:function(options){
     // 页面初始化 options为页面跳转所带来的参数
+    this.setData({id:options.id});
+    this.getDetail(options.id);
   },
   onReady:function(){
     // 页面渲染完成

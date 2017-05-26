@@ -1,0 +1,112 @@
+.search-page{
+
+}
+.search-page .input-wrap{
+    background-color: #344966;
+    padding: 0 0 30rpx 55rpx;
+    display:flex;
+    align-items: center;
+}
+.search-page .input-wrap .content{
+    background-color:#fff;
+    height: 60rpx;
+    border-radius: 30rpx;
+    display:flex;
+    align-items: center;
+    flex-grow: 1;
+    padding:0 0 0 25rpx;
+}
+.search-page .input-wrap .cancel{
+    color:#fff;
+    font-size: 34rpx;
+    padding: 0 50rpx 0 45rpx;
+}
+.search-page .input-wrap .content image{
+    width: 44rpx;
+    height: 46rpx;
+}
+.search-page .input-wrap .content input{
+    height: 100%;
+    flex-grow: 1;
+    padding: 0 20rpx;
+    font-size: 28rpx;
+}
+/*没数据*/
+.search-page .not-data{
+    font-size: 40rpx;
+    color:#344966;
+    padding-top:300rpx;
+}
+.search-page .not-data text{
+    display: block;
+    padding-top:20rpx;
+    text-align: center;
+}
+/*列表样式开始*/
+.search-page .list{
+    padding-left: 30rpx;
+    padding-bottom: 40rpx;
+    background-color: #ffffff;
+}
+.search-page .list .item{
+    display: flex;
+    padding: 30rpx 0;
+    border-bottom: 1rpx solid #bebebe;
+}
+.search-page .list .item .left{
+    width: 280rpx;
+    height: 210rpx;
+    flex-shrink: 0;
+    position: relative;
+}
+.search-page .list .item .left image{
+    width: 100%;
+    height: 100%;
+}
+.search-page .list .item .right{
+    margin-left: 20rpx;
+}
+.search-page .list .right .item_child{
+    padding-bottom: 14rpx;
+}
+.search-page .list .right .item_child:first-child{
+    display: flex;
+    align-items: center;
+    padding-bottom: 20rpx;
+}
+.search-page .list .right .item_child .ico{
+    width: 40rpx;
+    height: 40rpx;
+}
+.search-page .list .item_child text{
+    display: block;
+    font-size: 14px;
+    color: #a8a8a8;
+}
+.search-page .list .item_child .h1{
+    color: #141414;
+    font-size: 18px;
+}
+.search-page .list .item_child .h2{
+    color: #555;
+    font-size: 16px;
+}
+.search-page .list .item_child:last-child{
+    display: flex;
+    padding-bottom: 0;
+}
+.search-page .list .item_child .span{
+    color:#66b3ff;
+    padding:8rpx 12rpx;
+    border: 1rpx solid #66b3ff;
+    border-radius: 42rpx;
+    margin-left: 6rpx;
+    flex-wrap: wrap;
+}
+.search-page .list .info{
+    padding: 30rpx 0 0;
+    font-size: 36rpx;
+    color:#707070;
+    text-align: center;
+}
+/*列表样式结束*/

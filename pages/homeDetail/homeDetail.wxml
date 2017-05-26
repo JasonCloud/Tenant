@@ -1,9 +1,9 @@
 <view class="container">
-    <swiper indicator-dots="{{indicatorDots}}" indicator-active-color="#fff"
+    <swiper indicator-dots="{{indicatorDots&&false}}" indicator-active-color="#fff"
             autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular="{{true}}">
-        <block wx:for="{{imgUrls}}" wx:key="index">
+        <block >
             <swiper-item>
-                <image src="{{item}}" class="slide-image" mode="aspectFill"/>
+                <image src="{{detailObject.banner}}" class="slide-image" mode="aspectFill"/>
             </swiper-item>
         </block>
     </swiper>
@@ -16,32 +16,34 @@
             <text class="red">{{detailObject.price}}</text><text class="fontcolor555">元/m2/月起</text>
         </view>
     </view>
-    <view class="filter-box">
-        <view class="filter-condition">
-            <view class="item checked">全部</view>
-            <view class="item">0-100m2</view>
-            <view class="item">100-200m2</view>
-            <view class="item">200-300m2</view>
-            <view class="item">300-500m2</view>
+    <block wx:if="{{list.length>0}}">
+        <view class="filter-box">
+            <view class="filter-condition">
+                <view class="item checked">全部</view>
+                <view class="item">0-100m2</view>
+                <view class="item">100-200m2</view>
+                <view class="item">200-300m2</view>
+                <view class="item">300-500m2</view>
+            </view>
         </view>
-    </view>
-    <view class="list-box margin-bottom-20">
-            <view class="list" wx:for="{{list}}" wx:key="index" catchtap="houseLook">
-                <view class="left"><text class="blue">90</text><texte class="fontcolor555">m2</texte></view>
-                <view class="middle"><text class="red">69</text><text class="fontcolor555">元/m2/月起</text></view>
+        <view class="list-box margin-bottom-20">
+            <view class="list" wx:for="{{list}}" wx:key="index" catchtap="houseLook" data-id="{{item.id}}">
+                <view class="left"><text class="blue">{{item.totalArea}}</text><texte class="fontcolor555">m2</texte></view>
+                <view class="middle"><text class="red">{{item.unitPrice}}</text><text class="fontcolor555">元/m2/月起</text></view>
                 <view class="right">
-                    <image src="../../images/eg.png" mode="aspectFill"></image>
+                    <image src="{{item.bannerImage}}" mode="aspectFill"></image>
                     <text>精装</text>
                 </view>
             </view>
-        <view class="loadMore">点击查看更多</view>
-    </view>
-    <view class="done-recording margin-bottom-20">
+            <view class="loadMore">点击查看更多</view>
+        </view>
+    </block>
+    <view class="done-recording margin-bottom-20" wx:if="{{detailObject.orders.length > 0}}">
         <view class="h1">成交记录</view>
-        <view class="list" wx:for="{{list}}" wx:key="index">
-            <text>2017.2.26</text>
-            <text>90m2</text>
-            <text>成交价13444.50元/月</text>
+        <view class="list" wx:for="{{detailObject.orders}}" wx:key="index">
+            <text>{{item.data}}</text>
+            <text>{{item.area}}m2</text>
+            <text>成交价{{item.price}}元/月</text>
         </view>
     </view>
     <view class="built-introduction margin-bottom-20">
@@ -133,20 +135,20 @@
             <view class="item">
                 <image mode="aspectFill" src="../../images/ic_home_bus.png"></image>
                 <text>距</text>
-                <text class="blue">公交站名1</text>
-                <text>步行7分钟</text>
+                <text class="blue">{{detailObject.traffic.walk}}</text>
+                <text>步行{{detailObject.traffic.walkTime}}分钟</text>
             </view>
             <view class="item">
                 <image mode="aspectFill" src="../../images/ic_home_fly.png"></image>
                 <text>距</text>
-                <text class="blue">公交站名1</text>
-                <text>步行7分钟</text>
+                <text class="blue">{{detailObject.traffic.metro}}</text>
+                <text>地铁{{detailObject.traffic.metroTime}}分钟</text>
             </view>
             <view class="item">
                 <image mode="aspectFill" src="../../images/ic_home_railway.png"></image>
                 <text>距</text>
-                <text class="blue">公交站名1</text>
-                <text>步行7分钟</text>
+                <text class="blue">{{detailObject.traffic.drive}}</text>
+                <text>驾车{{detailObject.traffic.driveTime}}分钟</text>
             </view>
         </view>
     </view>
@@ -162,10 +164,10 @@
                 <button class="right" formType="reset">取消</button>
             </view>
                 <view class="input">
-                    <label for="nickname">称谓</label><input type="text" name="nickname" id="nickname" auto-focus/>
+                    <label for="nickname">称谓</label><input type="text" name="nickname" id="nickname" focus/>
                 </view>
                 <view class="input">
-                    <label for="phone">电话</label><input type="text" name="phone" id="phone"/>
+                    <label for="phone">电话</label><input type="number" name="phone" id="phone"/>
                 </view>
                 <button class="btn" formType="submit">提交预约</button>
             </form>

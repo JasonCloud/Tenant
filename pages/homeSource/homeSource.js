@@ -2,6 +2,7 @@
 const http = require('../../utils/http')
 const util = require('../../utils/util')
 const Throttle = util.Throttle();
+const app = getApp();
 Page({
   data:{
     list:[],
@@ -31,7 +32,8 @@ Page({
     areaOrFilter:'',//区域和筛选切换
     listOne:[],
     listTow:[],
-    conditionKey:['area','price','subwayPerimeter','landmarkBuilding','office','creativeGarden']
+    conditionKey:['area','price','subwayPerimeter','landmarkBuilding','office','creativeGarden'],
+    pageSize:10
   },
   //删除搜索
   dele(){
@@ -140,24 +142,26 @@ Page({
   },
   //获取房源列表
   get_house_list(obj,reset=false){
+    obj.pageSize = this.data.pageSize;
    return http.get('/api/mansion/list',obj).then(res => {
-      console.log('====')
-      console.log(res)
+     console.log(res);
+     let arr = res.data && res.data.result;
+     if(!!arr){
+       arr.forEach(res => {
+         res.price = res.price.replace(/\D/g,'')
+       })
+       this.setData({
+         list:reset ? arr : Array.prototype.concat(this.data.list,arr)
+       })
+     }
     }).catch(res =>{
-      let arr = res.data.data && res.data.data.result;
-      if(!!arr){
-        arr.forEach(res => {
-          res.price = res.price.replace(/\D/g,'')
-        })
-        this.setData({
-          list:reset ? arr : Array.prototype.concat(this.data.list,arr)
-        })
-      }
+
     })
   },
   //获取筛选条件
   getCondition(){
-    return util.getStorage('condition')
+    // return util.getStorage('condition')
+
   },
   //选择区域和地铁线路
   changeArea(e){
@@ -191,15 +195,25 @@ Page({
     }
 
   },
+  //搜索
+  search(){
+    wx.navigateTo({
+      url:"../search/search"
+    })
+  },
   onLoad:function(options){
     // 页面初始化 options为页面跳转所带来的参数
-    this.get_house_list({pageNo:this.data.page_num})
-    let condition = this.initCondition(this.getCondition());
-    this.setData({
-      condition:condition,
-      listOne:condition.region.allChildrenKeyword,
-      listTow:condition.region.allChildrenKeyword[0].allChildrenKeyword,
-    })
+    this.get_house_list({pageNo:this.data.page_num});
+    // let condition = this.initCondition(this.getCondition());
+    app.getCondition(res => {
+      console.log(res);
+      let condition = this.initCondition(res);
+      this.setData({
+        condition:condition,
+        listOne:condition.region.allChildrenKeyword,
+        listTow:condition.region.allChildrenKeyword[0].allChildrenKeyword,
+      })
+    });
   },
   //显示筛选数据的处理
   initCondition(condition){
@@ -223,8 +237,11 @@ Page({
       }
     }
     this.setData({
-      selectConditionId:obj_condition
-    })
+      selectConditionId:obj_condition,
+      upChoiceValue:'',
+      page_num:1
+    });
+    this.get_house_list({pageNo:this.data.page_num},true);
   },
   //筛选条件确定
   confirm(){

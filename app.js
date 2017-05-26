@@ -1,10 +1,9 @@
 //app.js
+const http = require('./utils/http');
 App({
   onLaunch: function () {
     //调用API从本地缓存中获取数据
-    var logs = wx.getStorageSync('logs') || []
-    logs.unshift(Date.now())
-    wx.setStorageSync('logs', logs)
+
   },
   getUserInfo:function(cb){
     var that = this
@@ -23,6 +22,16 @@ App({
         }
       })
     }
+  },
+  getCondition(cb){
+    http.get('/api/mansion/condition').then(res => {
+      if(cb && typeof cb == 'function'){
+        cb(res.data);
+      }
+      util.setStorage('condition',res.data);
+    }).catch(res => {
+
+    })
   },
   globalData:{
     userInfo:null
