@@ -34,8 +34,8 @@
                 </view>
             </view>
         </block>
-        <view class="info" wx:if="{{list.length == 0}}">没有数据</view>
     </view>
+    <view class="info" wx:if="{{list.length >0 && fetchAll}}">所有房源已经加载完</view>
     <!--没有数据-->
     <view class="not-data" wx:if="{{list.length <= 0 && searchFlag}}">
         <text>抱歉，没有找到符合的房源 </text>

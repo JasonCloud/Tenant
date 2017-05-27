@@ -22,6 +22,7 @@ Page({
         'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1494154720482&di=24b13864d742c8e6fcc516eb7bd9dcb9&imgtype=0&src=http%3A%2F%2Fimage.tianjimedia.com%2FuploadImages%2F2015%2F028%2F28%2FIW4C75336797.JPEG'
     ],
    },
+  //预约看房提交
   formSubmit(e){
      var name = e.detail.value.nickname;
      var phone = e.detail.value.phone;
@@ -32,6 +33,7 @@ Page({
         util.alert({content:JSON.stringify(err)})
     })
   },
+  //取消预约看房
   formReset(e){
     this.setData({
       mask:false
@@ -43,9 +45,11 @@ Page({
       mask:!this.data.mask
     })
   },
+  //辅助函数,防止事件冒泡
   prevent(){
 
   },
+  //咨询
   call(){
     var self = this
     wx.makePhoneCall({
@@ -69,12 +73,19 @@ Page({
       btnType:'zi_xun'
     })
   },
+  //查看户型详情
   houseLook(e){
     var id = e.currentTarget.dataset.id;
     wx.navigateTo({
       url:`../houseLook/houseLook?id=${id}`
     })
 
+  },
+  //查看更多
+  seeMore(){
+    wx.navigateTo({
+      url:`../homeSource/homeSource`
+    })
   },
   get_house_detail(id){
     http.get('/api/mansion/detail',{id:id}).then(res => {

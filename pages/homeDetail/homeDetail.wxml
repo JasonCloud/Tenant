@@ -35,7 +35,7 @@
                     <text>精装</text>
                 </view>
             </view>
-            <view class="loadMore">点击查看更多</view>
+            <view class="loadMore" catchtap="seeMore">点击查看更多</view>
         </view>
     </block>
     <view class="done-recording margin-bottom-20" wx:if="{{detailObject.orders.length > 0}}">
@@ -164,10 +164,10 @@
                 <button class="right" formType="reset">取消</button>
             </view>
                 <view class="input">
-                    <label for="nickname">称谓</label><input type="text" name="nickname" id="nickname" focus/>
+                    <label for="nickname">称谓</label><input type="text" name="nickname" id="nickname" focus cursor-spacing="90"/>
                 </view>
                 <view class="input">
-                    <label for="phone">电话</label><input type="number" name="phone" id="phone"/>
+                    <label for="phone">电话</label><input type="number" name="phone" id="phone" cursor-spacing="60"/>
                 </view>
                 <button class="btn" formType="submit">提交预约</button>
             </form>

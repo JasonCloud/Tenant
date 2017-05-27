@@ -8,8 +8,9 @@ Page({
     list:[],
     search_input:"",
     areaType:'area',//默认选择为区域
-    page_num:1,
-    resultAreaId:'',
+    filterType:'', //选项类型
+    page_num:1, //当前页数
+    resultAreaId:'', //区域筛选的id
     upChoiceValue:'',//价格排序图标控制
     tabType:{ //展开控制
       area:'',
@@ -33,7 +34,8 @@ Page({
     listOne:[],
     listTow:[],
     conditionKey:['area','price','subwayPerimeter','landmarkBuilding','office','creativeGarden'],
-    pageSize:10
+    pageSize:10,
+    fetchAll:false, //标注是否加载完数据
   },
   //删除搜索
   dele(){
@@ -98,10 +100,10 @@ Page({
     }else{
       this.setData({
         areaOrFilter:type,
-        resultAreaId:''
+        resultAreaId:'',
+        filterType:type,
       })
     }
-
   },
   tab(e){
     let type = e.currentTarget.dataset.type;
@@ -126,25 +128,33 @@ Page({
     })
     if(this.data.resultAreaId != id){
       let obj = {
-        pageNo:this.data.page_num
-      }
+        pageNo:this.data.page_num,
+        fetchAll:false,
+      };
       this.data.areaType == 'metro'? obj.subway = id : obj.region = id;
-      console.log(obj)
       this.get_house_list(obj,true).then(res => {
         this.setData({
           resultAreaId:id
-        })
+        });
       })
     }
-    console.log(this.data.resultAreaId)
-    console.log(id)
+    // console.log(this.data.resultAreaId)
+    // console.log(id)
 
   },
   //获取房源列表
   get_house_list(obj,reset=false){
     obj.pageSize = this.data.pageSize;
    return http.get('/api/mansion/list',obj).then(res => {
-     console.log(res);
+     if(res.data.result.length < this.data.pageSize){
+       this.setData({
+         fetchAll:true
+       })
+     }else if(res.data.resul.length >= this.data.pageSize){
+       this.setData({
+         page_num:this.page_num + 1
+       })
+     }
      let arr = res.data && res.data.result;
      if(!!arr){
        arr.forEach(res => {
@@ -239,7 +249,9 @@ Page({
     this.setData({
       selectConditionId:obj_condition,
       upChoiceValue:'',
-      page_num:1
+      page_num:1,
+      filterType:'',
+      fetchAll:false,
     });
     this.get_house_list({pageNo:this.data.page_num},true);
   },
@@ -247,14 +259,15 @@ Page({
   confirm(){
     this.setData({
       areaOrFilter:'',
-      page_num:1
+      page_num:1,
+      fetchAll:false,
     })
     if(!this.objectEmpty()(this.data.selectConditionId)){
       let obj = Object.assign({},this.data.selectConditionId);
       this.data.areaType == 'metro'? obj.subway = this.data.resultAreaId : obj.region = this.data.resultAreaId;
-      this.get_house_list(obj,true)
+      this.get_house_list(obj,true);
+      console.log(this.data.filterType);
     }
-
   },
   objectEmpty(){
     let flag = true;
@@ -285,5 +298,30 @@ Page({
   },
   onUnload:function(){
     // 页面关闭
-  }
+  },
+  onReachBottom: function() {
+    // Do something when page reach bottom.
+    if(this.page_num <= 1 || this.data.fetchAll){
+      return
+    }
+    if(this.data.areaOrFilter == 'area'){
+      let obj = {
+        pageNo:this.data.page_num
+      }
+      this.data.areaType == 'metro'? obj.subway = this.data.resultAreaId : obj.region = this.data.resultAreaId;
+      this.get_house_list(obj);
+
+    }else if(this.data.areaOrFilter == 'filter'){
+
+      if(!this.objectEmpty()(this.data.selectConditionId)){
+        let obj = Object.assign({},this.data.selectConditionId);
+        this.data.areaType == 'metro'? obj.subway = this.data.resultAreaId : obj.region = this.data.resultAreaId;
+        this.get_house_list(obj);
+      }
+
+    }else{
+      let obj = {pageNo:this.data.page_num};
+      this.get_house_list(obj);
+    }
+  },
 })

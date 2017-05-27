@@ -35,6 +35,17 @@ page{
     padding: 0;
     box-sizing: border-box;
 }
+.container view.bg{
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-size:cover;
+    background-repeat: no-repeat;
+    background-origin: border-box;
+    background-position: center;
+}
 .container .cover{
     position: fixed;
     bottom: 0;

@@ -202,6 +202,7 @@
     bottom: 0;
     right: 0;
     z-index: 22;
+    overflow: auto;
 }
 .mask .content{
     background-color: #ffffff;

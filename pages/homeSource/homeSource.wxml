@@ -1,7 +1,8 @@
 <view class="container">
     <view class="search">
-        <view class="input" catchtap="search">
-            <input type="text" placeholder="输入大厦名称或地址" value="{{search_input}}" placeholder-class="placeholder_class" disabled/>
+        <view class="input" bindtap="search">
+            <!--<input type="text" placeholder="输入大厦名称或地址" value="{{search_input}}" placeholder-class="placeholder_class" disabled />-->
+            <view class="input-tag">输入大厦名称或地址</view>
             <!--<image src="../../images/close-button.png" class="close" catchtap="dele" mode="aspectFill"></image>-->
         </view>
     </view>
@@ -96,4 +97,5 @@
         </block>
         <view class="info" wx:if="{{list.length == 0}}">没有数据</view>
     </view>
+    <view class="info" wx:if="{{list.length >0 && fetchAll}}" style="background-color:#edeff1;">所有房源已经加载完</view>
 </view>

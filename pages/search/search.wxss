@@ -109,4 +109,10 @@
     color:#707070;
     text-align: center;
 }
+.search-page .info{
+    padding: 30rpx 0;
+    font-size: 36rpx;
+    color:#707070;
+    text-align: center;
+}
 /*列表样式结束*/
