@@ -1,5 +1,6 @@
 //app.js
 const http = require('./utils/http');
+//appid wxbdaf2837541eb89f
 App({
   onLaunch: function () {
     //调用API从本地缓存中获取数据
