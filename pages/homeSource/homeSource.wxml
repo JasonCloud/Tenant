@@ -34,16 +34,19 @@
                     <text class="{{areaType=='metro' ? 'checked' : ''}}" data-type="metro">地铁</text>
                 </view>
                 <view class="item" catchtap="changeCity">
+                    <text wx:if="{{areaType=='area'}}" class="{{selectId == '' ? 'checked' : ''}}" data-id="" data-index="-1">不限</text>
                     <block wx:for="{{listOne}}" wx:key="idx" wx:for-index="idx">
                         <text class="{{selectId == item.id ? 'checked' : ''}}" data-id="{{item.id}}" data-index="{{idx}}" data-fatherId="{{item.fatherId}}">{{item.wordName}}</text>
                     </block>
                 </view>
                 <view class="item">
-                    <block wx:for="{{listTow}}" wx:key="idx" wx:for-index="idx">
+                    <text wx:if="{{areaType=='area'}}" data-id=""  data-fatherId="" catchtap="choiceArea">不限</text>
+                    <block wx:for="{{listTow}}" wx:key="idx" wx:for-index="idx" wx:if="{{selectId!=-1}}">
                         <text class="item-child" data-id="{{item.id}}"  data-fatherId="{{item.fatherId}}" catchtap="choiceArea">{{item.wordName}}</text>
                     </block>
                 </view>
             </view>
+            <!--筛选-->
             <view class="filter-condition" wx:if="{{areaOrFilter == 'filter'}}">
                 <view class="item-box" >
                     <view class="item" wx:for="{{conditionKey}}" wx:key="index">
@@ -73,7 +76,7 @@
             <view class="item">
                 <view class="left">
                     <image src="{{item.image}}" mode="aspectFill"></image>
-                    <text class="info"></text>
+                    <view class="rented-info">{{item.apartmentCount}}套可租</view>
                 </view>
 
                 <view class="right" catchtap="gotoDetail" data-id="{{item.id}}">
@@ -88,14 +91,19 @@
                     <view class="item_child">
                         <text>{{item.region}} | {{item.area}}</text>
                     </view>
-                    <view class="item_child" wx:if="{{item.labels.length > 0}}">
+                    <view class="item_child tags" wx:if="{{item.labels.length > 0}}">
                         <text class="span" wx:for="{{item.labels}}" wx:for-item="label">{{label.name}}</text>
                         <!--<text class="span">标签2</text>-->
                     </view>
                 </view>
             </view>
         </block>
-        <view class="info" wx:if="{{list.length == 0}}">没有数据</view>
+        <!--<view class="info" wx:if="{{list.length == 0}}">没有数据</view>-->
+    </view>
+    <!--没有数据-->
+    <view class="not-data" wx:if="{{list.length <= 0}}">
+        <text>抱歉，没有找到符合的房源 </text>
+        <text>请尝试更改搜索结果查找</text>
     </view>
     <view class="info" wx:if="{{list.length >0 && fetchAll}}" style="background-color:#edeff1;">所有房源已经加载完</view>
 </view>

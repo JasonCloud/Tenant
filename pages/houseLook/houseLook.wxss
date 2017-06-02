@@ -56,14 +56,17 @@ page{
 }
 .container .cover .price{
     padding: 30rpx;
-    font-size: 36rpx;
-    border-bottom: 1rpx solid #bebebe;
+    font-size: 22rpx;
+    border-bottom: 1rpx solid #eeeeee;
+}
+.container .cover .price-text{
+    font-size: 30rpx;
 }
 .container .cover .item{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1rpx solid #bebebe;
+    border-bottom: 1rpx solid #eeeeee;
     font-size: 36rpx;
     padding: 30rpx 0 ;
 }
@@ -86,21 +89,32 @@ page{
 .cover .item .item_flex .unit_price{
     flex-shrink: 0;
     padding-right: 20rpx;
+    font-size: 28rpx;
 }
 .cover .item .item_flex:first-child{
-    border-right: 1rpx solid #bebebe;
+    border-right: 1rpx solid #eeeeee;
+}
+.container .btn-box-wrap{
+    height: 90rpx;
 }
 .container .btn-box{
     display: flex;
     align-items: center;
     justify-content: space-between;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
 }
 .container .btn-box .btn{
-    padding: 30rpx 0;
     text-align: center;
     color: #ffffff;
     font-size: 36rpx;
     width: 50%;
+    height: 90rpx;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .container .btn-box .zi-xun{
     background-color: #ff6060;
@@ -192,4 +206,10 @@ page{
 }
 .mask .call text:last-child{
     color:#3399ff;
+}
+.font28{
+    font-size: 28rpx !important;
+}
+.font26{
+    font-size: 26rpx !important;
 }

@@ -125,7 +125,15 @@ Page({
     this.setData({
       areaOrFilter:'',
       page_num:1
-    })
+    });
+    if(id==''){
+      let obj = {
+        pageNo:this.data.page_num,
+        fetchAll:false,
+      };
+      this.data.areaType == 'metro'? obj.subway = id : obj.region = this.data.selectId;
+      this.get_house_list(obj,true);
+    }
     if(this.data.resultAreaId != id){
       let obj = {
         pageNo:this.data.page_num,
@@ -150,7 +158,7 @@ Page({
        this.setData({
          fetchAll:true
        })
-     }else if(res.data.resul.length >= this.data.pageSize){
+     }else if(res.data.result.length >= this.data.pageSize){
        this.setData({
          page_num:this.page_num + 1
        })
@@ -195,11 +203,17 @@ Page({
   },
   //选择具体某个城市或者地铁的某个站点
   changeCity(e){
-    let index = e.target.dataset.index
-    let id = e.target.dataset.id
+    let index = e.target.dataset.index;
+    let id = e.target.dataset.id;
+    console.log('选择城市');
     if(this.data.listOne[index]){
       this.setData({
         listTow:this.data.listOne[index]['allChildrenKeyword'],
+        selectId:id
+      })
+    }else{
+      this.setData({
+        listTow:[],
         selectId:id
       })
     }
@@ -260,9 +274,9 @@ Page({
     this.setData({
       areaOrFilter:'',
       page_num:1,
-      fetchAll:false,
     })
     if(!this.objectEmpty()(this.data.selectConditionId)){
+      this.setData({fetchAll:false});
       let obj = Object.assign({},this.data.selectConditionId);
       this.data.areaType == 'metro'? obj.subway = this.data.resultAreaId : obj.region = this.data.resultAreaId;
       this.get_house_list(obj,true);

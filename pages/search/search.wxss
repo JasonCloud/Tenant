@@ -3,13 +3,13 @@
 }
 .search-page .input-wrap{
     background-color: #344966;
-    padding: 0 0 30rpx 55rpx;
+    padding: 0 0 20rpx 32rpx;
     display:flex;
     align-items: center;
 }
 .search-page .input-wrap .content{
     background-color:#fff;
-    height: 60rpx;
+    height: 58rpx;
     border-radius: 30rpx;
     display:flex;
     align-items: center;
@@ -19,21 +19,21 @@
 .search-page .input-wrap .cancel{
     color:#fff;
     font-size: 34rpx;
-    padding: 0 50rpx 0 45rpx;
+    padding: 0 30rpx 0 30rpx;
 }
 .search-page .input-wrap .content image{
-    width: 44rpx;
-    height: 46rpx;
+    width: 28rpx;
+    height: 29rpx;
 }
 .search-page .input-wrap .content input{
     height: 100%;
     flex-grow: 1;
     padding: 0 20rpx;
-    font-size: 28rpx;
+    font-size: 24rpx;
 }
 /*没数据*/
 .search-page .not-data{
-    font-size: 40rpx;
+    font-size: 36rpx;
     color:#344966;
     padding-top:300rpx;
 }
@@ -45,19 +45,32 @@
 /*列表样式开始*/
 .search-page .list{
     padding-left: 30rpx;
-    padding-bottom: 40rpx;
+    /*padding-bottom: 40rpx;*/
     background-color: #ffffff;
 }
 .search-page .list .item{
     display: flex;
-    padding: 30rpx 0;
-    border-bottom: 1rpx solid #bebebe;
+    padding: 20rpx 0;
+    border-bottom: 1rpx solid #eeeeee;
+}
+.search-page .list .item:last-child{
+    border-bottom: none;
 }
 .search-page .list .item .left{
-    width: 280rpx;
-    height: 210rpx;
+    width: 235rpx;
+    height: 175rpx;
     flex-shrink: 0;
     position: relative;
+}
+.search-page .list .item .rented-info{
+    background-color:rgba(255,255,255,0.7);
+    font-size: 22rpx;
+    color: #141414;
+    padding: 4rpx 8rpx;
+    border-radius: 8rpx 0 0 0;
+    position:absolute;
+    bottom: 0;
+    right: 0;
 }
 .search-page .list .item .left image{
     width: 100%;
@@ -72,7 +85,7 @@
 .search-page .list .right .item_child:first-child{
     display: flex;
     align-items: center;
-    padding-bottom: 20rpx;
+    /*padding-bottom: 20rpx;*/
 }
 .search-page .list .right .item_child .ico{
     width: 40rpx;
@@ -80,16 +93,19 @@
 }
 .search-page .list .item_child text{
     display: block;
-    font-size: 14px;
+    font-size: 24rpx;
     color: #a8a8a8;
+}
+.search-page .list .tags text{
+    font-size: 22rpx;
 }
 .search-page .list .item_child .h1{
     color: #141414;
-    font-size: 18px;
+    font-size: 32rpx;
 }
 .search-page .list .item_child .h2{
     color: #555;
-    font-size: 16px;
+    font-size: 28rpx;
 }
 .search-page .list .item_child:last-child{
     display: flex;
@@ -97,21 +113,21 @@
 }
 .search-page .list .item_child .span{
     color:#66b3ff;
-    padding:8rpx 12rpx;
+    padding:4rpx 10rpx;
     border: 1rpx solid #66b3ff;
     border-radius: 42rpx;
     margin-left: 6rpx;
     flex-wrap: wrap;
 }
 .search-page .list .info{
-    padding: 30rpx 0 0;
-    font-size: 36rpx;
+    padding: 30rpx 0;
+    font-size: 28rpx;
     color:#707070;
     text-align: center;
 }
 .search-page .info{
     padding: 30rpx 0;
-    font-size: 36rpx;
+    font-size: 28rpx;
     color:#707070;
     text-align: center;
 }

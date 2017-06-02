@@ -3,40 +3,42 @@
     <image src="{{detailObj.bannerImage}}" class="bg" mode="aspectFill"></image>
     <!--<view class="bg" style="background-image: url({{detailObj.bannerImage}})"></view>-->
     <view class="cover">
-        <view class="price color_55"><text class="red">{{detailObj.totalPrice}}</text>/月</view>
+        <view class="price color_14"><text class="red price-text">{{detailObj.totalPrice}}</text>/月</view>
         <view class="item">
             <view class="item_flex">
                     <view class="color_55 unit_price">单位</view>
                     <view>
-                        <text class="red">{{detailObj.unitPrice}}</text>
-                        <text class="color_14">元/m2/月起</text>
+                        <text class="red font28">{{detailObj.unitPrice}}</text>
+                        <text class="color_14 font28">元/㎡/月</text>
                     </view>
             </view>
             <view class="item_flex">
-                <view class="color_55">面积</view>
+                <view class="color_55 font28">面积</view>
                 <view>
-                    <text class="red">{{detailObj.totalArea}}</text>
-                    <text class="color_14">m2</text>
+                    <text class="red font28">{{detailObj.totalArea}}</text>
+                    <text class="color_14 font28">㎡</text>
                 </view>
             </view>
         </view>
         <view class="item">
             <view class="item_flex">
-                <view class="color_55">装修</view>
+                <view class="color_55 font28">装修</view>
                 <view>
-                    <text class="color_14">{{detailObj.renovation}}</text>
+                    <text class="color_14 font28">{{detailObj.renovation}}</text>
                 </view>
             </view>
             <view class="item_flex">
-                <view class="color_55">可容纳工位</view>
+                <view class="color_55 font28">可容纳工位</view>
                 <view>
-                    <text class="color_14">{{detailObj.stationNumber}}</text>
+                    <text class="color_14 font28">{{detailObj.stationNumber}}</text>
                 </view>
             </view>
         </view>
-        <view class="btn-box">
-            <view class="btn zi-xun" bindtap="zi_xun">咨询</view>
-            <view class="btn prevlook" bindtap="prev_look_home">预约看房</view>
+        <view class="btn-box-wrap">
+            <view class="btn-box">
+                <view class="btn zi-xun font26" bindtap="zi_xun">咨询</view>
+                <view class="btn prevlook font26" bindtap="prev_look_home">预约看房</view>
+            </view>
         </view>
     </view>
     <view class="mask" wx:if="{{mask}}" catchtap="control_mask">
@@ -55,9 +57,9 @@
                 <button class="btn" formType="submit">提交预约</button>
             </form>
         </view>
-        <view class="call" wx:else catchtap="prevent">
+        <view class="call" wx:else catchtap="prevent" catchtap="call">
             <text>{{phone_num}}</text>
-            <text catchtap="call">拨打</text>
+            <text>拨打</text>
         </view>
     </view>
 </view>

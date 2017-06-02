@@ -12,7 +12,7 @@
             <view class="item">
                 <view class="left">
                     <image src="{{item.image}}" mode="aspectFill"></image>
-                    <text class="info"></text>
+                    <view class="rented-info">{{item.apartmentCount}}套可租</view>
                 </view>
 
                 <view class="right" catchtap="gotoDetail" data-id="{{item.id}}">

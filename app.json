@@ -11,7 +11,8 @@
   "window":{
     "backgroundTextStyle":"light",
     "navigationBarBackgroundColor": "#344966",
-    "navigationBarTitleText": "租客",
-    "navigationBarTextStyle":"#fff"
+    "navigationBarTitleText": "房源",
+    "navigationBarTextStyle":"#fff",
+    "backgroundColor": "#344966"
   }
 }

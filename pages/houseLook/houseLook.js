@@ -14,9 +14,9 @@ Page({
     var phone = e.detail.value.phone;
     http.post('/api/apply/wechat/order',{tenantsName:name,tenantsPhone:phone,apartmentId:this.data.id},true).then(res=>{
       this.formReset();
-      util.alert({title:res.msg});
+      util.alert({content:'预约成功！我们将安排专业顾问带你看房，请内心等待～'});
     }).catch(err=>{
-      util.alert({content:JSON.stringify(err)})
+      util.alert({content:JSON.stringify(err)});
     })
   },
   formReset(e){
@@ -58,7 +58,9 @@ Page({
   },
   getDetail(id){
     http.get('/api/apartment/detail',{id:id}).then(res=>{
-      console.log(res);
+      res.data.totalPrice = parseInt(res.data.totalPrice);
+      res.data.unitPrice = parseInt(res.data.unitPrice);
+      res.data.totalArea = parseInt(res.data.totalArea);
       this.setData({
         phone_num:res.data.telephone,
         detailObj:res.data

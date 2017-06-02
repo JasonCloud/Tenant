@@ -7,7 +7,7 @@
     padding: 20rpx 0;
 }
 .container .search .input{
-    height: 60rpx;
+    height: 58rpx;
     margin: 0 auto;
     position: relative;
     width: 90%;
@@ -28,8 +28,8 @@
     margin: 0 auto;
     border-radius: 30rpx;
     text-align: center;
-    height: 60rpx;
-    line-height: 60rpx;
+    height: 58rpx;
+    line-height: 58rpx;
     color:#808080;
 }
 .placeholder_class{
@@ -37,7 +37,7 @@
 }
 .border{
     height: 2rpx;
-    background-color: #bebebe;
+    background-color: #eeeeee;
     width: 100%;
 }
 /*筛选Bar样式开始*/
@@ -47,7 +47,7 @@
     justify-content: space-around;
     padding: 30rpx 0;
     /*border-bottom: 2rpx solid #bebebe;*/
-    background-color: #edeff1;
+    background-color: #ffffff;
 }
 .container .nav .tow-ico{
     display:flex;
@@ -67,7 +67,7 @@
 .container .nav .item text{
     display: block;
     color: #555555;
-    font-size: 14px;
+    font-size: 30rpx;
     margin-right: 12rpx;
 }
 .container .nav text.checked{
@@ -93,6 +93,7 @@
     align-items: flex-start;
     z-index: 30;
     padding-bottom: 40rpx;
+    min-height: 968rpx;
 }
 .container .nav-box .filter-list .item{
     display: flex;
@@ -103,19 +104,21 @@
 }
 .container .filter-list .item text{
     display: block;
-    border-bottom: 1rpx solid #bebebe;
-    font-size: 36rpx;
+    border-bottom: 1rpx solid #eeeeee;
+    font-size: 28rpx;
     line-height: 150%;
     padding: 20rpx 0;
 }
 .container .filter-list .item text.checked{
-    color: #141414;
+    /*color: #141414;*/
+    color:#3399FF;
 }
 .container .nav-box .filter-condition{
     background-color: #edeff1;
     position: absolute;
     width: 100%;
     z-index: 30;
+    min-height: 968rpx;
 }
 .container .nav-box .filter-condition .item-box{
     margin-bottom: 40rpx;
@@ -123,7 +126,7 @@
 .container .nav-box .filter-condition .item{
     padding: 30rpx 0;
     background-color: #ffffff;
-    border-bottom: 1rpx solid #bebebe;
+    border-bottom: 1rpx solid #eeeeee;
 }
 .nav-box .filter-condition .item:last-child{
     border-bottom: none;
@@ -131,7 +134,7 @@
 .nav-box .filter-condition .item text{
     display: block;
     color:#555555;
-    font-size: 36rpx;
+    font-size: 28rpx;
 }
 .nav-box .filter-condition .item .child-box{
     padding-left: 30rpx;
@@ -202,20 +205,33 @@
 /*列表样式开始*/
 .container .list{
     padding-left: 30rpx;
-    padding-bottom: 40rpx;
+    /*padding-bottom: 40rpx;*/
     background-color: #ffffff;
 }
 .container .list .item{
     display: flex;
-    padding: 30rpx 0;
-    border-bottom: 1rpx solid #bebebe;
+    padding: 20rpx 0;
+    border-bottom: 1rpx solid #eeeeee;
+}
+.container .list .item:last-child{
+    border-bottom: none;
 }
 .container .list .item .left{
-    width: 280rpx;
-    height: 210rpx;
+    width: 235rpx;
+    height: 175rpx;
     flex-shrink: 0;
     position: relative;
 }
+.container .list .item .rented-info{
+    background-color:rgba(255,255,255,0.7);
+    font-size: 22rpx;
+    color: #141414;
+    padding: 4rpx 8rpx;
+    border-radius: 8rpx 0 0 0;
+    position:absolute;
+    bottom: 0;
+    right: 0;
+ }
 .container .list .item .left image{
     width: 100%;
     height: 100%;
@@ -224,12 +240,12 @@
     margin-left: 20rpx;
 }
 .container .list .right .item_child{
-    padding-bottom: 14rpx;
+    padding-bottom: 8rpx;
 }
 .container .list .right .item_child:first-child{
     display: flex;
     align-items: center;
-    padding-bottom: 20rpx;
+    /*padding-bottom: 20rpx;*/
 }
 .container .list .right .item_child .ico{
     width: 40rpx;
@@ -237,16 +253,19 @@
 }
 .container .list .item_child text{
     display: block;
-    font-size: 14px;
+    font-size: 24rpx;
     color: #a8a8a8;
+}
+.container .list .tags text{
+    font-size: 22rpx;
 }
 .container .list .item_child .h1{
     color: #141414;
-    font-size: 18px;
+    font-size: 32rpx;
 }
 .container .list .item_child .h2{
     color: #555;
-    font-size: 16px;
+    font-size: 28rpx;
 }
 .container .list .item_child:last-child{
     display: flex;
@@ -254,21 +273,33 @@
 }
 .container .list .item_child .span{
     color:#66b3ff;
-    padding:8rpx 12rpx;
+    padding:4rpx 10rpx;
     border: 1rpx solid #66b3ff;
     border-radius: 42rpx;
     margin-left: 6rpx;
     flex-wrap: wrap;
 }
 .container .list .info{
-    padding: 30rpx 0 0;
-    font-size: 36rpx;
+    padding: 30rpx 0 ;
+    font-size: 28rpx;
     color:#707070;
     text-align: center;
 }
+/*没数据*/
+.container .not-data{
+    font-size: 36rpx;
+    color:#344966;
+    padding-top:300rpx;
+}
+.container .not-data text{
+    display: block;
+    padding-top:20rpx;
+    text-align: center;
+}
+/*加载完成提示*/
 .container .info{
     padding: 30rpx 0;
-    font-size: 36rpx;
+    font-size: 28rpx;
     color:#707070;
     text-align: center;
 }

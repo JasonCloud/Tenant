@@ -9,54 +9,72 @@
     </swiper>
     <view class="title-box margin-bottom-20">
         <view class="left">
-            <text class="h1">{{detailObject.name}}</text>
-            <text class="h2">{{detailObject.region}} | 8套在租</text>
+            <text class="h1 font32">{{detailObject.name}}</text>
+            <text class="h2 font24">{{detailObject.region}} | 8套在租</text>
         </view>
         <view class="right">
-            <text class="red">{{detailObject.price}}</text><text class="fontcolor555">元/m2/月起</text>
+            <text class="red font36">{{detailObject.price}}</text><text class="fontcolor555 font28">元/m2/月起</text>
         </view>
     </view>
     <block wx:if="{{list.length>0}}">
         <view class="filter-box">
-            <view class="filter-condition">
-                <view class="item checked">全部</view>
-                <view class="item">0-100m2</view>
-                <view class="item">100-200m2</view>
-                <view class="item">200-300m2</view>
-                <view class="item">300-500m2</view>
-            </view>
+            <scroll-view scroll-x>
+                <view class="filter-condition">
+                    <view bindtap="areaFilter" class="{{areaState == 0 ? 'item checked':'item'}}" data-state="0">全部</view>
+                    <view bindtap="areaFilter" class="{{areaState == 1 ? 'item-number checked':'item-number'}}" data-state="1">0-100㎡</view>
+                    <view bindtap="areaFilter" class="{{areaState == 2 ? 'item-number checked':'item-number'}}" data-state="2">100-200㎡</view>
+                    <view bindtap="areaFilter" class="{{areaState == 3 ? 'item-number checked':'item-number'}}" data-state="3">200-300㎡</view>
+                    <view bindtap="areaFilter" class="{{areaState == 4 ? 'item-number checked':'item-number'}}" data-state="4">300-500㎡</view>
+                    <view bindtap="areaFilter" class="{{areaState == 5 ? 'item-number checked':'item-number'}}" data-state="5">500㎡以上</view>
+                </view>
+            </scroll-view>
         </view>
         <view class="list-box margin-bottom-20">
-            <view class="list" wx:for="{{list}}" wx:key="index" catchtap="houseLook" data-id="{{item.id}}">
-                <view class="left"><text class="blue">{{item.totalArea}}</text><texte class="fontcolor555">m2</texte></view>
-                <view class="middle"><text class="red">{{item.unitPrice}}</text><text class="fontcolor555">元/m2/月起</text></view>
-                <view class="right">
-                    <image src="{{item.bannerImage}}" mode="aspectFill"></image>
-                    <text>精装</text>
+            <block wx:if="{{areaState == 0}}">
+                <view class="list" wx:for="{{list}}" wx:key="index" catchtap="houseLook" data-id="{{item.id}}" wx:if="{{areaState==0}}">
+                    <view class="left"><text class="blue font44">{{item.totalArea}}</text><texte class="fontcolor555 font28">m2</texte></view>
+                    <view class="middle"><text class="red font44">{{item.unitPrice}}</text><text class="fontcolor555 font28">元/m2/月起</text></view>
+                    <view class="right">
+                        <image src="{{item.bannerImage}}" mode="aspectFill"></image>
+                        <text>精装</text>
+                    </view>
                 </view>
-            </view>
-            <view class="loadMore" catchtap="seeMore">点击查看更多</view>
+            </block>
+            <block wx:if="{{areaState > 0}}">
+                <block wx:if="{{filterList.length > 0}}">
+                    <view class="list" wx:for="{{filterList}}" wx:key="index" catchtap="houseLook" data-id="{{item.id}}">
+                        <view class="left"><text class="blue font44">{{item.totalArea}}</text><texte class="fontcolor555 font28">m2</texte></view>
+                        <view class="middle"><text class="red font44">{{item.unitPrice}}</text><text class="fontcolor555 font28">元/m2/月起</text></view>
+                        <view class="right">
+                            <image src="{{item.bannerImage}}" mode="aspectFill"></image>
+                            <text>精装</text>
+                        </view>
+                    </view>
+                </block>
+                <view class="not-data" wx:else>没有相应的房源</view>
+            </block>
+            <view class="loadMore font24" catchtap="seeMore" wx:if="{{showSeeMore}}">点击查看更多</view>
         </view>
     </block>
     <view class="done-recording margin-bottom-20" wx:if="{{detailObject.orders.length > 0}}">
-        <view class="h1">成交记录</view>
-        <view class="list" wx:for="{{detailObject.orders}}" wx:key="index">
+        <view class="h1 font32">成交记录</view>
+        <view class="list font28" wx:for="{{detailObject.orders}}" wx:key="index">
             <text>{{item.data}}</text>
             <text>{{item.area}}m2</text>
             <text>成交价{{item.price}}元/月</text>
         </view>
     </view>
     <view class="built-introduction margin-bottom-20">
-        <view class="h1">楼盘介绍</view>
+        <view class="h1 font32">楼盘介绍</view>
         <view class="introduction-box">
             <video src="{{detailObject.videoLink}}" class="video" controls="{{true}}"></video>
-            <text class="content fontcolor555">
+            <text class="content fontcolor555 font28">
                 {{detailObject.info}}
             </text>
         </view>
     </view>
     <view class="wu_ye margin-bottom-20">
-        <view class="h1">物业信息</view>
+        <view class="h1 font32">物业信息</view>
         <view class="info">
             <view class="item">
                 <text>总面积</text>
@@ -93,7 +111,7 @@
         </view>
     </view>
     <view class="lease margin-bottom-20">
-        <view class="h1">租赁信息</view>
+        <view class="h1 font32">租赁信息</view>
         <view class="info">
             <view class="item">
                 <text>租金</text>
@@ -130,7 +148,7 @@
         </view>
     </view>
     <view class="traffic-box margin-bottom-20">
-        <view class="h1">交通</view>
+        <view class="h1 font32">交通</view>
         <view class="content-box">
             <view class="item">
                 <image mode="aspectFill" src="../../images/ic_home_bus.png"></image>
@@ -152,9 +170,11 @@
             </view>
         </view>
     </view>
-    <view class="btn-box">
-        <view class="btn" bindtap="zi_xun">咨询</view>
-        <view class="btn" bindtap="prev_look_home">预约看房</view>
+    <view class="btn-box-wrap">
+        <view class="btn-box">
+            <view class="btn font32" bindtap="zi_xun">咨询</view>
+            <view class="btn font32" bindtap="prev_look_home">预约看房</view>
+        </view>
     </view>
     <view class="mask" wx:if="{{mask}}" catchtap="control_mask">
         <view class="content" wx:if="{{btnType === 'prevlook'?true : false}}" catchtap="prevent">
@@ -172,9 +192,9 @@
                 <button class="btn" formType="submit">提交预约</button>
             </form>
         </view>
-        <view class="call" wx:else catchtap="prevent">
+        <view class="call" wx:else catchtap="prevent" catchtap="call">
             <text>{{phone_num}}</text>
-            <text catchtap="call">拨打</text>
+            <text>拨打</text>
         </view>
     </view>
 </view>
