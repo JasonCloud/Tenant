@@ -188,13 +188,13 @@ Page({
       this.setData({
         areaType:areaType,
         listOne:this.data.condition.region.allChildrenKeyword,
-        listTow:this.data.condition.region.allChildrenKeyword[0].allChildrenKeyword,
+        listTow:this.data.condition.region.allChildrenKeyword.length > 0 ? this.data.condition.region.allChildrenKeyword[0].allChildrenKeyword:[],
         selectId:-1
       })
     }else if(areaType == 'metro'){
       this.setData({
         areaType:areaType,
-        listTow:this.data.condition.metro.allChildrenKeyword[0].allChildrenKeyword,
+        listTow:this.data.condition.metro.allChildrenKeyword.length > 0 ? this.data.condition.metro.allChildrenKeyword[0].allChildrenKeyword:[],
         listOne:this.data.condition.metro.allChildrenKeyword,
         selectId:-1
       })
@@ -232,11 +232,12 @@ Page({
     app.getCondition(res => {
       console.log(res);
       let condition = this.initCondition(res);
+      console.log(condition);
       this.setData({
         condition:condition,
         listOne:condition.region.allChildrenKeyword,
-        listTow:condition.region.allChildrenKeyword[0].allChildrenKeyword,
-      })
+        listTow:condition.region.allChildrenKeyword.length > 0 ? condition.region.allChildrenKeyword[0].allChildrenKeyword:[],
+      });
     });
   },
   //显示筛选数据的处理

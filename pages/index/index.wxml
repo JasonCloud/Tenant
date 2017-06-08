@@ -25,19 +25,19 @@
     <view class="foot">
       <view class="idx">
         <text>会员</text>
-        <text>6658人</text>
+        <text class="number">6658人</text>
       </view>
       <view class="idx">
         <text>顾问</text>
-        <text>3325人</text>
+        <text class="number">3325人</text>
       </view>
       <view class="idx">
         <text>楼盘</text>
-        <text>8894</text>
+        <text class="number">8894</text>
       </view>
       <view class="idx">
         <text>成交楼盘</text>
-      <text>7784</text>
+        <text class="number">7784</text>
       </view>
     </view>
   </view>
@@ -73,7 +73,7 @@
     <view class="idx">
       <view class="title border-bottom">
         <image src="../../images/ico_around.png"/>
-        <text class="h1">全民招商</text>
+        <text class="h1">业主委托</text>
         <image src="../../images/ico_around.png"/>
       </view>
       <text>专业团队</text>
@@ -82,11 +82,11 @@
     <view class="idx">
       <view class="title border-bottom">
         <image src="../../images/ico_around.png"/>
-        <text class="h1">全民招商</text>
+        <text class="h1">帮我找房</text>
         <image src="../../images/ico_around.png"/>
       </view>
-      <text>专业团队</text>
-      <text class="border-bottom">一对一极致服务</text>
+      <text>专业平台</text>
+      <text class="border-bottom">快速解决闲置空间</text>
     </view>
   </view>
   <view class="banner margin20px">

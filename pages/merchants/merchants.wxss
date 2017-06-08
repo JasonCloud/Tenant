@@ -1,0 +1,254 @@
+.merchants-page{
+
+}
+.merchants-page .nav{
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 35rpx 25rpx 30rpx;
+}
+.merchants-page .nav view{
+    font-size: 28rpx;
+    color:#a8a8a8;
+}
+.merchants-page .nav .current{
+    color:#555555;
+}
+.merchants-page .nav .arrow{
+    width: 24rpx;
+    height: 26rpx;
+}
+.merchants-page .nav .arrow image{
+    width: 100%;
+    height: 100%;
+}
+/*基本信息*/
+.merchants-page .form-wrap{
+    background-color:#fff;
+    padding-left: 25rpx;
+}
+.merchants-page .form-wrap .flex{
+    display:flex;
+    align-items: center;
+}
+.merchants-page .form-wrap text{
+    display:block;
+    font-size: 28rpx;
+    color: #555555;
+    flex-shrink: 0;
+}
+.merchants-page .form-wrap input{
+    display:block;
+    font-size: 28rpx;
+    height: 80rpx;
+    /*width: 100%;*/
+    flex-grow: 1;
+}
+.border-bottom{
+    border-bottom: 1px solid #eeeeee;
+}
+.form-wrap .city image{
+    width: 16rpx;
+    height: 27rpx;
+    margin-right: 24rpx;
+}
+.form-wrap .name input{
+    padding:0 25rpx 0 110rpx;
+}
+.form-wrap .phone input{
+    padding:0 25rpx 0 80rpx;
+}
+.placeholder{
+    color:#a8a8a8;
+    font-size: 28rpx;
+}
+.pseudo-input{
+    height: 80rpx;
+    line-height: 80rpx;
+    flex-grow: 1;
+    padding-left: 110rpx;
+}
+.resume{
+    padding:22rpx 25rpx;
+    margin-top: 25rpx;
+    background-color: #fff;
+}
+.resume .h3{
+    font-size: 28rpx;
+    color:#555555;
+    padding-bottom: 15rpx;
+}
+.resume textarea{
+    width: 100%;
+    height: 190rpx;
+    word-break: break-all;
+    word-wrap: break-word;
+    font-size: 28rpx;
+    color:#333;
+}
+.textarea-placeholder{
+    font-size: 28rpx;
+    color:#a8a8a8;
+}
+.form-submit-btn{
+    height: 80rpx;
+    background-color:#344966;
+    color:#fff;
+    font-size: 28rpx;
+    margin-top:80rpx;
+    width: 90%;
+    line-height: 80rpx;
+    border-radius: 8rpx;
+}
+/*身份证上传*/
+.id-card-wrap{
+    background-color:#fff;
+    padding: 40rpx 25rpx 90rpx;
+}
+.id-card-wrap .title{
+    padding-bottom: 25rpx;
+}
+.id-card-wrap .title text{
+    color:#555555;
+    font-size: 28rpx;
+}
+.id-card-wrap .title .tip{
+    color:#a8a8a8;
+    font-size: 24rpx;
+}
+.id-card-wrap .id-card-box{
+    width: 556rpx;
+    height: 320rpx;
+    margin: 47rpx auto 0;
+    background-color: #f3f5f6;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+.id-card-box .img{
+    width:360rpx;
+    height: 228rpx;
+}
+.id-card-box .default image{
+    width: 80rpx;
+    height: 80rpx;
+    display: block;
+    margin: 0 auto;
+}
+.id-card-box .default text{
+    color: #a8a8a8;
+    font-size: 28rpx;
+    padding-top: 25rpx;
+}
+.id-card-btn{
+    width: 556rpx;
+    margin: 90rpx auto 0;
+    height: 80rpx;
+    line-height: 80rpx;
+    color: #fff;
+    border-radius: 8rpx;
+    font-size: 28rpx;
+    background-color: #344966;
+}
+/*提交成功弹窗*/
+.pop-ups{
+    position:fixed;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100%;
+    background-color:rgba(0,0,0,0.7);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+.pop-ups .content{
+    background-color: #ffffff;
+    width: 615rpx;
+    border-radius: 10rpx;
+}
+.pop-ups .title{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    padding: 90rpx 25rpx 30rpx;
+}
+.pop-ups .title image{
+    width:52rpx;
+    height: 52rpx;
+}
+.pop-ups .title text{
+    font-size: 42rpx;
+    color: #141414;
+    padding-left: 18rpx;
+}
+.pop-ups .p{
+    padding: 0 55rpx 90rpx;
+    color:#141414;
+    font-size: 28rpx;
+}
+.pop-ups .button{
+    height: 90rpx;
+    line-height: 90rpx;
+    text-align: center;
+    font-size: 28rpx;
+    color:#3399ff;
+    border-top: 1px solid #eeeeee;
+}
+/*上传身份证弹窗*/
+.upload-IDCard-pop-ups{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.7);
+}
+.upload-IDCard-pop-ups .content{
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+.upload-IDCard-pop-ups .content .show-example{
+    padding-top: 160rpx;
+}
+.upload-IDCard-pop-ups .show-example .h3{
+    font-size: 34rpx;
+    color: #fff;
+    text-align: center;
+}
+.upload-IDCard-pop-ups .show-example .image-wrap{
+    width: 665rpx;
+    height: 382rpx;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f3f5f6;
+    margin: 35rpx auto 0;
+}
+.upload-IDCard-pop-ups .show-example .image-wrap image{
+    width: 535rpx;
+    height: 340rpx;
+}
+.upload-IDCard-pop-ups .show-example .tip{
+    padding: 30rpx 0 0 42rpx;
+    font-size: 28rpx;
+    color:#fff;
+}
+.upload-IDCard-pop-ups .bottom{
+    width: 100%;
+    position: absolute;
+    background-color: #fff;
+    bottom: 0;
+    left: 0;
+}
+.upload-IDCard-pop-ups .bottom .item{
+    height: 100rpx;
+    line-height: 100rpx;
+    text-align: center;
+    font-size: 28rpx;
+    color: #555555;
+}
+.upload-IDCard-pop-ups .bottom .border-bottom{
+    border-bottom: 1px solid #eeeeee;
+}

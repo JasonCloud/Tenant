@@ -45,6 +45,11 @@
                 <input type="text" placeholder="请填写每月租金" name="rent" placeholder-class="placeholder"/>
             </view>
         </view>
-        <button  form-type="submit" disabled>确认并提交</button>
+        <!--备注-->
+        <view class="remarks">
+            <view class="title">备注</view>
+            <textarea name="remarks" placeholder="描述需要怎样的房源（例如：凹凸凹创意园10-100平方）" placeholder-class="placeholder" maxlength="-1"></textarea>
+        </view>
+        <button  form-type="submit" disabled="{{false}}">确认并提交</button>
     </form>
 </view>

@@ -112,6 +112,24 @@ input{
 .rent input{
     padding: 0 25rpx 0 32rpx;
 }
+/*备注*/
+.remarks{
+    margin-top: 25rpx;
+    background-color: #fff;
+    padding: 20rpx 25rpx;
+}
+.remarks .title{
+    font-size: 29rpx;
+    color: #555555;
+    padding-bottom: 15rpx;
+}
+.remarks textarea{
+    height: 240rpx;
+    word-wrap: break-word;
+    word-break: break-all;
+    width: 100%;
+    font-size: 28rpx;
+}
 .placeholder{
     color: #a8a8a8;
     font-size: 28rpx;

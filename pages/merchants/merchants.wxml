@@ -1,0 +1,112 @@
+<view class="merchants-page">
+    <view class="nav">
+        <view class="current">基本信息</view>
+        <view class="arrow">
+            <image mode="aspectFill" src="../../images/arrow.png"></image>
+        </view>
+        <view>上传身份证</view>
+        <view class="arrow">
+            <image mode="aspectFill" src="../../images/arrow.png"></image>
+        </view>
+        <view>提交申请</view>
+    </view>
+    <!--基本信息-->
+    <block wx:if="{{false}}">
+        <form bindsubmit="newsSubmit">
+            <view class="form-wrap">
+                <view class="name flex border-bottom">
+                    <text>姓名</text>
+                    <input type="text" name="name" placeholder="请填写真实姓名" placeholder-class="placeholder"/>
+                </view>
+                <view class="phone flex border-bottom">
+                    <text>手机号</text>
+                    <input type="number" name="phone" placeholder="请填写手机好" placeholder-class="placeholder"/>
+                </view>
+                <view class="city flex">
+                    <text>城市</text>
+                    <view class="placeholder pseudo-input">请选择服务城市</view>
+                    <image mode="aspectFill" src="../../images/btn_expand_gray.png"></image>
+                </view>
+            </view>
+            <view class="resume">
+                <view class="h3">个人履历</view>
+                <textarea maxlength="-1" name="resume" placeholder="请填写你的履历" placeholder-class="textarea-placeholder"></textarea>
+            </view>
+            <button class="form-submit-btn" form-type="submit">下一步</button>
+        </form>
+    </block>
+    <!--身份证上传-->
+    <block>
+        <form bindsubmit="IdCardSubmit">
+            <view class="id-card-wrap">
+                <view class="title">
+                    <text>上传身份证信息</text>
+                    <text class="tip">（照片仅用于平台审核）</text>
+                </view>
+                <view class="id-card-box">
+                    <image class="img" wx:if="{{true}}" mode="aspectFill" src="../../images/IDcard.png"></image>
+                    <view class="default" wx:else>
+                        <image mode="aspectFill" src="../../images/add.png"></image>
+                        <text>身份证正面</text>
+                    </view>
+                </view>
+
+                <view class="id-card-box">
+                    <image class="img" wx:if="{{false}}" mode="aspectFill" src="../../images/IDcard.png"></image>
+                    <view class="default" wx:else>
+                        <image mode="aspectFill" src="../../images/add.png"></image>
+                        <text>身份证反面</text>
+                    </view>
+                </view>
+
+                <view class="id-card-box">
+                    <image class="img" wx:if="{{false}}" mode="aspectFill" src="../../images/IDcard.png"></image>
+                    <view class="default" wx:else>
+                        <image mode="aspectFill" src="../../images/add.png"></image>
+                        <text>手持身份证</text>
+                    </view>
+                </view>
+
+                <button class="id-card-btn" form-type="submit">提交</button>
+            </view>
+        </form>
+    </block>
+    <!--提交成功弹窗-->
+    <block wx:if="{{false}}">
+        <view class="pop-ups">
+            <view class="content">
+                <view class="title">
+                    <image mode="aspectFill" src="../../images/success.png"></image>
+                    <text>委托成功</text>
+                </view>
+                <view class="p">我们将以最快速度联系您，请耐心等待~</view>
+                <view class="button">确认</view>
+            </view>
+        </view>
+    </block>
+    <!--上传身份证弹窗-->
+    <block>
+        <view class="upload-IDCard-pop-ups">
+            <view class="content">
+                <view class="show-example">
+                    <view class="h3">拍摄技巧</view>
+                    <view class="image-wrap" wx:if="{{false}}">
+                        <image mode="aspectFill" src="../../images/IDcard.png"></image>
+                    </view>
+                    <view class="image-wrap" wx:if="{{false}}">
+                        <image mode="aspectFill" src="../../images/anti-IDcard.png"></image>
+                    </view>
+                    <view class="image-wrap" wx:if="{{true}}">
+                        <image mode="aspectFill" src="../../images/held-IDcard.png"></image>
+                    </view>
+                    <view class="tip">须确保爆破清晰，无边框缺失</view>
+                </view>
+                <view class="bottom">
+                    <view class="item border-bottom">拍照</view>
+                    <view class="item border-bottom">从手机相册选择</view>
+                    <view class="item">取消</view>
+                </view>
+            </view>
+        </view>
+    </block>
+</view>

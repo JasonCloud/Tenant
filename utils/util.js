@@ -81,6 +81,10 @@ function alert(obj={},showCancel=false){
       title: obj.title?obj.title:'',
       content: obj.content?obj.content:'',
       showCancel:showCancel,
+      cancelText:obj.cancelText?obj.cancelText:'取消',
+      confirmText:obj.confirmText?obj.confirmText:'确定',
+      cancelColor:obj.cancelColor?obj.cancelColor:'#000000',
+      confirmColor:obj.confirmColor?obj.confirmColor:'#3CC51F',
       success: function(res) {
         if (res.confirm) {
           reslove({confirm:true});

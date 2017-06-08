@@ -247,7 +247,7 @@ scroll-view{
     left: 0;
     width: 100%;
     border-top: 1px solid #eeeeee;
-    z-index: 10;
+    z-index: 99;
 }
 .btn-box .btn{
     width: 50%;

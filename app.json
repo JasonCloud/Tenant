@@ -6,7 +6,9 @@
     "pages/logs/logs",
     "pages/houseLook/houseLook",
     "pages/commissioned/commissioned",
-    "pages/search/search"
+    "pages/search/search",
+    "pages/merchants/merchants",
+    "pages/helpFoundHouse/helpFoundHouse"
   ],
   "window":{
     "backgroundTextStyle":"light",
@@ -14,5 +16,20 @@
     "navigationBarTitleText": "房源",
     "navigationBarTextStyle":"#fff",
     "backgroundColor": "#344966"
+  },
+  "tabBar": {
+    "color":"#677075",
+    "selectedColor":"#344966",
+    "list": [{
+      "iconPath":"./images/tab_ic_home_mormal@3x.png",
+      "selectedIconPath":"./images/tab_ic_home_pressed@3x.png",
+      "pagePath": "pages/index/index",
+      "text": "首页"
+    }, {
+      "iconPath":"./images/tab_ic_housing_normal@3x.png",
+      "selectedIconPath":"./images/tab_ic_housing_pressed@3x.png",
+      "pagePath": "pages/homeSource/homeSource",
+      "text": "房源"
+    }]
   }
 }

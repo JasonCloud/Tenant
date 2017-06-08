@@ -1,9 +1,9 @@
 <view class="container">
     <swiper indicator-dots="{{indicatorDots&&false}}" indicator-active-color="#fff"
             autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular="{{true}}">
-        <block >
+        <block wx:for="{{detailObject.banner}}">
             <swiper-item>
-                <image src="{{detailObject.banner}}" class="slide-image" mode="aspectFill"/>
+                <image src="{{item}}" class="slide-image" mode="aspectFill"/>
             </swiper-item>
         </block>
     </swiper>
@@ -192,9 +192,9 @@
                 <button class="btn" formType="submit">提交预约</button>
             </form>
         </view>
-        <view class="call" wx:else catchtap="prevent" catchtap="call">
+        <!--<view class="call" wx:else catchtap="prevent" catchtap="call">
             <text>{{phone_num}}</text>
             <text>拨打</text>
-        </view>
+        </view>-->
     </view>
 </view>

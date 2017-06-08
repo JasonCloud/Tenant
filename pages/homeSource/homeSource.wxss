@@ -218,7 +218,7 @@
 }
 .container .list .item .left{
     width: 235rpx;
-    height: 175rpx;
+    height: 185rpx;
     flex-shrink: 0;
     position: relative;
 }

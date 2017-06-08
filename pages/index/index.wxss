@@ -8,7 +8,7 @@
   font-size: 1.6em;
 }
 .border-bottom{
-  border-bottom: 1px solid #bebebe;
+  border-bottom: 1px solid #eeeeee;
 }
 .placeholder_input{
   color: #141414;
@@ -21,7 +21,7 @@
   margin-bottom: 20rpx;
 }
 .container .bar swiper{
-  height: 440rpx;
+  height: 650rpx;
 }
 .bar .slide-image{
   width: 100%;
@@ -43,7 +43,7 @@
   text-align: center;
   padding: 10rpx 0;
   color: #141414;
-  font-size: 18px;
+  font-size: 32rpx;
   box-shadow:0px 4px 6px 0px rgba(159,163,170,.4);
 }
 .bar .search .search_btn{
@@ -68,8 +68,8 @@
   align-items: center;
 }
 .bar .dots view{
-  height: 16rpx;
-  width: 16rpx;
+  height: 12rpx;
+  width: 12rpx;
   border: 4rpx solid #ffffff;
   border-radius: 50%;
   margin-right: 12rpx;
@@ -102,9 +102,12 @@
 .bar .foot .idx text{
   display: block;
   color: #141414;
-  font-size: 18px;
+  font-size: 32rpx;
   text-align: center;
   padding-top: 10rpx;
+}
+.bar .foot .idx .number{
+  font-size: 28rpx;
 }
 .bar .foot .idx text:last-child{
   color:#555555;
@@ -125,14 +128,14 @@
 }
 .nav-title .idx text{
   display: block;
-  padding-top: 8rpx;
-  font-size: 13px;
+  padding-top: 10rpx;
+  font-size: 20rpx;
   color:#555555;
 }
 .nav-title .idx image{
   margin: 0 auto;
-  width: 62rpx;
-  height: 62rpx;
+  width: 75rpx;
+  height: 75rpx;
 }
 .choice-box{
   display: flex;
@@ -149,7 +152,7 @@
   padding: 12rpx;
 }
 .choice-box .idx text{
-  font-size: 26rpx;
+  font-size: 20rpx;
   color: #a8a8a8;
   padding-top: 8rpx;
   display: block;
@@ -165,14 +168,14 @@
   height: 20rpx;
 }
 .choice-box .idx .title .h1{
-  font-size: 36rpx;
+  font-size: 32rpx;
   color: #344966;
   padding-top: 0;
   margin: 0 10rpx;
 }
 .banner image{
   width: 100%;
-  height: 300rpx;
+  height: 250rpx;
 }
 .choice_lei_xing{
   padding: 20rpx;
@@ -188,11 +191,11 @@
 }
 .one_choice text{
   color: #3399ff;
-  font-size: 18px;
+  font-size: 28rpx;
 }
 .choice_lei_xing text{
   color: #555555;
-  font-size: 18px;
+  font-size: 28rpx;
   text-align: center;
   display: block;
   position: relative;
@@ -217,7 +220,7 @@
   position: relative;
 }
 .img-box image{
-  height: 300rpx;
+  height: 290rpx;
   border-radius: 10rpx;
   width: 100%;
   position: relative;
@@ -235,7 +238,7 @@
 .img-box text{
   display: block;
   color: #ffffff;
-  font-size: 36rpx;
+  font-size: 32rpx;
   position: absolute;
   left:50%;
   top:50%;
@@ -243,11 +246,12 @@
 }
 .look_more .btn{
   background-color: #ffffff;
-  padding: 16rpx 0;
+  height: 77rpx;
+  line-height: 77rpx;
   width: 70%;
   margin: 0 auto 20rpx;
   border: 1px solid #3399ff;
   color: #3399ff;
-  font-size: 36rpx;
+  font-size: 32rpx;
   text-align: center;
 }

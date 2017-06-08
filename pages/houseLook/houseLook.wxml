@@ -57,9 +57,9 @@
                 <button class="btn" formType="submit">提交预约</button>
             </form>
         </view>
-        <view class="call" wx:else catchtap="prevent" catchtap="call">
+        <!--<view class="call" wx:else catchtap="prevent" catchtap="call">
             <text>{{phone_num}}</text>
             <text>拨打</text>
-        </view>
+        </view>-->
     </view>
 </view>

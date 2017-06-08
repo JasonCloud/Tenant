@@ -73,9 +73,14 @@ Page({
   },
   zi_xun(){
     this.setData({
-      mask:true,
+      mask:false,
       btnType:'zi_xun'
-    })
+    });
+      util.alert({title:'咨询电话',content:this.data.phone_num,confirmText:'拨打'},true).then(res=>{
+          if(res.confirm){
+              this.call();
+          }
+      })
   },
   //查看户型详情
   houseLook(e){
