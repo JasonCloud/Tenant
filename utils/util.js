@@ -1,4 +1,6 @@
 const _Promise = require('./bluebird');
+const qqMapWx = require('./qqmap-wx-jssdk.min');
+const qqMap = new qqMapWx({key:'CGTBZ-J6YWG-RXDQ7-IUKHX-2LXDS-HGBVJ'});
 function formatTime(date) {
   var year = date.getFullYear()
   var month = date.getMonth() + 1
@@ -105,6 +107,40 @@ function toThousands(num) {
     if (!(counter % 4) && i != 0) { result.unshift(' '); }
   }
   return result.join('');
+};
+//加载
+function showLoading(title='加载中'){
+  var time = null;
+  if(wx.showLoading){
+    wx.showLoading({
+      title: title,
+    });
+  }else{
+    wx.showToast({
+      title: title,
+      icon: 'loading',
+      duration: 1000000
+    });
+    clearInterval(time);
+    time = setInterval(function(){
+      // alert({content:'再一次 showLoading'});
+      wx.showToast({
+        title: title,
+        icon: 'loading',
+        duration: 1000000
+      });
+    },9000);
+  }
+  return time;
+};
+//关闭加载
+function hiddenLoading(time){
+  if(wx.showLoading){
+    wx.hideLoading();
+  }else{
+    clearInterval(time);
+    wx.hideToast();
+  }
 }
 module.exports = {
   formatTime: formatTime,
@@ -113,5 +149,8 @@ module.exports = {
   removeStorage: removeStorage,
   alert: alert,
   toThousands: toThousands,
-  Throttle:Throttle
+  Throttle:Throttle,
+  qqMap:qqMap,
+  showLoading: showLoading,
+  hiddenLoading: hiddenLoading
 }

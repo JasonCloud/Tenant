@@ -25,7 +25,7 @@ App({
     }
   },
   getCondition(cb){
-    http.get('/api/mansion/condition').then(res => {
+    http.get('/api/mansion/condition',{city:'广州'}).then(res => {
       if(cb && typeof cb == 'function'){
         cb(res.data);
       }

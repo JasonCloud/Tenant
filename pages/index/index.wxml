@@ -23,11 +23,11 @@
       </block>
     </view>
     <view class="foot">
-      <view class="idx">
-        <text>会员</text>
-        <text class="number">6658人</text>
+      <view class="idx" wx:for="{{dataObj.datas}}" wx:key="{{index}}">
+        <text>{{item.name}}</text>
+        <text class="number">{{item.data}}人</text>
       </view>
-      <view class="idx">
+      <!--<view class="idx">
         <text>顾问</text>
         <text class="number">3325人</text>
       </view>
@@ -38,7 +38,11 @@
       <view class="idx">
         <text>成交楼盘</text>
         <text class="number">7784</text>
-      </view>
+      </view>-->
+    </view>
+    <view class="area-position">
+      <image mode="aspectFill" src="../../images/area-arrow.png"></image>
+      <text>{{positionCity}}</text>
     </view>
   </view>
   <!--房源选择-->
@@ -61,7 +65,7 @@
     </view>
   </view>
   <view class="choice-box">
-    <view class="idx">
+    <view class="idx" data-type="merchants" bindtap="routerGo">
       <view class="title border-bottom">
         <image src="../../images/ico_around.png"/>
         <text class="h1">全民招商</text>
@@ -70,7 +74,7 @@
       <text>专业团队</text>
       <text class="border-bottom">一对一极致服务</text>
     </view>
-    <view class="idx">
+    <view class="idx" data-type="commissioned" bindtap="routerGo">
       <view class="title border-bottom">
         <image src="../../images/ico_around.png"/>
         <text class="h1">业主委托</text>
@@ -79,7 +83,7 @@
       <text>专业团队</text>
       <text class="border-bottom">一对一极致服务</text>
     </view>
-    <view class="idx">
+    <view class="idx" data-type="helpFoundHouse" bindtap="routerGo">
       <view class="title border-bottom">
         <image src="../../images/ico_around.png"/>
         <text class="h1">帮我找房</text>
@@ -93,20 +97,20 @@
     <image src="{{imgs[3]}}" mode="aspectFill"/>
   </view>
   <view class="choice_lei_xing margin20px">
-    <text class="{{choice_checked_first == 0 ? 'checked': ''}}" data-index="0" bindtap="check" data-type="first">热门商圈</text>
-    <text class="{{choice_checked_first == 1 ? 'checked': ''}}" data-index="1" bindtap="check" data-type="first">团队规模</text>
-    <text class="{{choice_checked_first == 2 ? 'checked': ''}}" data-index="2" bindtap="check" data-type="first">办公类型</text>
+    <text wx:for="{{dataObj.groups}}" wx:key="{{index}}" class="{{choice_checked_first == index ? 'checked': ''}}" data-type="{{item.type}}" data-index="{{index}}" bindtap="check">{{item.title}}</text>
+    <!--<text class="{{choice_checked_first == 1 ? 'checked': ''}}" data-index="1" bindtap="check" >团队规模</text>
+    <text class="{{choice_checked_first == 2 ? 'checked': ''}}" data-index="2" bindtap="check">办公类型</text>-->
   </view>
-  <view class="img-box margin20px">
-    <image src="{{imgs[2]}}" mode="aspectFill" />
-    <text>#珠江新城#</text>
+  <view class="img-box margin20px" wx:for="{{dataObj.groups}}" wx:if="{{item.type == groupType}}" wx:key="{{index}}">
+    <image src="{{item.bannerImage}}" mode="aspectFill" ></image>
+    <text>#{{item.name}}#</text>
   </view>
   <view class=" margin20px one_choice">
     <text class="checked">热门房源</text>
   </view>
-  <view class="img-box margin20px" wx:for="{{imgs}}" wx:key="{{index}}">
-    <image src="{{item}}" mode="aspectFill" />
-    <text>#珠江新城#</text>
+  <view class="img-box margin20px" wx:for="{{dataObj.mansions}}" wx:key="{{index}}">
+    <image src="{{item.bannerImage}}" mode="aspectFill" />
+    <text>#{{item.name}}#</text>
   </view>
 
   <view class="look_more">

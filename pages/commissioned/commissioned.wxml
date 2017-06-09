@@ -4,14 +4,14 @@
         <view class="name-wrap">
             <view class="name">
                 <view class="text">姓名</view>
-                <input type="text" placeholder="请填写真实姓名" name="name" placeholder-class="placeholder"/>
+                <input bindinput="input" type="text" placeholder="请填写真实姓名" name="name" data-type="name"  placeholder-class="placeholder"/>
             </view>
         </view>
         <!--手机好-->
         <view class="mobile-wrap">
             <view class="mobile">
                 <view class="text">手机号</view>
-                <input type="text" placeholder="请填写手机号" name="mobile" placeholder-class="placeholder"/>
+                <input bindinput="input" type="number" placeholder="请填写手机号" name="mobile" placeholder-class="placeholder" data-type="mobile"/>
             </view>
         </view>
         <!--区域-->
@@ -28,23 +28,23 @@
         <view class="estate-name-wrap">
             <view class="estate-name">
                 <view class="text">楼盘名称</view>
-                <input type="text" placeholder="请填写楼盘名称" name="estateName" placeholder-class="placeholder"/>
+                <input bindinput="input" type="text" placeholder="请填写楼盘名称" name="estateName" placeholder-class="placeholder" data-type="estate"/>
             </view>
         </view>
         <!--面积-->
         <view class="size-wrap">
             <view class="size">
                 <view class="text">面积 (㎡)</view>
-                <input type="text" placeholder="请填写出租面积" name="size" placeholder-class="placeholder"/>
+                <input bindinput="input" type="number" placeholder="请填写出租面积" name="size" placeholder-class="placeholder" data-type="size"/>
             </view>
         </view>
         <!--每月租金-->
         <view class="rent-wrap">
             <view class="rent">
                 <view class="text">每月租金 (元)</view>
-                <input type="text" placeholder="请填写每月租金" name="rent" placeholder-class="placeholder"/>
+                <input bindinput="input" type="number" placeholder="请填写每月租金" name="rent" placeholder-class="placeholder" data-type="rent"/>
             </view>
         </view>
-        <button  form-type="submit" disabled>确认并提交</button>
+        <button  form-type="submit" disabled="{{btnDisabled}}">确认并提交</button>
     </form>
 </view>
