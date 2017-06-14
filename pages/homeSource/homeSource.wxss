@@ -45,7 +45,7 @@
     display: flex;
     align-items: center;
     justify-content: space-around;
-    padding: 30rpx 0;
+    /*padding: 30rpx 0;*/
     /*border-bottom: 2rpx solid #bebebe;*/
     background-color: #ffffff;
 }
@@ -58,24 +58,35 @@
 .container .nav .item{
     display: flex;
     align-items: center;
+    flex-grow: 1;
+    justify-content: center;
+    height: 100rpx;
+    flex-shrink: 0;
+    width: 240rpx;
 }
 .container .nav .border{
     height: 40rpx;
     width: 2rpx;
     background-color: #bebebe;
 }
-.container .nav .item text{
-    display: block;
+.container .nav .item view{
     color: #555555;
     font-size: 30rpx;
     margin-right: 12rpx;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
 }
-.container .nav text.checked{
+.container .nav view.checked{
     color: #141414;
+}
+.container .nav view.selected{
+    color: #3399ff;
 }
 .container .nav .item .ico{
     width: 20rpx;
     height: 10rpx;
+    flex-shrink: 0;
 }
 .container .nav-box .filter-list-box{
     position: relative;
@@ -102,14 +113,14 @@
     flex-direction: column;
     margin-left: 30rpx;
 }
-.container .filter-list .item text{
+.container .filter-list .item view{
     display: block;
     border-bottom: 1rpx solid #eeeeee;
     font-size: 28rpx;
     line-height: 150%;
     padding: 20rpx 0;
 }
-.container .filter-list .item text.checked{
+.container .filter-list .item view.checked{
     /*color: #141414;*/
     color:#3399FF;
 }
@@ -131,7 +142,7 @@
 .nav-box .filter-condition .item:last-child{
     border-bottom: none;
 }
-.nav-box .filter-condition .item text{
+.nav-box .filter-condition .item view{
     display: block;
     color:#555555;
     font-size: 28rpx;
@@ -152,7 +163,7 @@
     height: 18rpx;
     margin-right: 20rpx;
 }
-.nav-box .filter-condition .item .child-box text{
+.nav-box .filter-condition .item .child-box view{
     margin-top: 30rpx;
     flex-shrink: 0;
     margin-right: 16rpx;
@@ -172,7 +183,7 @@
     color: #141414;
     padding-left: 30rpx;
 }
-.nav-box .filter-condition .item text.checked{
+.nav-box .filter-condition .item view.checked{
     color: #ffffff;
     background-color: #3399ff;
     border: 1rpx solid #3399ff;

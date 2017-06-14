@@ -13,16 +13,11 @@ Page({
     filterList:[],
     mask:false,
     page_num:1, //接口页码
+    list_page_num:1,
     detail_obj:{}, //详情数据
     detailObject:{},
     phone_num:'', //咨询电话
     btnType:'prevlook',
-    imgUrls:[
-      'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1494154720483&di=189fc9c3663d9580aecf139880bf8623&imgtype=0&src=http%3A%2F%2Fimage.tianjimedia.com%2FuploadImages%2F2015%2F028%2F31%2FQ3U828G33506.JPEG',
-        'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1494154720482&di=ecd977d0df516af5cddcbd392e07c1a3&imgtype=0&src=http%3A%2F%2Fimage.tianjimedia.com%2FuploadImages%2F2015%2F028%2F22%2FP822ETRKJOU0.JPEG',
-        'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1494154720482&di=cf09b5974e321ce3aa9a580ba95923b9&imgtype=0&src=http%3A%2F%2Fimage.tianjimedia.com%2FuploadImages%2F2015%2F028%2F25%2F6Q1AIE18139Y.JPEG',
-        'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1494154720482&di=24b13864d742c8e6fcc516eb7bd9dcb9&imgtype=0&src=http%3A%2F%2Fimage.tianjimedia.com%2FuploadImages%2F2015%2F028%2F28%2FIW4C75336797.JPEG'
-    ],
     areaState:0,
     showSeeMore:false ,
    },
@@ -96,7 +91,7 @@ Page({
         this.setData({areaState:state});
         if(state == 0){
             this.setData({
-                showSeeMore: this.data.list.length == this.data.allList.length ? false : true,
+                // showSeeMore: this.data.list.length == this.data.allList.length ? false : true,
             });
         }else if(state == 1){
             let list = this.data.allList.filter(function(item){
@@ -105,8 +100,9 @@ Page({
                 }
             });
             this.setData({
-                filterList:list.length > 5 ? list.splice(0,5) : list,
-                showSeeMore: list.length > 5 ? true : false
+                filterList:list
+                // filterList:list.length > 5 ? list.splice(0,5) : list,
+                // showSeeMore: list.length > 5 ? true : false
             })
         }else if(state == 2){
             let list = this.data.allList.filter(function(item){
@@ -115,8 +111,9 @@ Page({
                 }
             });
             this.setData({
-                filterList:list.length > 5 ? list.splice(0,5) : list,
-                showSeeMore: list.length > 5 ? true : false
+                filterList:list
+                // filterList:list.length > 5 ? list.splice(0,5) : list,
+                // showSeeMore: list.length > 5 ? true : false
             })
         }
         else if(state == 3){
@@ -126,8 +123,9 @@ Page({
                 }
             });
             this.setData({
-                filterList:list.length > 5 ? list.splice(0,5) : list,
-                showSeeMore: list.length > 5 ? true : false
+                filterList:list,
+                // filterList:list.length > 5 ? list.splice(0,5) : list,
+                // showSeeMore: list.length > 5 ? true : false
             })
         }
         else if(state == 4){
@@ -137,8 +135,9 @@ Page({
                 }
             });
             this.setData({
-                filterList:list.length > 5 ? list.splice(0,5) : list,
-                showSeeMore: list.length > 5 ? true : false
+                filterList:list
+                // filterList:list.length > 5 ? list.splice(0,5) : list,
+                // showSeeMore: list.length > 5 ? true : false
             })
         }else if(state == 5){
             let list = this.data.allList.filter(function(item){
@@ -147,99 +146,185 @@ Page({
                 }
             });
             this.setData({
-                filterList:list.length > 5 ? list.splice(0,5) : list,
-                showSeeMore: list.length > 5 ? true : false
+                // filterList:list.length > 5 ? list.splice(0,5) : list,
+                filterList:list
+                // showSeeMore: list.length > 5 ? true : false
             })
         }
     },
   //查看更多
-  seeMore(){
-      let state = this.data.areaState;
-      if(state == 0){
-          this.setData({
-              list: this.data.allList.length > this.data.list.length ? this.data.list.concat(this.data.allList.splice(this.data.list.length,5)) : this.data.allList,
-          })
-          this.setData({
-              showSeeMore: this.data.allList.length > this.data.list.length ? false : true
-          })
-      }else if(state == 1){
-          let list = this.data.allList.filter(function(item){
-              if(item.totalArea > 0 && item.totalArea <= 100){
-                  return item;
-              }
-          });
-          this.setData({
-              filterList:this.data.filterList.length < list.length ? this.data.filterList.concat(list.splice(0,5)): list ,
-          })
-          let showSeeMore = this.data.filterList.length < list.length ? true : false;
-          this.setData({
-              showSeeMore:showSeeMore
-          })
-      }else if(state == 2){
-          let list = this.data.allList.filter(function(item){
-              if(item.totalArea > 100 && item.totalArea <= 200){
-                  return item;
-              }
-          });
-          this.setData({
-              filterList:this.data.filterList.length < list.length ? this.data.filterList.concat(list.splice(0,5)): list ,
-          })
-          let showSeeMore = this.data.filterList.length < list.length ? true : false;
-          this.setData({
-              showSeeMore:showSeeMore
-          })
-      }
-      else if(state == 3){
-          let list = this.data.allList.filter(function(item){
-              if(item.totalArea > 200 && item.totalArea <= 300){
-                  return item;
-              }
-          });
-          this.setData({
-              filterList:this.data.filterList.length < list.length ? this.data.filterList.concat(list.splice(0,5)): list ,
-          })
-          let showSeeMore = this.data.filterList.length < list.length ? true : false;
-          this.setData({
-              showSeeMore:showSeeMore
-          })
-      }
-      else if(state == 4){
-          let list = this.data.allList.filter(function(item){
-              if(item.totalArea > 300 && item.totalArea <= 500){
-                  return item;
-              }
-          });
-          this.setData({
-              filterList:this.data.filterList.length < list.length ? this.data.filterList.concat(list.splice(0,5)): list ,
-          })
-          let showSeeMore = this.data.filterList.length < list.length ? true : false;
-          this.setData({
-              showSeeMore:showSeeMore
-          })
-      }else if(state == 5){
-          let list = this.data.allList.filter(function(item){
-              if(item.totalArea > 500){
-                  return item;
-              }
-          });
-          this.setData({
-              filterList:this.data.filterList.length < list.length ? this.data.filterList.concat(list.splice(0,5)): list ,
-          })
-          let showSeeMore = this.data.filterList.length < list.length ? true : false;
-          this.setData({
-              showSeeMore:showSeeMore
-          })
-      }
-  },
+  // seeMore(){
+  //     let state = this.data.areaState;
+  //     if(state == 0){
+  //         this.setData({
+  //             list: this.data.allList.length > this.data.list.length ? this.data.list.concat(this.data.allList.splice(this.data.list.length,5)) : this.data.allList,
+  //         })
+  //         this.setData({
+  //             showSeeMore: this.data.allList.length > this.data.list.length ? false : true
+  //         })
+  //     }else if(state == 1){
+  //         let list = this.data.allList.filter(function(item){
+  //             if(item.totalArea > 0 && item.totalArea <= 100){
+  //                 return item;
+  //             }
+  //         });
+  //         this.setData({
+  //             filterList:this.data.filterList.length < list.length ? this.data.filterList.concat(list.splice(0,5)): list ,
+  //         })
+  //         let showSeeMore = this.data.filterList.length < list.length ? true : false;
+  //         this.setData({
+  //             showSeeMore:showSeeMore
+  //         })
+  //     }else if(state == 2){
+  //         let list = this.data.allList.filter(function(item){
+  //             if(item.totalArea > 100 && item.totalArea <= 200){
+  //                 return item;
+  //             }
+  //         });
+  //         this.setData({
+  //             filterList:this.data.filterList.length < list.length ? this.data.filterList.concat(list.splice(0,5)): list ,
+  //         })
+  //         let showSeeMore = this.data.filterList.length < list.length ? true : false;
+  //         this.setData({
+  //             showSeeMore:showSeeMore
+  //         })
+  //     }
+  //     else if(state == 3){
+  //         let list = this.data.allList.filter(function(item){
+  //             if(item.totalArea > 200 && item.totalArea <= 300){
+  //                 return item;
+  //             }
+  //         });
+  //         this.setData({
+  //             filterList:this.data.filterList.length < list.length ? this.data.filterList.concat(list.splice(0,5)): list ,
+  //         })
+  //         let showSeeMore = this.data.filterList.length < list.length ? true : false;
+  //         this.setData({
+  //             showSeeMore:showSeeMore
+  //         })
+  //     }
+  //     else if(state == 4){
+  //         let list = this.data.allList.filter(function(item){
+  //             if(item.totalArea > 300 && item.totalArea <= 500){
+  //                 return item;
+  //             }
+  //         });
+  //         this.setData({
+  //             filterList:this.data.filterList.length < list.length ? this.data.filterList.concat(list.splice(0,5)): list ,
+  //         })
+  //         let showSeeMore = this.data.filterList.length < list.length ? true : false;
+  //         this.setData({
+  //             showSeeMore:showSeeMore
+  //         })
+  //     }else if(state == 5){
+  //         let list = this.data.allList.filter(function(item){
+  //             if(item.totalArea > 500){
+  //                 return item;
+  //             }
+  //         });
+  //         this.setData({
+  //             filterList:this.data.filterList.length < list.length ? this.data.filterList.concat(list.splice(0,5)): list ,
+  //         })
+  //         let showSeeMore = this.data.filterList.length < list.length ? true : false;
+  //         this.setData({
+  //             showSeeMore:showSeeMore
+  //         })
+  //     }
+  // },
+    seeMore(e,reset=false,pageSize=3){
+        http.get('/api/apartment/list',{pageNo:this.data.list_page_num,mansionId:this.data.id,pageSize:pageSize}).then(res=>{
+            let resList = res.data.result;
+            let state = this.data.areaState;
+            let list = this.data.list;
+            let allList = this.data.allList;
+            let filterList = this.data.filterList;
+            if(resList.length >= pageSize){
+                this.setData({
+                    list_page_num: this.data.list_page_num + 1 ,
+
+                })
+            }
+            console.log(reset);
+                if(state == 0){
+                    this.setData({
+                        list:reset ? resList : list.concat(resList),
+                        allList:reset ? resList : allList.concat(resList),
+                        showSeeMore:resList.length >= pageSize ? true :false
+                    });
+                }else if(state == 1){
+                    let list = resList.filter(function(item){
+                        if(item.totalArea > 0 && item.totalArea <= 100){
+                            return item;
+                        }
+                    });
+                    this.setData({
+                        list:reset ? resList : list.concat(resList),
+                        allList:reset ? resList : allList.concat(resList),
+                        filterList:filterList.concat(list),
+                        showSeeMore:resList.length >= pageSize ? true :false
+                    });
+                }else if(state == 2){
+                    let list = resList.filter(function(item){
+                        if(item.totalArea > 100 && item.totalArea <= 200){
+                            return item;
+                        }
+                    });
+                    this.setData({
+                        list:reset ? resList : list.concat(resList),
+                        allList:reset ? resList : allList.concat(resList),
+                        filterList:filterList.concat(list),
+                        showSeeMore:resList.length >= pageSize ? true :false
+                    });
+                }
+                else if(state == 3){
+                    let list = resList.filter(function(item){
+                        if(item.totalArea > 200 && item.totalArea <= 300){
+                            return item;
+                        }
+                    });
+                    this.setData({
+                        list:reset ? resList : list.concat(resList),
+                        allList:reset ? resList : allList.concat(resList),
+                        filterList:filterList.concat(list),
+                        showSeeMore:resList.length >= pageSize ? true :false
+                    });
+                }
+                else if(state == 4){
+                    let list = resList.filter(function(item){
+                        if(item.totalArea > 300 && item.totalArea <= 500){
+                            return item;
+                        }
+                    });
+                    this.setData({
+                        list:reset ? resList : list.concat(resList),
+                        allList:reset ? resList : allList.concat(resList),
+                        filterList:filterList.concat(list),
+                        showSeeMore:resList.length >= pageSize ? true :false
+                    });
+                }else if(state == 5){
+                    let list = resList.filter(function(item){
+                        if(item.totalArea > 500){
+                            return item;
+                        }
+                    });
+                    this.setData({
+                        list:reset ? resList : list.concat(resList),
+                        allList:reset ? resList : allList.concat(resList),
+                        filterList:filterList.concat(list),
+                        showSeeMore:resList.length >= pageSize ? true :false
+                    });
+                }
+        })
+    },
   get_house_detail(id){
     http.get('/api/mansion/detail',{id:id}).then(res => {
       let obj = this.initDetailData(res.data);
       this.setData({
         detailObject: obj,
         phone_num:obj.telephone,
-        list:obj.apartments.length > 5 ? obj.apartments.splice(0,5) : obj.apartments,
-        allList: obj.apartments,
-        showSeeMore: obj.apartments.length > 5 ? true : false
+        // list:obj.apartments.length > 5 ? obj.apartments.splice(0,5) : obj.apartments,
+        // allList: obj.apartments,
+        // showSeeMore: obj.apartments.length > 5 ? true : false
       })
     }).catch(res =>{
 
@@ -257,7 +342,11 @@ Page({
   onLoad:function(options){
     // 页面初始化 options为页面跳转所带来的参数
     this.get_house_detail(options.id);
-    this.setData({id:options.id});
+    this.setData({
+        id:options.id,
+        apartmentCount:options.apartmentCount
+    });
+    this.seeMore(undefined,true);
   },
   onReady:function(){
     // 页面渲染完成

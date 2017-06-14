@@ -2,6 +2,7 @@
 .container{
   min-height: 100%;
   background-color: #edeff1;
+  padding-bottom: 30rpx;
 }
 .h1{
   display: block;
@@ -29,14 +30,14 @@
 }
 .bar .search{
   position: absolute;
-  width: 70%;
+  width: 80%;
   left: 50%;
   bottom: 100rpx;
   transform: translateX(-50%);
   display: flex;
   justify-content: flex-start;
 }
-.bar .search input{
+.bar .search .input{
   flex-grow: 1;
   background-color: #ffffff;
   margin-right: 4rpx;
@@ -45,6 +46,10 @@
   color: #141414;
   font-size: 32rpx;
   box-shadow:0px 4px 6px 0px rgba(159,163,170,.4);
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
+  max-width: 260rpx;
 }
 .bar .search .search_btn{
   width: 15%;
@@ -112,24 +117,46 @@
 .bar .foot .idx text:last-child{
   color:#555555;
 }
-.bar .area-position{
+.bar .area-position-wrap{
   position:absolute;
-  top: 0 ;
+  top: 20rpx ;
   left: 40rpx;
-  display:flex;
-  align-items: center;
+}
+.bar .area-position{
+    display:flex;
+    align-items: center;
+    height: 50rpx;
 }
 .bar .area-position image{
-  width: 36rpx;
-  height: 21rpx;
-  display:block;
+    width: 36rpx;
+    height: 21rpx;
+    display:block;
 }
 .bar .area-position text{
-  color: #fff;
-  font-size: 32rpx;
-  display:block;
-  padding-left: 15rpx;
-  text-shadow: 1px 1px 2px #000;
+    color: #fff;
+    font-size: 32rpx;
+    display:block;
+    padding-left: 15rpx;
+    text-shadow: 1px 1px 2px #000;
+}
+.bar .area-other{
+    background-color: #ffffff;
+    width: auto;
+    box-shadow: 2rpx 2rpx 20rpx 0rpx #000;
+}
+
+.bar .area-other view{
+    padding: 15rpx 20rpx;
+    color: #141414;
+    text-shadow: none;
+    min-width: 80rpx;
+    display: block;
+    border-bottom: 1px solid #eeeeee;
+    font-size: 32rpx;
+    text-align: center;
+}
+.bar .area-other view:last-child{
+    border-bottom: none;
 }
 .nav-title{
   width: 100%;
@@ -273,4 +300,31 @@
   color: #3399ff;
   font-size: 32rpx;
   text-align: center;
+}
+/*区域选择*/
+.region-select{
+  position:fixed;
+  bottom:0;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  z-index: 99;
+}
+.region-select .nav{
+  display:flex;
+  justify-content: space-between;
+}
+.region-select .nav .cancel{
+  padding: 15rpx 25rpx;
+  font-size: 32rpx;
+  color: #000;
+}
+.region-select .nav .confirm{
+  padding: 15rpx 25rpx;
+  font-size: 32rpx;
+  color: #3CC51F;
+}
+.indicator{
+  height: 50px;
+  font-size:32rpx;
 }

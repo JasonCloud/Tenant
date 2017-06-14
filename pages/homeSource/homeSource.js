@@ -1,6 +1,6 @@
 // pages/homeSource/homeSource.js
-const http = require('../../utils/http')
-const util = require('../../utils/util')
+const http = require('../../utils/http');
+const util = require('../../utils/util');
 const Throttle = util.Throttle();
 const app = getApp();
 Page({
@@ -21,21 +21,31 @@ Page({
       creativeGarden:''
     },
     selectConditionId:{
+      areaText:'',
       area:'',
+      priceText:'',
       price:'',
+      subwayPerimeterText:'',
       subwayPerimeter:'',
+      landmarkBuildingText:'',
       landmarkBuilding:'',
+      officeText:'',
       office:'',
+      creativeGardenText:'',
       creativeGarden:''
     },
     condition:{},//所有的筛选条件
     selectId:-1,//区域选择二级id
+    selectText:'', //区域选择二级名字
     areaOrFilter:'',//区域和筛选切换
     listOne:[],
     listTow:[],
     conditionKey:['area','price','subwayPerimeter','landmarkBuilding','office','creativeGarden'],
     pageSize:10,
     fetchAll:false, //标注是否加载完数据
+    areaText:'', //选中的区域名称
+    filterText:'',//选中的筛选条件
+    showFilterText:false,
   },
   //删除搜索
   dele(){
@@ -46,28 +56,29 @@ Page({
   //跳转到详情
   gotoDetail(e){
     let id = e.currentTarget.dataset.id;
+    let apartmentCount = e.currentTarget.dataset.apartmentcount;
     wx.navigateTo({
-      url:"../homeDetail/homeDetail?id="+id
+      url:`../homeDetail/homeDetail?id=${id}&apartmentCount=${apartmentCount}`
     })
   },
   //获取某一个区域的id
   selectConditionId(e){
     let id = e.target.dataset.id;
     let type = e.target.dataset.type;
-
+    let wordName = e.target.dataset.wordname;
     if(id == this.data.selectConditionId[type]){
       this.data.selectConditionId[type] = '';
+      this.data.selectConditionId[type+'Text'] = '';
       this.setData({
         selectConditionId:this.data.selectConditionId
       })
     }else {
       this.data.selectConditionId[type] = id;
+      this.data.selectConditionId[type+'Text'] = wordName;
       this.setData({
-        selectConditionId:this.data.selectConditionId
+        selectConditionId:this.data.selectConditionId,
       })
     }
-
-
   },
   //价格排序
   priceSort(){
@@ -120,25 +131,32 @@ Page({
     }
 
   },
+  //区
   choiceArea(e){
     let id = e.currentTarget.dataset.id;
+    let wordName = e.currentTarget.dataset.wordname;
     this.setData({
       areaOrFilter:'',
-      page_num:1
+      page_num:1,
+      fetchAll:false,
     });
-    if(id==''){
+    if(id==0){
       let obj = {
         pageNo:this.data.page_num,
-        fetchAll:false,
       };
-      this.data.areaType == 'metro'? obj.subway = id : obj.region = this.data.selectId;
+      this.setData({
+        areaText:this.data.selectText,
+      });
+      this.data.areaType == 'metro'? obj.subway = this.data.selectId : obj.region = this.data.selectId;
       this.get_house_list(obj,true);
     }
     if(this.data.resultAreaId != id){
       let obj = {
         pageNo:this.data.page_num,
-        fetchAll:false,
       };
+      this.setData({
+        areaText:wordName
+      });
       this.data.areaType == 'metro'? obj.subway = id : obj.region = id;
       this.get_house_list(obj,true).then(res => {
         this.setData({
@@ -176,11 +194,6 @@ Page({
 
     })
   },
-  //获取筛选条件
-  getCondition(){
-    // return util.getStorage('condition')
-
-  },
   //选择区域和地铁线路
   changeArea(e){
     let areaType = e.target.dataset.type;
@@ -202,19 +215,23 @@ Page({
 
   },
   //选择具体某个城市或者地铁的某个站点
+  //式
   changeCity(e){
     let index = e.target.dataset.index;
     let id = e.target.dataset.id;
-    console.log('选择城市');
+    let wordName = e.target.dataset.wordname;
     if(this.data.listOne[index]){
+      // console.log('选择城市');
       this.setData({
         listTow:this.data.listOne[index]['allChildrenKeyword'],
-        selectId:id
+        selectId:id,
+        selectText:wordName
       })
     }else{
       this.setData({
         listTow:[],
-        selectId:id
+        selectId:id,
+        selectText:wordName
       })
     }
 
@@ -227,8 +244,10 @@ Page({
   },
   onLoad:function(options){
     // 页面初始化 options为页面跳转所带来的参数
-    this.get_house_list({pageNo:this.data.page_num});
     // let condition = this.initCondition(this.getCondition());
+
+  },
+  getCondition(){
     app.getCondition(res => {
       console.log(res);
       let condition = this.initCondition(res);
@@ -269,19 +288,50 @@ Page({
       fetchAll:false,
     });
     this.get_house_list({pageNo:this.data.page_num},true);
+    this.detectionFilter();
   },
   //筛选条件确定
   confirm(){
     this.setData({
       areaOrFilter:'',
       page_num:1,
-    })
+    });
     if(!this.objectEmpty()(this.data.selectConditionId)){
       this.setData({fetchAll:false});
       let obj = Object.assign({},this.data.selectConditionId);
       this.data.areaType == 'metro'? obj.subway = this.data.resultAreaId : obj.region = this.data.resultAreaId;
       this.get_house_list(obj,true);
-      console.log(this.data.filterType);
+    }
+    this.detectionFilter();
+  },
+  //检测筛选显示文案
+  detectionFilter(){
+    var condition = this.data.selectConditionId;
+    var n = 0;
+    for(let key in condition){
+      if(condition.hasOwnProperty(key)){
+        if(key.indexOf('Text')>-1 && condition[key] != ''){
+            this.setData({filterText:condition[key]});
+        }
+        if(condition[key] != '' && key.indexOf('Text') < 0 ){
+          n = n + 1;
+        }
+      }
+    }
+    if(n==0){
+      this.setData({
+        showFilterText: false,
+        filterText:''
+      })
+    }else if(n > 1){
+      this.setData({
+        showFilterText: true,
+        filterText:'多选'
+      })
+    }else{
+      this.setData({
+        showFilterText: true,
+      })
     }
   },
   objectEmpty(){
@@ -307,6 +357,26 @@ Page({
   },
   onShow:function(){
     // 页面显示
+    this.setData({
+      page_num:1
+    });
+    this.getCondition();
+    var obj = util.getStorage('searchObj');
+    var filterText = util.getStorage('filterText');
+    if(filterText){
+      filterText.showFilterText = filterText.filterText ? true : false;
+      this.setData(filterText);
+      util.removeStorage('filterText');
+    }
+    if(obj){
+      obj.pageNo = 1;
+      obj.cityName = app.globalData.serverCity;
+      this.get_house_list(obj,true);
+      util.removeStorage('searchObj');
+    }else{
+      this.get_house_list({pageNo:1},true);
+    }
+
   },
   onHide:function(){
     // 页面隐藏
@@ -339,4 +409,11 @@ Page({
       this.get_house_list(obj);
     }
   },
+  onHide(){
+    this.setData({
+      areaText:'',
+      filterText:'',
+      showFilterText:false,
+    })
+  }
 })

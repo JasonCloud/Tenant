@@ -1,6 +1,9 @@
 const _Promise = require('./bluebird');
 const qqMapWx = require('./qqmap-wx-jssdk.min');
 const qqMap = new qqMapWx({key:'CGTBZ-J6YWG-RXDQ7-IUKHX-2LXDS-HGBVJ'});
+const province = require('./province');
+const city = require('./city');
+const area = require('./area');
 function formatTime(date) {
   var year = date.getFullYear()
   var month = date.getMonth() + 1
@@ -149,8 +152,11 @@ module.exports = {
   removeStorage: removeStorage,
   alert: alert,
   toThousands: toThousands,
-  Throttle:Throttle,
-  qqMap:qqMap,
+  Throttle: Throttle,
+  qqMap: qqMap,
   showLoading: showLoading,
-  hiddenLoading: hiddenLoading
+  hiddenLoading: hiddenLoading,
+  province: province.province,
+  city: city.city,
+  area: area.area
 }

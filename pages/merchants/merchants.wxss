@@ -67,6 +67,9 @@
     line-height: 80rpx;
     flex-grow: 1;
     padding-left: 110rpx;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
 }
 .resume{
     padding:22rpx 25rpx;
@@ -150,51 +153,6 @@
     font-size: 28rpx;
     background-color: #344966;
 }
-/*提交成功弹窗*/
-.pop-ups{
-    position:fixed;
-    top:0;
-    left:0;
-    width: 100%;
-    height: 100%;
-    background-color:rgba(0,0,0,0.7);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-}
-.pop-ups .content{
-    background-color: #ffffff;
-    width: 615rpx;
-    border-radius: 10rpx;
-}
-.pop-ups .title{
-    display:flex;
-    align-items: center;
-    justify-content: center;
-    padding: 90rpx 25rpx 30rpx;
-}
-.pop-ups .title image{
-    width:52rpx;
-    height: 52rpx;
-}
-.pop-ups .title text{
-    font-size: 42rpx;
-    color: #141414;
-    padding-left: 18rpx;
-}
-.pop-ups .p{
-    padding: 0 55rpx 90rpx;
-    color:#141414;
-    font-size: 28rpx;
-}
-.pop-ups .button{
-    height: 90rpx;
-    line-height: 90rpx;
-    text-align: center;
-    font-size: 28rpx;
-    color:#3399ff;
-    border-top: 1px solid #eeeeee;
-}
 /*上传身份证弹窗*/
 .upload-IDCard-pop-ups{
     position: fixed;
@@ -235,6 +193,10 @@
     font-size: 28rpx;
     color:#fff;
 }
+.upload-IDCard-pop-ups .show-example .tip text{
+    display: block;
+    padding-bottom: 20rpx;
+}
 .upload-IDCard-pop-ups .bottom{
     width: 100%;
     position: absolute;
@@ -251,4 +213,8 @@
 }
 .upload-IDCard-pop-ups .bottom .border-bottom{
     border-bottom: 1px solid #eeeeee;
+}
+button[disabled][type="default"],button[disabled]:not([type]){
+    color:#fff;
+    background-color:#c5c5c5;
 }

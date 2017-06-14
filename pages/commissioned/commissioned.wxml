@@ -1,24 +1,24 @@
-<view class="commissioned-page">
-    <form bindsubmit="submit">
+<view class="commissioned-page" bindtap="hiddenAddressSelect">
         <!--姓名-->
         <view class="name-wrap">
             <view class="name">
                 <view class="text">姓名</view>
-                <input bindinput="input" type="text" placeholder="请填写真实姓名" name="name" data-type="name"  placeholder-class="placeholder"/>
+                <input bindinput="input" type="text" placeholder="请填写真实姓名" data-type="name"  placeholder-class="placeholder"/>
             </view>
         </view>
         <!--手机好-->
         <view class="mobile-wrap">
             <view class="mobile">
                 <view class="text">手机号</view>
-                <input bindinput="input" type="number" placeholder="请填写手机号" name="mobile" placeholder-class="placeholder" data-type="mobile"/>
+                <input bindinput="input" type="number" placeholder="请填写手机号" placeholder-class="placeholder" data-type="mobile"/>
             </view>
         </view>
         <!--区域-->
         <view class="area-wrap">
-            <view class="area">
+            <view class="area" catchtap="showAndHiddenAddressSelect">
                 <view class="text">区域</view>
-                <view class="placeholder pseudo-input">请选择区域</view>
+                <view class="placeholder pseudo-input" wx:if="{{!serverCityName}}">请选择区域</view>
+                <view class="pseudo-input" wx:else>{{serverCityName}}</view>
                 <view class="arrow">
                     <image mode="aspectFill" src="../../images/btn_expand_gray.png"></image>
                 </view>
@@ -28,23 +28,54 @@
         <view class="estate-name-wrap">
             <view class="estate-name">
                 <view class="text">楼盘名称</view>
-                <input bindinput="input" type="text" placeholder="请填写楼盘名称" name="estateName" placeholder-class="placeholder" data-type="estate"/>
+                <input bindinput="input" type="text" placeholder="请填写楼盘名称" placeholder-class="placeholder" data-type="estate"/>
             </view>
         </view>
         <!--面积-->
         <view class="size-wrap">
             <view class="size">
                 <view class="text">面积 (㎡)</view>
-                <input bindinput="input" type="number" placeholder="请填写出租面积" name="size" placeholder-class="placeholder" data-type="size"/>
+                <input bindinput="input" type="number" placeholder="请填写出租面积" placeholder-class="placeholder" data-type="size"/>
             </view>
         </view>
         <!--每月租金-->
         <view class="rent-wrap">
             <view class="rent">
                 <view class="text">每月租金 (元)</view>
-                <input bindinput="input" type="number" placeholder="请填写每月租金" name="rent" placeholder-class="placeholder" data-type="rent"/>
+                <input bindinput="input" type="number" placeholder="请填写每月租金" placeholder-class="placeholder" data-type="rent"/>
             </view>
         </view>
-        <button  form-type="submit" disabled="{{btnDisabled}}">确认并提交</button>
-    </form>
+        <button  form-type="submit" disabled="{{btnDisabled}}" bindtap="submit">确认并提交</button>
+
+    <!--提交成功弹窗-->
+    <block wx:if="{{showSubmitSuccess}}">
+        <view id="submitSuccess">
+            <view class="content">
+                <view class="title">
+                    <image mode="aspectFill" src="../../images/success.png"></image>
+                    <text>提交成功</text>
+                </view>
+                <view class="p">我们将以最快速度联系您，请耐心等待~</view>
+                <view class="button" bindtap="submitSuccess">确认</view>
+            </view>
+        </view>
+    </block>
+    <!--地址选择-->
+    <view id="pickerSelect" wx:if="{{showAddressSelect}}" catchtap="auxiliary">
+        <view class="nav">
+            <view class="cancel" catchtap="showAndHiddenAddressSelect" data-type="cancel">取消</view>
+            <view class="confirm" catchtap="showAndHiddenAddressSelect" data-type="confirm">确定</view>
+        </view>
+        <picker-view indicator-class="indicator" style="width: 100%; height: 400rpx;" bindchange="addressChange">
+            <picker-view-column>
+                <view wx:for="{{province}}" style="line-height: 50px; text-align: center">{{item.name}}</view>
+            </picker-view-column>
+            <picker-view-column>
+                <view wx:for="{{cityArr}}" style="line-height: 50px; text-align: center;">{{item.name}}</view>
+            </picker-view-column>
+            <picker-view-column>
+                <view wx:for="{{areaArr}}" style="line-height: 50px; text-align: center;">{{item.name}}</view>
+            </picker-view-column>
+        </picker-view>
+    </view>
 </view>

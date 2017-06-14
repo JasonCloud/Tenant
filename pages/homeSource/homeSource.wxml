@@ -10,17 +10,19 @@
     <view class="nav-box">
         <view class="nav">
             <view class="item" catchtap="choiceCondition" data-type="area">
-                <text class="{{areaOrFilter == 'area' ? 'checked':''}}">区域</text>
+                <view wx:if="{{!areaText}}" class="{{areaOrFilter == 'area' ? 'checked':''}}">区域</view>
+                <view class="selected" wx:else>{{areaText}}</view>
                 <image src="{{areaOrFilter == 'area' ? '../../images/btn_up_check.png':'../../images/btn_down.png'}}" class="ico"></image>
             </view>
-            <view class="item border"></view>
+            <view class="border"></view>
             <view class="item" catchtap="choiceCondition" data-type="filter">
-                <text class="{{areaOrFilter == 'filter' ? 'checked':''}}">筛选</text>
+                <view wx:if="{{!filterText && !showFilterText}}" class="{{areaOrFilter == 'filter' ? 'checked':''}}">筛选</view>
+                <view class="selected" wx:else>{{filterText}}</view>
                 <image src="{{areaOrFilter == 'filter' ? '../../images/btn_up_check.png':'../../images/btn_down.png'}}" class="ico"></image>
             </view>
-            <view class="item border"></view>
+            <view class="border"></view>
             <view class="item" catchtap="priceSort">
-                <text>价格</text>
+                <view>价格</view>
                 <view class="tow-ico" >
                     <image src="{{upChoiceValue === false ? '../../images/btn_up_check.png':'../../images/btn_up.png'}}" class="ico"></image>
                     <image src="{{upChoiceValue === true ? '../../images/btn_down_check.png':'../../images/btn_down.png'}}" class="ico"></image>
@@ -30,19 +32,21 @@
         <view class="filter-list-box">
             <view class="filter-list" wx:if="{{areaOrFilter == 'area'}}">
                 <view class="item" catchtap="changeArea">
-                    <text class="{{areaType=='area' ? 'checked' : ''}}" data-type="area">区域</text>
-                    <text class="{{areaType=='metro' ? 'checked' : ''}}" data-type="metro">地铁</text>
+                    <view class="{{areaType=='area' ? 'checked' : ''}}" data-type="area">区域</view>
+                    <view class="{{areaType=='metro' ? 'checked' : ''}}" data-type="metro">地铁</view>
                 </view>
                 <view class="item" catchtap="changeCity">
-                    <text wx:if="{{areaType=='area'}}" class="{{selectId == '' ? 'checked' : ''}}" data-id="" data-index="-1">不限</text>
                     <block wx:for="{{listOne}}" wx:key="idx" wx:for-index="idx">
-                        <text class="{{selectId == item.id ? 'checked' : ''}}" data-id="{{item.id}}" data-index="{{idx}}" data-fatherId="{{item.fatherId}}">{{item.wordName}}</text>
+                        <view class="{{selectId == item.id ? 'checked' : ''}}" data-id="{{item.id}}" data-index="{{idx}}" data-fatherId="{{item.fatherId}}" data-wordname="{{item.wordName}}">
+                            {{item.wordName}}
+                        </view>
                     </block>
                 </view>
                 <view class="item">
-                    <text wx:if="{{areaType=='area'}}" data-id=""  data-fatherId="" catchtap="choiceArea">不限</text>
                     <block wx:for="{{listTow}}" wx:key="idx" wx:for-index="idx" wx:if="{{selectId!=-1}}">
-                        <text class="item-child" data-id="{{item.id}}"  data-fatherId="{{item.fatherId}}" catchtap="choiceArea">{{item.wordName}}</text>
+                        <view class="item-child" data-id="{{item.id}}"  data-fatherId="{{item.fatherId}}" catchtap="choiceArea" data-wordname="{{item.wordName}}">
+                            {{item.wordName}}
+                        </view>
                     </block>
                 </view>
             </view>
@@ -57,7 +61,10 @@
 
                         <view class="child-box" catchtap="selectConditionId" wx:if="{{index == 1 || index == 0 || tabType[item] == item}}">
                             <block wx:for="{{condition[item]['allChildrenKeyword']}}" wx:for-item="child_item" wx:key="child_idx" wx:for-index="child_idx">
-                                <text data-id="{{child_item.id}}" class="{{selectConditionId[item] == child_item.id ? 'checked': ''}}" data-type="{{item}}">{{child_item.wordName}}</text>
+                                <view data-id="{{child_item.id}}" class="{{selectConditionId[item] == child_item.id ? 'checked': ''}}" data-type="{{item}}"
+                                      data-wordName="{{child_item.wordName}}">
+                                    {{child_item.wordName}}
+                                </view>
                             </block>
                         </view>
                     </view>
@@ -79,11 +86,11 @@
                     <view class="rented-info">{{item.apartmentCount}}套可租</view>
                 </view>
 
-                <view class="right" catchtap="gotoDetail" data-id="{{item.id}}">
+                <view class="right" catchtap="gotoDetail" data-id="{{item.id}}" data-apartmentcount="{{item.apartmentCount}}">
                     <view class="item_child">
                         <text class="h1">{{item.name}}</text>
                         <image src="../../images/jingpin.png" class="ico" wx:if="{{item.highlight==1}}"></image>
-                        <image src="../../images/ding.png" class="ico" wx:if="{{item.highlight==2}}"></image>
+                        <image src="../../images/ding.png" class="ico" wx:if="{{item.addTop==1}}"></image>
                     </view>
                     <view class="item_child">
                         <text class="h2">{{item.price}}元/㎡起</text>

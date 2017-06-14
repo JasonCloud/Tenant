@@ -3,17 +3,17 @@
     "pages/index/index",
     "pages/homeSource/homeSource",
     "pages/homeDetail/homeDetail",
-    "pages/logs/logs",
     "pages/houseLook/houseLook",
     "pages/commissioned/commissioned",
     "pages/search/search",
     "pages/merchants/merchants",
-    "pages/helpFoundHouse/helpFoundHouse"
+    "pages/helpFoundHouse/helpFoundHouse",
+    "pages/homeFilterList/homeFilterList"
   ],
   "window":{
     "backgroundTextStyle":"light",
     "navigationBarBackgroundColor": "#344966",
-    "navigationBarTitleText": "房源",
+    "navigationBarTitleText": "租啊",
     "navigationBarTextStyle":"#fff",
     "backgroundColor": "#344966"
   },

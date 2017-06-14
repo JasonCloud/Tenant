@@ -1,5 +1,5 @@
 <view class="container">
-    <swiper indicator-dots="{{indicatorDots&&false}}" indicator-active-color="#fff"
+    <swiper indicator-dots="{{detailObject.banner.length > 1}}" indicator-active-color="#fff"
             autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular="{{true}}">
         <block wx:for="{{detailObject.banner}}">
             <swiper-item>
@@ -10,7 +10,7 @@
     <view class="title-box margin-bottom-20">
         <view class="left">
             <text class="h1 font32">{{detailObject.name}}</text>
-            <text class="h2 font24">{{detailObject.region}} | 8套在租</text>
+            <text class="h2 font24">{{detailObject.region}} | {{apartmentCount}}套在租</text>
         </view>
         <view class="right">
             <text class="red font36">{{detailObject.price}}</text><text class="fontcolor555 font28">元/m2/月起</text>
@@ -32,8 +32,8 @@
         <view class="list-box margin-bottom-20">
             <block wx:if="{{areaState == 0}}">
                 <view class="list" wx:for="{{list}}" wx:key="index" catchtap="houseLook" data-id="{{item.id}}" wx:if="{{areaState==0}}">
-                    <view class="left"><text class="blue font44">{{item.totalArea}}</text><texte class="fontcolor555 font28">m2</texte></view>
-                    <view class="middle"><text class="red font44">{{item.unitPrice}}</text><text class="fontcolor555 font28">元/m2/月起</text></view>
+                    <view class="left"><text class="blue font44">{{item.totalArea}}</text><texte class="fontcolor555 font28">㎡</texte></view>
+                    <view class="middle"><text class="red font44">{{item.unitPrice}}</text><text class="fontcolor555 font28">元/㎡/月</text></view>
                     <view class="right">
                         <image src="{{item.bannerImage}}" mode="aspectFill"></image>
                         <text>精装</text>
@@ -43,8 +43,8 @@
             <block wx:if="{{areaState > 0}}">
                 <block wx:if="{{filterList.length > 0}}">
                     <view class="list" wx:for="{{filterList}}" wx:key="index" catchtap="houseLook" data-id="{{item.id}}">
-                        <view class="left"><text class="blue font44">{{item.totalArea}}</text><texte class="fontcolor555 font28">m2</texte></view>
-                        <view class="middle"><text class="red font44">{{item.unitPrice}}</text><text class="fontcolor555 font28">元/m2/月起</text></view>
+                        <view class="left"><text class="blue font44">{{item.totalArea}}</text><texte class="fontcolor555 font28">㎡</texte></view>
+                        <view class="middle"><text class="red font44">{{item.unitPrice}}</text><text class="fontcolor555 font28">元/㎡/月</text></view>
                         <view class="right">
                             <image src="{{item.bannerImage}}" mode="aspectFill"></image>
                             <text>精装</text>

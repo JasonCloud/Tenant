@@ -3,3 +3,77 @@ page{
   min-height: 100%;
   background-color: #edeff1;
 }
+/*地址选择器*/
+#pickerSelect{
+  position:fixed;
+  bottom:0;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  z-index: 99;
+  box-shadow: -2rpx 0 20rpx 0 #000;
+}
+#pickerSelect .nav{
+  display:flex;
+  justify-content: space-between;
+}
+#pickerSelect .nav .cancel{
+  padding: 15rpx 25rpx;
+  font-size: 32rpx;
+  color: #000;
+}
+#pickerSelect .nav .confirm{
+  padding: 15rpx 25rpx;
+  font-size: 32rpx;
+  color: #3CC51F;
+}
+.indicator{
+  height: 50px;
+  font-size:32rpx;
+}
+/*提交成功*/
+
+#submitSuccess{
+  position:fixed;
+  top:0;
+  left:0;
+  width: 100%;
+  height: 100%;
+  background-color:rgba(0,0,0,0.7);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+#submitSuccess .content{
+  background-color: #ffffff;
+  width: 615rpx;
+  border-radius: 10rpx;
+}
+#submitSuccess .title{
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  padding: 90rpx 25rpx 30rpx;
+}
+#submitSuccess .title image{
+  width:52rpx;
+  height: 52rpx;
+}
+#submitSuccess .title text{
+  font-size: 42rpx;
+  color: #141414;
+  padding-left: 18rpx;
+}
+#submitSuccess .p{
+  padding: 0 55rpx 90rpx;
+  color:#141414;
+  font-size: 28rpx;
+}
+#submitSuccess .button{
+  height: 90rpx;
+  line-height: 90rpx;
+  text-align: center;
+  font-size: 28rpx;
+  color:#3399ff;
+  border-top: 1px solid #eeeeee;
+}
