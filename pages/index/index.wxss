@@ -1,7 +1,10 @@
 /**index.wxss**/
+page{
+  background-color: #ffffff;
+}
 .container{
   min-height: 100%;
-  background-color: #edeff1;
+  /*background-color: #edeff1;*/
   padding-bottom: 30rpx;
 }
 .h1{
@@ -166,6 +169,9 @@
   align-items: center;
   padding: 12rpx 0;
 }
+.nav-title-not-foot{
+  margin-top:25rpx;
+}
 .nav-title .idx{
   flex-grow: 1;
   display: flex;
@@ -261,9 +267,22 @@
   z-index: 10;
 }
 
+
+.group-swiper{
+  height: 290rpx;
+  margin-bottom: 25rpx;
+}
 .img-box{
   padding: 0 20rpx;
   position: relative;
+  flex-grow: 1;
+}
+.group-item .next{
+  width: 98rpx;
+  flex-shrink: 0;
+  height: 290rpx;
+  overflow: hidden;
+  padding-left: 25rpx;
 }
 .img-box image{
   height: 290rpx;

@@ -162,8 +162,8 @@ Page({
 
     },
     focus(){
-        this.setData({
-            showAddressSelect:false
-        })
+        // this.setData({
+        //     showAddressSelect:false
+        // })
     }
 })

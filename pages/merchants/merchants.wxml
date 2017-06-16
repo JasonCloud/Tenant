@@ -28,9 +28,15 @@
                 <image mode="aspectFill" src="../../images/btn_expand_gray.png"></image>
             </view>
         </view>
-        <view class="resume">
+        <view class="resume" wx:if="{{!showAddressSelect}}">
             <view class="h3">个人履历</view>
-            <textarea maxlength="-1" name="resume" placeholder="请填写你的履历" placeholder-class="textarea-placeholder" data-type="resume" bindinput="inputEnter"></textarea>
+            <textarea maxlength="-1" name="resume" placeholder="请填写你的履历" placeholder-class="textarea-placeholder" data-type="resume" fixed="{{true}}"
+                      bindinput="inputEnter" disabled="{{showAddressSelect}}" value="{{resume}}"></textarea>
+        </view>
+        <view class="pseudo-textarea" wx:else>
+            <view class="h3">个人履历</view>
+            <view wx:if="{{!resume}}" class="textarea-placeholder textarea">请填写你的履历</view>
+            <view class="content textarea" wx:else>{{resume}}</view>
         </view>
         <button class="form-submit-btn" bindtap="next" disabled="{{basicDisable}}">下一步</button>
     </block>

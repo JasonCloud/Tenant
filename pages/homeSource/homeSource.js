@@ -245,6 +245,26 @@ Page({
   onLoad:function(options){
     // 页面初始化 options为页面跳转所带来的参数
     // let condition = this.initCondition(this.getCondition());
+    console.log('onload');
+    this.setData({
+      page_num:1
+    });
+    this.getCondition();
+    var obj = util.getStorage('searchObj');
+    var filterText = util.getStorage('filterText');
+    if(filterText){
+      filterText.showFilterText = filterText.filterText ? true : false;
+      this.setData(filterText);
+      util.removeStorage('filterText');
+    }
+    if(obj){
+      obj.pageNo = 1;
+      obj.cityName = app.globalData.serverCity;
+      this.get_house_list(obj,true);
+      util.removeStorage('searchObj');
+    }else{
+      this.get_house_list({pageNo:1},true);
+    }
 
   },
   getCondition(){
@@ -357,29 +377,27 @@ Page({
   },
   onShow:function(){
     // 页面显示
-    this.setData({
-      page_num:1
-    });
-    this.getCondition();
     var obj = util.getStorage('searchObj');
     var filterText = util.getStorage('filterText');
-    if(filterText){
-      filterText.showFilterText = filterText.filterText ? true : false;
-      this.setData(filterText);
-      util.removeStorage('filterText');
+    if(obj || filterText){
+      this.setData({
+        page_num:1
+      });
+      this.getCondition();
+      if(filterText){
+        filterText.showFilterText = filterText.filterText ? true : false;
+        this.setData(filterText);
+        util.removeStorage('filterText');
+      }
+      if(obj){
+        obj.pageNo = 1;
+        obj.cityName = app.globalData.serverCity;
+        this.get_house_list(obj,true);
+        util.removeStorage('searchObj');
+      }else{
+        this.get_house_list({pageNo:1},true);
+      }
     }
-    if(obj){
-      obj.pageNo = 1;
-      obj.cityName = app.globalData.serverCity;
-      this.get_house_list(obj,true);
-      util.removeStorage('searchObj');
-    }else{
-      this.get_house_list({pageNo:1},true);
-    }
-
-  },
-  onHide:function(){
-    // 页面隐藏
   },
   onUnload:function(){
     // 页面关闭
@@ -410,10 +428,10 @@ Page({
     }
   },
   onHide(){
-    this.setData({
-      areaText:'',
-      filterText:'',
-      showFilterText:false,
-    })
+    // this.setData({
+    //   areaText:'',
+    //   filterText:'',
+    //   showFilterText:false,
+    // })
   }
 })

@@ -2,11 +2,11 @@
 <view class="container" bindtap="hiddenOtherArea">
   <!--banner图块-->
   <view class="bar">
-    <swiper indicator-dots="{{dataObj.banners.length > 1}}" bindchange="change"
+    <swiper indicator-dots="{{false}}" bindchange="change"
             autoplay="{{autoplay}}" circular="{{circular}}" interval="{{interval}}" duration="{{duration}}">
       <block wx:for="{{dataObj.banners}}" wx:key="{{index}}">
         <swiper-item>
-          <image src="{{item}}" class="slide-image" mode="aspectFill"/>
+          <image src="{{item.bannerImage}}" class="slide-image" mode="aspectFill"/>
         </swiper-item>
       </block>
     </swiper>
@@ -25,10 +25,10 @@
       </block>
     </view>
 
-    <view class="foot">
+    <view class="foot" wx:if="{{dataObj.datas.length > 1 }}">
       <view class="idx" wx:for="{{dataObj.datas}}" wx:key="{{index}}">
         <text>{{item.name}}</text>
-        <text class="number">{{item.data}}人</text>
+        <text class="number">{{item.data}}</text>
       </view>
     </view>
     <!--城市定位-->
@@ -43,7 +43,7 @@
     </view>
   </view>
   <!--房源选择-->
-  <view class="nav-title">
+  <view class="{{dataObj.datas.length > 1 ? 'nav-title':'nav-title nav-title-not-foot'}}">
     <view class="idx" data-type="subwayPerimeter" bindtap="searchLot">
       <image src="../../images/ic_home_railwey_around.png" mode="scaleToFill"/>
       <text>地铁周边</text>
@@ -103,15 +103,15 @@
   </view>
 
   <!--组-->
-  <block wx:for="{{groups}}" wx:if="{{item == groupType}}"  wx:key="{{index}}">
-    <swiper indicator-dots="{{dataObj.groups[item].length > 1}}" indicator-active-color="#fff"
-            autoplay="{{true}}" interval="{{4000}}" duration="{{500}}" circular="{{true}}" data-item="{{item}}" data-stype="{{groupType}}">
-      <block wx:for="{{dataObj.groups[item]}}" wx:key="{{index}}">
+  <block wx:for="{{groups}}" wx:if="{{groupName == groupType}}"  wx:key="{{index}}" wx:for-item="groupName">
+    <swiper class="group-swiper" indicator-dots="{{dataObj.groups[groupName].length > 1}}" indicator-active-color="#fff" data-item="{{groupName}}" data-stype="{{groupType}}">
+      <block wx:for="{{dataObj.groups[groupName]}}" wx:key="{{index}}">
         <swiper-item>
-          <view class="img-box margin20px" data-type="{{item.type}}" data-id="{{item.id}}" catchtap="searchGroup">
-            <image src="{{item.bannerImage}}" mode="aspectFill" ></image>
-            <text>#{{item.name}}#</text>
-          </view>
+            <view class="img-box margin20px" data-type="{{item.type}}" data-id="{{item.id}}"
+                  catchtap="searchGroup" data-swiper="{{dataObj.groups[item]}}">
+              <image src="{{item.bannerImage}}" mode="aspectFill" ></image>
+              <text>#{{item.name}}#</text>
+            </view>
         </swiper-item>
       </block>
     </swiper>

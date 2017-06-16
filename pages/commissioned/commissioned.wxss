@@ -110,10 +110,10 @@ input{
     padding: 0 25rpx 0 117rpx;
 }
 .size input{
-    padding: 0 25rpx 0 100rpx;
+    padding: 0 25rpx 0 124rpx;
 }
 .rent input{
-    padding: 0 25rpx 0 32rpx;
+    padding: 0 25rpx 0 56rpx;
 }
 .placeholder{
     color: #a8a8a8;

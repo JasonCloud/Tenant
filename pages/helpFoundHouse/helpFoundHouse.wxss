@@ -110,28 +110,32 @@ input{
     padding: 0 25rpx 0 117rpx;
 }
 .size input{
-    padding: 0 25rpx 0 100rpx;
+    padding: 0 25rpx 0 124rpx;
 }
 .rent input{
-    padding: 0 25rpx 0 32rpx;
+    padding: 0 25rpx 0 56rpx;
 }
 /*备注*/
-.remarks{
+.remarks,.pseudo-textarea{
     margin-top: 25rpx;
     background-color: #fff;
     padding: 20rpx 25rpx;
 }
-.remarks .title{
+.remarks .title,.pseudo-textarea .title{
     font-size: 29rpx;
     color: #555555;
     padding-bottom: 15rpx;
 }
-.remarks textarea{
+.pseudo-textarea .textarea{
+    height: 240rpx;
+}
+.remarks textarea ,.pseudo-textarea .content{
     height: 240rpx;
     word-wrap: break-word;
     word-break: break-all;
     width: 100%;
     font-size: 28rpx;
+    color: #333;
 }
 .placeholder{
     color: #a8a8a8;
