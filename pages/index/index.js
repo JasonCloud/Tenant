@@ -19,7 +19,7 @@ Page({
     choice_checked_first:0,
     groupType: 'tradingAreas',
 
-    serverCity:'广州', //服务城市
+    serverCity:'广州市', //服务城市
     show_area_other:false, //是否显示可选服务城市
     regionText:'区域',
     areaText:'面积',
@@ -74,6 +74,8 @@ Page({
     var city = e.currentTarget.dataset.city;
     loadingTimer = util.showLoading();
     app.setGlobalData('serverCity',city);
+    this.getCondition();
+    this.loadData(city);
     this.setData({
       serverCity:city,
       regionText:'区域',
@@ -81,7 +83,6 @@ Page({
       currentRegionId:-1,
       currentAreaId: -1
     });
-    this.getCondition();
   },
   //显示隐藏选择器
   showRegionSelectMethod(e){
@@ -211,6 +212,7 @@ Page({
             var city = res.result.address_component.city;
             if(availableCity.indexOf(city) > -1){
               app.setGlobalData('serverCity',city);
+              that.loadData(city);
               that.setData({
                 serverCity:city
               })
@@ -241,16 +243,28 @@ Page({
 
     })
   },
-  onLoad: function () {
-    if(!onLoadend){
-      loadingTimer = util.showLoading();
-      http.get('/api/home/index').then(res=>{
+  loadData(city){
+    if(city){
+      http.get('/api/home/index',{cityName:city}).then(res=>{
+        onLoadend = true;
+        this.setData({
+          dataObj:res.data
+        })
+      })
+    }else{
+      http.get('/api/home/index',{cityName:this.data.serverCity}).then(res=>{
         onLoadend = true;
         this.position(res.data.citys);
         this.setData({
           dataObj:res.data
         })
       })
+    }
+  },
+  onLoad: function () {
+    if(!onLoadend){
+      loadingTimer = util.showLoading();
+      this.loadData();
     }
   },
   onShow(){

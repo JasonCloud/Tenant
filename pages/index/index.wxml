@@ -96,14 +96,17 @@
     <image src="{{imgs[3]}}" mode="aspectFill"/>
   </view>-->
   <!--房源分类-->
-  <view class="choice_lei_xing margin20px">
-    <text wx:for="{{groups}}" wx:key="{{index}}" class="{{choice_checked_first == index ? 'checked': ''}}" data-index="{{index}}" bindtap="check">{{groupName[item]}}</text>
+  <view class="choice_lei_xing margin20px" wx:if="{{dataObj.groups['tradingAreas'].length > 0 || dataObj.groups['teams'].length > 0 || dataObj.groups['office'].length > 0}}">
+    <text wx:for="{{groups}}" wx:key="{{index}}" class="{{choice_checked_first == index ? 'checked': ''}}" data-index="{{index}}"
+          bindtap="check" wx:if="{{dataObj.groups[item].length > 0}}">
+      {{groupName[item]}}
+    </text>
     <!--<text class="{{choice_checked_first == 1 ? 'checked': ''}}" data-index="1" bindtap="check" >团队规模</text>
     <text class="{{choice_checked_first == 2 ? 'checked': ''}}" data-index="2" bindtap="check">办公类型</text>-->
   </view>
 
   <!--组-->
-  <block wx:for="{{groups}}" wx:if="{{groupName == groupType}}"  wx:key="{{index}}" wx:for-item="groupName">
+  <block wx:for="{{groups}}" wx:if="{{groupName == groupType && dataObj.groups[groupName].length > 0}}"  wx:key="{{index}}" wx:for-item="groupName">
     <swiper class="group-swiper" indicator-dots="{{dataObj.groups[groupName].length > 1}}" indicator-active-color="#fff" data-item="{{groupName}}" data-stype="{{groupType}}">
       <block wx:for="{{dataObj.groups[groupName]}}" wx:key="{{index}}">
         <swiper-item>
