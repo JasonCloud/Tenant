@@ -32,7 +32,7 @@ page{
 }
 .indicator{
   height: 50px;
-  font-size:62rpx;
+  font-size:32rpx;
 }
 /*提交成功*/
 

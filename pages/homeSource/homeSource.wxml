@@ -1,4 +1,4 @@
-<view class="container">
+<view class="{{areaOrFilter == 'area' || areaOrFilter == 'filter' ? 'notScroll container' : 'container'}}">
     <view class="search">
         <view class="input" bindtap="search">
             <!--<input type="text" placeholder="输入大厦名称或地址" value="{{search_input}}" placeholder-class="placeholder_class" disabled />-->

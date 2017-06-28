@@ -6,6 +6,13 @@
         </view>
         <view class="cancel" catchtap="cancel">取消</view>
     </view>
+    <!--搜索历史-->
+    <view class="search-history" wx:if="{{false}}">
+        <view class="history-list">
+            <view class="item">广州</view>
+        </view>
+        <view class="clear-history">清除历史记录</view>
+    </view>
     <!---列表-->
     <view class="list" wx:if="{{list.length>0 && searchFlag}}">
         <block wx:for="{{list}}" wx:key="index">

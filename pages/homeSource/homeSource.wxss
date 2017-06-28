@@ -1,6 +1,14 @@
 /* pages/homeSource/homeSource.wxss */
+page{
+    height: 100%;
+}
 .container{
     min-height: 100%;
+}
+.notScroll{
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
 }
 .container .search{
     background-color: #344966;
@@ -103,8 +111,9 @@
     color:#555555;
     align-items: flex-start;
     z-index: 30;
-    padding-bottom: 40rpx;
-    min-height: 968rpx;
+    padding-bottom: 150rpx;
+    height: 900rpx;
+    overflow: auto;
 }
 .container .nav-box .filter-list .item{
     display: flex;
@@ -129,7 +138,9 @@
     position: absolute;
     width: 100%;
     z-index: 30;
-    min-height: 968rpx;
+    min-height: 900rpx;
+    padding-bottom: 150rpx;
+    overflow: auto;
 }
 .container .nav-box .filter-condition .item-box{
     margin-bottom: 40rpx;

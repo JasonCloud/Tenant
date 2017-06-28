@@ -127,6 +127,7 @@ Page({
   },
   //选择搜索区域
   regionChange(e){
+    console.log('ppppp');
     this.setData({
       currentRegionValue:e.detail.value[0],
     })

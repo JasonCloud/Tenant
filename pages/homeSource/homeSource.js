@@ -112,7 +112,7 @@ Page({
     }else{
       this.setData({
         areaOrFilter:type,
-        resultAreaId:'',
+        // resultAreaId:'',
         filterType:type,
       })
     }
@@ -142,6 +142,7 @@ Page({
       fetchAll:false,
     });
     if(id==0){
+      console.log('oopppoo')
       let obj = {
         pageNo:this.data.page_num,
       };
@@ -308,7 +309,11 @@ Page({
       filterType:'',
       fetchAll:false,
     });
-    this.get_house_list({pageNo:this.data.page_num},true);
+    var obj = {
+      pageNo:this.data.page_num,
+    }
+    this.data.areaType == 'metro'? obj.subway = this.data.resultAreaId : obj.region = this.data.resultAreaId;
+    this.get_house_list(obj,true);
     this.detectionFilter();
   },
   //筛选条件确定
@@ -319,6 +324,7 @@ Page({
     });
     if(!this.objectEmpty()(this.data.selectConditionId)){
       this.setData({fetchAll:false});
+      let selectConditionId = this.data.selectConditionId
       let obj = Object.assign({},this.data.selectConditionId);
       this.data.areaType == 'metro'? obj.subway = this.data.resultAreaId : obj.region = this.data.resultAreaId;
       this.get_house_list(obj,true);
