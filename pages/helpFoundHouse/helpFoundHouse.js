@@ -21,7 +21,8 @@ Page({
         areaArr:[], //当前区域
         showAddressSelect:false, //是否显示地址选择器
         serverCityName:'',
-        showSubmitSuccess:false
+        showSubmitSuccess:false,
+        textareaInput:false
     },
     onLoad(){
         this.setData({
@@ -31,6 +32,13 @@ Page({
             cityArr:util.city[util.province[0].id],
             areaArr:util.area[util.city[util.province[0].id][0].id]
         })
+    },
+    focusAndBlur(e){
+        if(e.type == 'focus'){
+            this.setData({textareaInput:true})
+        }else if(e.type == 'blur'){
+            this.setData({textareaInput:false})
+        }
     },
     submit(){
         loadingTimer = util.showLoading('正在提交');

@@ -113,7 +113,7 @@
             <view class="img-box margin20px" data-type="{{item.type}}" data-id="{{item.id}}"
                   catchtap="searchGroup" data-swiper="{{dataObj.groups[item]}}">
               <image src="{{item.bannerImage}}" mode="aspectFill" ></image>
-              <text>#{{item.name}}#</text>
+              <text>{{item.name}}</text>
             </view>
         </swiper-item>
       </block>
@@ -126,7 +126,7 @@
   </view>
   <view class="img-box margin20px" wx:for="{{dataObj.mansions}}" wx:key="{{index}}" catchtap="goHomeDetail" data-id="{{item.id}}">
     <image src="{{item.bannerImage}}" mode="aspectFill" />
-    <text>#{{item.name}}#</text>
+    <text>{{item.name}}</text>
   </view>
 
   <view class="look_more">
@@ -142,10 +142,10 @@
     </view>
     <picker-view indicator-class="indicator" style="width: 100%; height: 400rpx;" bindchange="regionChange">
       <picker-view-column>
-        <view wx:for="{{currentRegion}}" style="line-height: 50px; text-align: center">{{item.wordName}}</view>
+        <view class="notIndicator" wx:for="{{currentRegion}}" style="line-height: 50px; text-align: center;">{{item.wordName}}</view>
       </picker-view-column>
       <picker-view-column>
-        <view wx:for="{{currentRegion[currentRegionValue].allChildrenKeyword}}" style="line-height: 50px; text-align: center;">{{item.wordName}}</view>
+        <view class="notIndicator" wx:for="{{currentRegion[currentRegionValue].allChildrenKeyword}}" style="line-height: 50px; text-align: center;">{{item.wordName}}</view>
       </picker-view-column>
     </picker-view>
   </view>

@@ -4,6 +4,7 @@
 const _Promise = require('./bluebird');
 const  util = require('./util');
 const src = 'https://zua.51feijin.com';
+// const src = 'http://zua.test.51feijin.com';//测试接口
 const ignoreUrl = /(login)|(weixinUserInfo)$/g;
 let userInfo = {};
 function wxlogin(url,resolve,reject,param,model){

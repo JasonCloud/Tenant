@@ -1,7 +1,7 @@
 <view class="container">
-    <swiper indicator-dots="{{detailObject.banner.length > 1}}" indicator-active-color="#fff"
+    <swiper indicator-dots="{{detailObject.carousels.length > 1}}" indicator-active-color="#fff"
             autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular="{{true}}">
-        <block wx:for="{{detailObject.banner}}">
+        <block wx:for="{{detailObject.carousels}}">
             <swiper-item>
                 <image src="{{item}}" class="slide-image" mode="aspectFill"/>
             </swiper-item>
@@ -60,14 +60,14 @@
         <view class="h1 font32">成交记录</view>
         <view class="list font28" wx:for="{{detailObject.orders}}" wx:key="index">
             <text>{{item.data}}</text>
-            <text>{{item.area}}m2</text>
+            <text>{{item.area}}㎡</text>
             <text>成交价{{item.price}}元/月</text>
         </view>
     </view>
     <view class="built-introduction margin-bottom-20">
         <view class="h1 font32">楼盘介绍</view>
         <view class="introduction-box">
-            <video src="{{detailObject.videoLink}}" class="video" controls="{{true}}"></video>
+            <video src="{{detailObject.videoLink}}" class="video" controls="{{true}}" poster="{{detailObject.bannerThumbnail}}"></video>
             <text class="content fontcolor555 font28">
                 {{detailObject.info}}
             </text>

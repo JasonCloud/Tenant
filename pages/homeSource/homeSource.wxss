@@ -167,7 +167,7 @@
     margin-top: 30rpx;
     flex-shrink: 0;
     margin-right: 16rpx;
-    padding: 16rpx 0;
+    padding: 16rpx 10rpx;
     border: 1rpx solid #bebebe;
     font-size: 28rpx;
     -o-text-overflow: ellipsis;/*兼容opera*/
@@ -175,7 +175,7 @@
     overflow: hidden;/*设置超过的隐藏*/
     white-space: nowrap;/*设置不折行*/
     border-radius: 8rpx;
-    width: 160rpx;
+    min-width: 160rpx;
     text-align: center;
 }
 

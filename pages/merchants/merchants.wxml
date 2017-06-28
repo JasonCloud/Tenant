@@ -1,4 +1,4 @@
-<view class="merchants-page" bindtap="hiddenAddressSelect">
+<view class="{{textareaInput?'textareaInput merchants-page':'merchants-page'}}" bindtap="hiddenAddressSelect">
     <view class="nav">
         <view class="{{showBasic?'current':''}}">基本信息</view>
         <view class="arrow">
@@ -30,8 +30,9 @@
         </view>
         <view class="resume" wx:if="{{!showAddressSelect}}">
             <view class="h3">个人履历</view>
-            <textarea maxlength="-1" name="resume" placeholder="请填写你的履历" placeholder-class="textarea-placeholder" data-type="resume" fixed="{{true}}"
-                      bindinput="inputEnter" disabled="{{showAddressSelect}}" value="{{resume}}"></textarea>
+            <textarea cursor-spacing="100" maxlength="-1" name="resume" placeholder="请填写你的履历" placeholder-class="textarea-placeholder" data-type="resume" fixed="{{true}}"
+                      bindinput="inputEnter" disabled="{{showAddressSelect}}" value="{{resume}}" bindfocus="focusAndBlur" bindblur="focusAndBlur">
+            </textarea>
         </view>
         <view class="pseudo-textarea" wx:else>
             <view class="h3">个人履历</view>

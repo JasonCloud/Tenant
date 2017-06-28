@@ -1,62 +1,63 @@
-<view class="commissioned-page" bindtap="hiddenAddressSelect">
-        <!--姓名-->
-        <view class="name-wrap">
-            <view class="name">
-                <view class="text">姓名</view>
-                <input bindinput="input" data-type="name" type="text" placeholder="请填写真实姓名" placeholder-class="placeholder"/>
+<view class="{{textareaInput?'commissioned-page textareaInput':'commissioned-page'}}" bindtap="hiddenAddressSelect">
+    <!--姓名-->
+    <view class="name-wrap">
+        <view class="name">
+            <view class="text">姓名</view>
+            <input bindinput="input" data-type="name" type="text" placeholder="请填写真实姓名" placeholder-class="placeholder"/>
+        </view>
+    </view>
+    <!--手机好-->
+    <view class="mobile-wrap">
+        <view class="mobile">
+            <view class="text">手机号</view>
+            <input bindinput="input" data-type="mobile" type="number" placeholder="请填写手机号" placeholder-class="placeholder"/>
+        </view>
+    </view>
+    <!--区域-->
+    <view class="area-wrap">
+        <view class="area" catchtap="showAndHiddenAddressSelect">
+            <view class="text">区域</view>
+            <view class="placeholder pseudo-input" wx:if="{{!serverCityName}}">请选择区域</view>
+            <view class="pseudo-input" wx:else>{{serverCityName}}</view>
+            <view class="arrow">
+                <image mode="aspectFill" src="../../images/btn_expand_gray.png"></image>
             </view>
         </view>
-        <!--手机好-->
-        <view class="mobile-wrap">
-            <view class="mobile">
-                <view class="text">手机号</view>
-                <input bindinput="input" data-type="mobile" type="number" placeholder="请填写手机号" placeholder-class="placeholder"/>
-            </view>
+    </view>
+    <!--楼盘名称-->
+    <!--<view class="estate-name-wrap">
+        <view class="estate-name">
+            <view class="text">楼盘名称</view>
+            <input data-type="estate" bindinput="input" type="text" placeholder="请填写楼盘名称" placeholder-class="placeholder"/>
         </view>
-        <!--区域-->
-        <view class="area-wrap">
-            <view class="area" catchtap="showAndHiddenAddressSelect">
-                <view class="text">区域</view>
-                <view class="placeholder pseudo-input" wx:if="{{!serverCityName}}">请选择区域</view>
-                <view class="pseudo-input" wx:else>{{serverCityName}}</view>
-                <view class="arrow">
-                    <image mode="aspectFill" src="../../images/btn_expand_gray.png"></image>
-                </view>
-            </view>
+    </view>-->
+    <!--面积-->
+    <view class="size-wrap">
+        <view class="size">
+            <view class="text">面积 (㎡)</view>
+            <input data-type="size" bindinput="input" type="number" placeholder="请填写出租面积" placeholder-class="placeholder"/>
         </view>
-        <!--楼盘名称-->
-        <!--<view class="estate-name-wrap">
-            <view class="estate-name">
-                <view class="text">楼盘名称</view>
-                <input data-type="estate" bindinput="input" type="text" placeholder="请填写楼盘名称" placeholder-class="placeholder"/>
-            </view>
-        </view>-->
-        <!--面积-->
-        <view class="size-wrap">
-            <view class="size">
-                <view class="text">面积 (㎡)</view>
-                <input data-type="size" bindinput="input" type="number" placeholder="请填写出租面积" placeholder-class="placeholder"/>
-            </view>
+    </view>
+    <!--每月租金-->
+    <view class="rent-wrap">
+        <view class="rent">
+            <view class="text">每月租金 (元)</view>
+            <input data-type="rent" bindinput="input" type="number" placeholder="请填写每月租金" placeholder-class="placeholder"/>
         </view>
-        <!--每月租金-->
-        <view class="rent-wrap">
-            <view class="rent">
-                <view class="text">每月租金 (元)</view>
-                <input data-type="rent" bindinput="input" type="number" placeholder="请填写每月租金" placeholder-class="placeholder"/>
-            </view>
-        </view>
-        <!--备注-->
-        <view class="remarks" wx:if="{{!showAddressSelect}}">
-            <view class="title">备注</view>
-            <textarea bindfocus="focus" data-type="remarks" bindinput="input" placeholder="描述需要怎样的房源（例如：凹凸凹创意园10-100平方）"
-                      fixed="{{true}}" placeholder-class="placeholder" maxlength="-1" value="{{remarks}}"></textarea>
-        </view>
-        <view class="pseudo-textarea" wx:else>
-            <view class="title">备注</view>
-            <view class="placeholder textarea" wx:if="{{!remarks}}">描述需要怎样的房源（例如：凹凸凹创意园10-100平方）</view>
-            <view class="content textarea" wx:else>{{remarks}}</view>
-        </view>
-        <button bindtap="submit" disabled="{{btnDisabled}}">确认并提交</button>
+    </view>
+    <!--备注-->
+    <view class="remarks" wx:if="{{!showAddressSelect}}">
+        <view class="title">备注</view>
+        <textarea bindfocus="focus" data-type="remarks" bindinput="input" placeholder="描述需要怎样的房源（例如：凹凸凹创意园10-100平方）"
+                  fixed="{{true}}" placeholder-class="placeholder" maxlength="-1" value="{{remarks}}" bindfocus="focusAndBlur" bindblur="focusAndBlur">
+            </textarea>
+    </view>
+    <view class="pseudo-textarea" wx:else>
+        <view class="title">备注</view>
+        <view class="placeholder textarea" wx:if="{{!remarks}}">描述需要怎样的房源（例如：凹凸凹创意园10-100平方）</view>
+        <view class="content textarea" wx:else>{{remarks}}</view>
+    </view>
+    <button bindtap="submit" disabled="{{btnDisabled}}">确认并提交</button>
 
     <!--提交成功弹窗-->
     <block wx:if="{{showSubmitSuccess}}">

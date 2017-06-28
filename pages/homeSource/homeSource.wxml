@@ -80,20 +80,20 @@
     <!---列表-->
     <view class="list">
         <block wx:for="{{list}}" wx:key="index">
-            <view class="item">
+            <view class="item" catchtap="gotoDetail" data-id="{{item.id}}" data-apartmentcount="{{item.apartmentCount}}">
                 <view class="left">
                     <image src="{{item.image}}" mode="aspectFill"></image>
                     <view class="rented-info">{{item.apartmentCount}}套可租</view>
                 </view>
 
-                <view class="right" catchtap="gotoDetail" data-id="{{item.id}}" data-apartmentcount="{{item.apartmentCount}}">
+                <view class="right">
                     <view class="item_child">
                         <text class="h1">{{item.name}}</text>
                         <image src="../../images/jingpin.png" class="ico" wx:if="{{item.highlight==1}}"></image>
                         <image src="../../images/ding.png" class="ico" wx:if="{{item.addTop==1}}"></image>
                     </view>
                     <view class="item_child">
-                        <text class="h2">{{item.price}}元/㎡起</text>
+                        <text class="h2">{{item.price}}</text>
                     </view>
                     <view class="item_child">
                         <text>{{item.region}} | {{item.area}}</text>

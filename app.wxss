@@ -27,9 +27,12 @@ page{
   font-size: 32rpx;
   color: #3CC51F;
 }
+#pickerSelect .picker-view .notIndicator{
+  font-size: 28rpx;
+}
 .indicator{
   height: 50px;
-  font-size:32rpx;
+  font-size:62rpx;
 }
 /*提交成功*/
 

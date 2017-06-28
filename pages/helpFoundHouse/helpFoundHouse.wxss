@@ -1,6 +1,9 @@
 .commissioned-page{
     padding-top: 25rpx;
 }
+.textareaInput{
+    margin-top:-240rpx;
+}
 /*姓名*/
 .commissioned-page .name-wrap{
     padding-left: 25rpx;

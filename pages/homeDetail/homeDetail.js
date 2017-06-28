@@ -248,7 +248,7 @@ Page({
                         showSeeMore:resList.length >= pageSize ? true :false
                     });
                 }else if(state == 1){
-                    let list = resList.filter(function(item){
+                    let listIn = resList.filter(function(item){
                         if(item.totalArea > 0 && item.totalArea <= 100){
                             return item;
                         }
@@ -256,11 +256,11 @@ Page({
                     this.setData({
                         list:reset ? resList : list.concat(resList),
                         allList:reset ? resList : allList.concat(resList),
-                        filterList:filterList.concat(list),
+                        filterList:filterList.concat(listIn),
                         showSeeMore:resList.length >= pageSize ? true :false
                     });
                 }else if(state == 2){
-                    let list = resList.filter(function(item){
+                    let listIn = resList.filter(function(item){
                         if(item.totalArea > 100 && item.totalArea <= 200){
                             return item;
                         }
@@ -268,12 +268,12 @@ Page({
                     this.setData({
                         list:reset ? resList : list.concat(resList),
                         allList:reset ? resList : allList.concat(resList),
-                        filterList:filterList.concat(list),
+                        filterList:filterList.concat(listIn),
                         showSeeMore:resList.length >= pageSize ? true :false
                     });
                 }
                 else if(state == 3){
-                    let list = resList.filter(function(item){
+                    let listIn = resList.filter(function(item){
                         if(item.totalArea > 200 && item.totalArea <= 300){
                             return item;
                         }
@@ -281,12 +281,12 @@ Page({
                     this.setData({
                         list:reset ? resList : list.concat(resList),
                         allList:reset ? resList : allList.concat(resList),
-                        filterList:filterList.concat(list),
+                        filterList:filterList.concat(listIn),
                         showSeeMore:resList.length >= pageSize ? true :false
                     });
                 }
                 else if(state == 4){
-                    let list = resList.filter(function(item){
+                    let listIn = resList.filter(function(item){
                         if(item.totalArea > 300 && item.totalArea <= 500){
                             return item;
                         }
@@ -294,11 +294,11 @@ Page({
                     this.setData({
                         list:reset ? resList : list.concat(resList),
                         allList:reset ? resList : allList.concat(resList),
-                        filterList:filterList.concat(list),
+                        filterList:filterList.concat(listIn),
                         showSeeMore:resList.length >= pageSize ? true :false
                     });
                 }else if(state == 5){
-                    let list = resList.filter(function(item){
+                    let listIn = resList.filter(function(item){
                         if(item.totalArea > 500){
                             return item;
                         }
@@ -306,7 +306,7 @@ Page({
                     this.setData({
                         list:reset ? resList : list.concat(resList),
                         allList:reset ? resList : allList.concat(resList),
-                        filterList:filterList.concat(list),
+                        filterList:filterList.concat(listIn),
                         showSeeMore:resList.length >= pageSize ? true :false
                     });
                 }

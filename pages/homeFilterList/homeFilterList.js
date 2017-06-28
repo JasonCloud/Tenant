@@ -45,14 +45,14 @@ Page({
                 })
             }else if(res.data.result.length >= this.data.pageSize){
                 this.setData({
-                    page_num:this.page_num + 1
+                    page_num:this.data.page_num + 1
                 })
             }
             let arr = res.data && res.data.result;
             if(!!arr){
-                arr.forEach(res => {
-                    res.price = res.price.replace(/\D/g,'')
-                })
+                // arr.forEach(res => {
+                //     res.price = res.price.replace(/\D/g,'')
+                // })
                 this.setData({
                     list:reset ? arr : Array.prototype.concat(this.data.list,arr)
                 })

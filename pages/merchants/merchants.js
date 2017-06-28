@@ -24,7 +24,8 @@ Page({
         IdCarDisabled: true,
         chooseImage: false,
         imageType:'positive',
-        showSubmitSuccess:false
+        showSubmitSuccess:false,
+        textareaInput:false
     },
     onLoad(options){
         this.setData({
@@ -53,6 +54,13 @@ Page({
         this.setData({
             showBasic: false
         })
+    },
+    focusAndBlur(e){
+        if(e.type == 'focus'){
+            this.setData({textareaInput:true});
+        }else if(e.type == 'blur'){
+            this.setData({textareaInput:false});
+        }
     },
     //提交成功
     submitSuccess(){

@@ -40,7 +40,8 @@ Page({
     areaOrFilter:'',//区域和筛选切换
     listOne:[],
     listTow:[],
-    conditionKey:['area','price','subwayPerimeter','landmarkBuilding','office','creativeGarden'],
+    // conditionKey:['area','price','subwayPerimeter','landmarkBuilding','office','creativeGarden'],
+    conditionKey:['area','price'],
     pageSize:10,
     fetchAll:false, //标注是否加载完数据
     areaText:'', //选中的区域名称
@@ -178,14 +179,14 @@ Page({
        })
      }else if(res.data.result.length >= this.data.pageSize){
        this.setData({
-         page_num:this.page_num + 1
+         page_num:this.data.page_num + 1
        })
      }
      let arr = res.data && res.data.result;
      if(!!arr){
-       arr.forEach(res => {
+       /*arr.forEach(res => {
          res.price = res.price.replace(/\D/g,'')
-       })
+       })*/
        this.setData({
          list:reset ? arr : Array.prototype.concat(this.data.list,arr)
        })
@@ -284,12 +285,12 @@ Page({
     if(!condition)return {}
     condition.area.wordName = '面积(㎡)';
     condition.price.wordName = '价格(元/㎡/月)';
-    condition.area.allChildrenKeyword.forEach((v,k) => {
+    /*condition.area.allChildrenKeyword.forEach((v,k) => {
       v.wordName = v.wordName.match(/\d+/g).join('-')
     })
     condition.price.allChildrenKeyword.forEach((v,k) => {
       v.wordName = v.wordName.match(/\d+/g).join('')
-    })
+    })*/
     return condition;
   },
   //重置筛选条件
@@ -331,7 +332,9 @@ Page({
     for(let key in condition){
       if(condition.hasOwnProperty(key)){
         if(key.indexOf('Text')>-1 && condition[key] != ''){
-            this.setData({filterText:condition[key]});
+              this.setData({
+                filterText: condition[key]
+              });
         }
         if(condition[key] != '' && key.indexOf('Text') < 0 ){
           n = n + 1;
@@ -404,7 +407,7 @@ Page({
   },
   onReachBottom: function() {
     // Do something when page reach bottom.
-    if(this.page_num <= 1 || this.data.fetchAll){
+    if(this.data.page_num <= 1 || this.data.fetchAll){
       return
     }
     if(this.data.areaOrFilter == 'area'){

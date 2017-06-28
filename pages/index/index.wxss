@@ -303,7 +303,7 @@ page{
 .img-box text{
   display: block;
   color: #ffffff;
-  font-size: 32rpx;
+  font-size: 42rpx;
   position: absolute;
   left:50%;
   top:50%;

@@ -1,6 +1,13 @@
 .merchants-page{
 
 }
+.textareaInput{
+    position:fixed;
+    width: 100%;
+    height: 100%;
+    top:-150rpx;
+    left:0;
+}
 .merchants-page .nav{
     display:flex;
     align-items: center;
