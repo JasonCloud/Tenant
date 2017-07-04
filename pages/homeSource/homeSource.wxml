@@ -1,4 +1,4 @@
-<view class="{{areaOrFilter == 'area' || areaOrFilter == 'filter' ? 'notScroll container' : 'container'}}">
+<view class="{{areaOrFilter == 'area' || areaOrFilter == 'filter' ? 'notScroll container' : 'container'}}" wx:if="{{onLoadend}}">
     <view class="search">
         <view class="input" bindtap="search">
             <!--<input type="text" placeholder="输入大厦名称或地址" value="{{search_input}}" placeholder-class="placeholder_class" disabled />-->
@@ -57,6 +57,12 @@
                         <view class="title-box" data-index="{{index}}" catchtap="tab" data-type="{{item}}">
                             <text class="title">{{condition[item]['wordName']}}</text>
                             <image src="{{tabType[item] == item ? '../../images/btn_up_check.png':'../../images/btn_down.png'}}" mode="aspectFill" wx:if="{{index>1}}"/>
+                        </view>
+
+                        <view class="dynamicInput">
+                            <input type="text" placeholder="最小"/>
+                            ～
+                            <input type="text" placeholder="最大"/>
                         </view>
 
                         <view class="child-box" catchtap="selectConditionId" wx:if="{{index == 1 || index == 0 || tabType[item] == item}}">

@@ -1,4 +1,4 @@
-<view class="container">
+<view class="container" wx:if="{{onLoadend}}">
     <swiper indicator-dots="{{detailObject.carousels.length > 1}}" indicator-active-color="#fff"
             autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular="{{true}}">
         <block wx:for="{{detailObject.carousels}}">
@@ -13,7 +13,7 @@
             <text class="h2 font24">{{detailObject.region}} | {{apartmentCount}}套在租</text>
         </view>
         <view class="right">
-            <text class="red font36">{{detailObject.price}}</text><text class="fontcolor555 font28">元/m2/月起</text>
+            <text class="red font36">{{detailObject.price}}</text><text class="fontcolor555 font28">元/㎡/月起</text>
         </view>
     </view>
     <block wx:if="{{list.length>0}}">
@@ -67,7 +67,7 @@
     <view class="built-introduction margin-bottom-20">
         <view class="h1 font32">楼盘介绍</view>
         <view class="introduction-box">
-            <video src="{{detailObject.videoLink}}" class="video" controls="{{true}}" poster="{{detailObject.bannerThumbnail}}"></video>
+            <video wx:if="{{detailObject.videoLink}}" src="{{detailObject.videoLink}}" class="video" controls="{{true}}" poster="{{detailObject.bannerThumbnail}}"></video>
             <text class="content fontcolor555 font28">
                 {{detailObject.info}}
             </text>

@@ -211,7 +211,7 @@ Page({
           location:{latitude:latitude,longitude:longitude},
           success:function(res){
             var city = res.result.address_component.city;
-            if(availableCity.indexOf(city) > -1){
+            if(availableCity.indexOf(city) > -1 && city != that.data.serverCity){
               app.setGlobalData('serverCity',city);
               that.loadData(city);
               that.setData({
@@ -226,7 +226,8 @@ Page({
             that.getCondition();
           },
           fail:function(err){
-            util.alert({content:JSON.stringify(err)});
+            util.hiddenLoading(loadingTimer);
+            util.alert({content:'定位失败,请检查是否已授权应用定位功能'});
           }
         })
       }

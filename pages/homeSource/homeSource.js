@@ -3,6 +3,8 @@ const http = require('../../utils/http');
 const util = require('../../utils/util');
 const Throttle = util.Throttle();
 const app = getApp();
+let loadend = false;
+let loadingTimer = null;
 Page({
   data:{
     list:[],
@@ -47,6 +49,7 @@ Page({
     areaText:'', //选中的区域名称
     filterText:'',//选中的筛选条件
     showFilterText:false,
+    onLoadend:false, //标注数据是否加载完
   },
   //删除搜索
   dele(){
@@ -185,11 +188,18 @@ Page({
      }
      let arr = res.data && res.data.result;
      if(!!arr){
-       /*arr.forEach(res => {
-         res.price = res.price.replace(/\D/g,'')
-       })*/
+       arr.forEach(res => {
+         // res.price = res.price.replace(/\D/g,'')
+         var priceArr = res.price.split('-');
+         res.price = priceArr.length > 1 ? priceArr[0]+res.price.replace(/[\d|-]/g,'') : res.price;
+       })
+       if(!loadend){
+         util.hiddenLoading(loadingTimer);
+       }
+       loadend = true;
        this.setData({
-         list:reset ? arr : Array.prototype.concat(this.data.list,arr)
+         list:reset ? arr : Array.prototype.concat(this.data.list,arr),
+         onLoadend:true
        })
      }
     }).catch(res =>{
@@ -247,7 +257,9 @@ Page({
   onLoad:function(options){
     // 页面初始化 options为页面跳转所带来的参数
     // let condition = this.initCondition(this.getCondition());
-    console.log('onload');
+    if(!loadend){
+      loadingTimer = util.showLoading();
+    }
     this.setData({
       page_num:1
     });
@@ -313,8 +325,8 @@ Page({
       pageNo:this.data.page_num,
     }
     this.data.areaType == 'metro'? obj.subway = this.data.resultAreaId : obj.region = this.data.resultAreaId;
-    this.get_house_list(obj,true);
-    this.detectionFilter();
+    // this.get_house_list(obj,true);
+    // this.detectionFilter();
   },
   //筛选条件确定
   confirm(){
@@ -326,6 +338,12 @@ Page({
       this.setData({fetchAll:false});
       let selectConditionId = this.data.selectConditionId
       let obj = Object.assign({},this.data.selectConditionId);
+      this.data.areaType == 'metro'? obj.subway = this.data.resultAreaId : obj.region = this.data.resultAreaId;
+      this.get_house_list(obj,true);
+    }else{
+      var obj = {
+        pageNo:this.data.page_num,
+      }
       this.data.areaType == 'metro'? obj.subway = this.data.resultAreaId : obj.region = this.data.resultAreaId;
       this.get_house_list(obj,true);
     }

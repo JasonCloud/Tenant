@@ -1,6 +1,7 @@
 // pages/homeDetail/homeDetail.js
 const http = require('../../utils/http');
 const util = require('../../utils/util');
+let loadingTimer = null; //加载动画
 Page({
   data:{
     id:null, //保存当前大夏id
@@ -20,6 +21,7 @@ Page({
     btnType:'prevlook',
     areaState:0,
     showSeeMore:false ,
+    onLoadend:false, //标记数据是否加载完
    },
   //预约看房提交
   formSubmit(e){
@@ -315,20 +317,22 @@ Page({
   get_house_detail(id){
     http.get('/api/mansion/detail',{id:id}).then(res => {
       let obj = this.initDetailData(res.data);
+      util.hiddenLoading(loadingTimer)
       this.setData({
         detailObject: obj,
         phone_num:obj.telephone,
+        onLoadend:true
         // list:obj.apartments.length > 5 ? obj.apartments.splice(0,5) : obj.apartments,
         // allList: obj.apartments,
         // showSeeMore: obj.apartments.length > 5 ? true : false
-      })
+      });
     }).catch(res =>{
 
     })
   },
   initDetailData(obj){
     if(!obj) return {};
-    obj.price = obj.price.replace(/\D/g,'');
+    obj.price = obj.price.split('-')[0];
     obj.orders = obj.orders.map(function(item){
       item.price = item .price.replace(/\D/g,'');
       return item;
@@ -337,6 +341,7 @@ Page({
   },
   onLoad:function(options){
     // 页面初始化 options为页面跳转所带来的参数
+    loadingTimer = util.showLoading();
     this.get_house_detail(options.id);
     this.setData({
         id:options.id,
