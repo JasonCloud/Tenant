@@ -14,7 +14,7 @@
                         <image src="../../images/ding.png" class="ico" wx:if="{{item.addTop==1}}"></image>
                     </view>
                     <view class="item_child">
-                        <text class="h2">{{item.price}}元/㎡起</text>
+                        <text class="h2">{{item.price}}</text>
                     </view>
                     <view class="item_child">
                         <text>{{item.region}} | {{item.area}}</text>

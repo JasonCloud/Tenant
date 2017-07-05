@@ -31,6 +31,39 @@
     padding: 0 20rpx;
     font-size: 24rpx;
 }
+/*搜索历史*/
+.search-page .search-history{
+    margin-top: 40rpx;
+    background-color: #ffffff;
+    padding: 0 30rpx;
+}
+.search-page .search-history .head{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1rpx solid #eeeeee;
+}
+.search-page .search-history .head .title{
+    font-size: 32rpx;
+    padding: 25rpx 0 30rpx;
+    color: #aaaaaa;
+}
+.search-page .search-history .head .icon{
+    width: 44rpx;
+    height: 50rpx;
+}
+.search-page .search-history .head .icon image{
+    width: 100%;
+    height: 100%;
+}
+.search-page .history-list{
+    padding: 20rpx 0;
+}
+.search-page .history-list .item{
+    color: #555555;
+    font-size: 32rpx;
+    padding: 20rpx 0;
+}
 /*没数据*/
 .search-page .not-data{
     font-size: 36rpx;

@@ -2,16 +2,21 @@
     <view class="input-wrap">
         <view class="content">
             <image class="search-icon" src="../../images/ic_home_search@2x.png"></image>
-            <input type="text" focus placeholder="输入大厦名称或地址" bindinput="searchList"/>
+            <input type="text" focus placeholder="输入大厦名称或地址" bindinput="searchList" value="{{keyword}}"/>
         </view>
         <view class="cancel" catchtap="cancel">取消</view>
     </view>
     <!--搜索历史-->
-    <view class="search-history" wx:if="{{false}}">
-        <view class="history-list">
-            <view class="item">广州</view>
+    <view class="search-history" wx:if="{{searchHistoryList.length > 0 && !searchFlag && list.length <= 0}}">
+        <view class="head">
+            <view class="title">搜索历史</view>
+            <view class="icon" catchtap="clearHistory">
+                <image mode="aspectFill" src="../../images/delete.png"></image>
+            </view>
         </view>
-        <view class="clear-history">清除历史记录</view>
+        <view class="history-list">
+            <view class="item" wx:for="{{searchHistoryList}}" catchtap="tapHistory" data-keyword="{{item}}">{{item}}</view>
+        </view>
     </view>
     <!---列表-->
     <view class="list" wx:if="{{list.length>0 && searchFlag}}">
