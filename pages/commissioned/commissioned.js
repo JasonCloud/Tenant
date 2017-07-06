@@ -21,6 +21,8 @@ Page({
         showAddressSelect:false, //是否显示地址选择器
         serverCityName:'',
         showSubmitSuccess:false,
+        remarks:'', //备注
+        textareaInput:false,
     },
     onLoad(){
         this.setData({
@@ -87,8 +89,18 @@ Page({
             case 'rent':
                 this.setData({rent:value});
                 break;
+            case 'remarks':
+                this.setData({remarks:value});
+                break;
         }
         this.judgment();
+    },
+    focusAndBlur(e){
+        if(e.type == 'focus'){
+            this.setData({textareaInput:true})
+        }else if(e.type == 'blur'){
+            this.setData({textareaInput:false})
+        }
     },
     //检测是否可以提交
     judgment(){

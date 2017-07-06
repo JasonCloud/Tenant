@@ -1,6 +1,9 @@
 .commissioned-page{
     padding-top: 25rpx;
 }
+.textareaInput{
+    margin-top:-400rpx;
+}
 /*姓名*/
 .commissioned-page .name-wrap{
     padding-left: 25rpx;
@@ -114,6 +117,32 @@ input{
 }
 .rent input{
     padding: 0 25rpx 0 56rpx;
+}
+.placeholder{
+    color: #a8a8a8;
+    font-size: 28rpx;
+}
+/*备注*/
+.remarks,.pseudo-textarea{
+    margin-top: 25rpx;
+    background-color: #fff;
+    padding: 20rpx 25rpx;
+}
+.remarks .title,.pseudo-textarea .title{
+    font-size: 29rpx;
+    color: #555555;
+    padding-bottom: 15rpx;
+}
+.pseudo-textarea .textarea{
+    height: 240rpx;
+}
+.remarks textarea ,.pseudo-textarea .content{
+    height: 240rpx;
+    word-wrap: break-word;
+    word-break: break-all;
+    width: 100%;
+    font-size: 28rpx;
+    color: #333;
 }
 .placeholder{
     color: #a8a8a8;

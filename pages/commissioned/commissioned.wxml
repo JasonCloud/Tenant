@@ -1,4 +1,4 @@
-<view class="commissioned-page" bindtap="hiddenAddressSelect">
+<view class="{{textareaInput ? 'commissioned-page textareaInput': 'commissioned-page'}}" bindtap="hiddenAddressSelect">
         <!--姓名-->
         <view class="name-wrap">
             <view class="name">
@@ -44,6 +44,18 @@
                 <view class="text">每月租金 (元)</view>
                 <input bindinput="input" type="number" placeholder="请填写每月租金" placeholder-class="placeholder" data-type="rent"/>
             </view>
+        </view>
+        <!--备注-->
+        <view class="remarks" wx:if="{{!showAddressSelect}}">
+            <view class="title">备注</view>
+            <textarea bindfocus="focus" data-type="remarks" bindinput="input" placeholder="描述需要怎样的房源（例如：凹凸凹创意园10-100平方）"
+                  fixed="{{true}}" placeholder-class="placeholder" maxlength="-1" value="{{remarks}}" bindfocus="focusAndBlur" bindblur="focusAndBlur">
+            </textarea>
+        </view>
+        <view class="pseudo-textarea" wx:else>
+            <view class="title">备注</view>
+            <view class="placeholder textarea" wx:if="{{!remarks}}">描述需要怎样的房源（例如：凹凸凹创意园10-100平方）</view>
+            <view class="content textarea" wx:else>{{remarks}}</view>
         </view>
         <button  form-type="submit" disabled="{{btnDisabled}}" bindtap="submit">确认并提交</button>
 

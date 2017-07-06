@@ -47,7 +47,7 @@ page{
   text-align: center;
   padding: 30rpx 0;
   color: #141414;
-  font-size: 38rpx;
+  font-size: 36rpx;
   box-shadow:0px 4px 6px 0px rgba(159,163,170,.4);
   overflow: hidden;
   text-overflow:ellipsis;
@@ -110,12 +110,12 @@ page{
 .bar .foot .idx text{
   display: block;
   color: #141414;
-  font-size: 32rpx;
+  font-size: 36rpx;
   text-align: center;
   padding-top: 10rpx;
 }
 .bar .foot .idx .number{
-  font-size: 28rpx;
+  font-size: 32rpx;
 }
 .bar .foot .idx text:last-child{
   color:#555555;
@@ -181,7 +181,7 @@ page{
 .nav-title .idx text{
   display: block;
   padding-top: 10rpx;
-  font-size: 20rpx;
+  font-size: 28rpx;
   color:#555555;
 }
 .nav-title .idx image{
@@ -204,7 +204,7 @@ page{
   padding: 12rpx;
 }
 .choice-box .idx text{
-  font-size: 20rpx;
+  font-size: 24rpx;
   color: #a8a8a8;
   padding-top: 8rpx;
   display: block;
@@ -220,7 +220,7 @@ page{
   height: 20rpx;
 }
 .choice-box .idx .title .h1{
-  font-size: 32rpx;
+  font-size: 36rpx;
   color: #344966;
   padding-top: 0;
   margin: 0 10rpx;
@@ -243,11 +243,11 @@ page{
 }
 .one_choice text{
   color: #3399ff;
-  font-size: 28rpx;
+  font-size: 36rpx;
 }
 .choice_lei_xing text{
   color: #555555;
-  font-size: 28rpx;
+  font-size: 36rpx;
   text-align: center;
   display: block;
   position: relative;
@@ -303,7 +303,7 @@ page{
 .img-box text{
   display: block;
   color: #ffffff;
-  font-size: 42rpx;
+  font-size: 44rpx;
   position: absolute;
   left:50%;
   top:50%;
@@ -317,7 +317,7 @@ page{
   margin: 0 auto 20rpx;
   border: 1px solid #3399ff;
   color: #3399ff;
-  font-size: 32rpx;
+  font-size: 36rpx;
   text-align: center;
 }
 /*区域选择*/
