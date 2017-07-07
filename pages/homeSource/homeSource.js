@@ -24,17 +24,17 @@ Page({
     },
     selectConditionId:{
       areaText:'',
-      area:'',
+      area:-1,
       priceText:'',
-      price:'',
+      price:-1,
       subwayPerimeterText:'',
-      subwayPerimeter:'',
+      subwayPerimeter:-1,
       landmarkBuildingText:'',
-      landmarkBuilding:'',
+      landmarkBuilding:-1,
       officeText:'',
-      office:'',
+      office:-1,
       creativeGardenText:'',
-      creativeGarden:''
+      creativeGarden:-1
     },
     condition:{},//所有的筛选条件
     selectId:-1,//区域选择二级id
@@ -50,6 +50,12 @@ Page({
     filterText:'',//选中的筛选条件
     showFilterText:false,
     onLoadend:false, //标注数据是否加载完
+    minAndMax:{
+      minArea:'',
+      maxArea:'',
+      minPrice:'',
+      maxPrice:''
+    }
   },
   //删除搜索
   dele(){
@@ -71,7 +77,7 @@ Page({
     let type = e.target.dataset.type;
     let wordName = e.target.dataset.wordname;
     if(id == this.data.selectConditionId[type]){
-      this.data.selectConditionId[type] = '';
+      this.data.selectConditionId[type] = -1;
       this.data.selectConditionId[type+'Text'] = '';
       this.setData({
         selectConditionId:this.data.selectConditionId
@@ -79,8 +85,17 @@ Page({
     }else {
       this.data.selectConditionId[type] = id;
       this.data.selectConditionId[type+'Text'] = wordName;
+      if(type == 'area'){
+        this.data.minAndMax.minArea = '';
+        this.data.minAndMax.maxArea = '';
+      }
+      if(type == 'price'){
+        this.data.minAndMax.minPrice = '';
+        this.data.minAndMax.maxPrice = '';
+      }
       this.setData({
         selectConditionId:this.data.selectConditionId,
+        minAndMax:this.data.minAndMax
       })
     }
   },
@@ -145,7 +160,6 @@ Page({
       fetchAll:false,
     });
     if(id==0){
-      console.log('oopppoo')
       let obj = {
         pageNo:this.data.page_num,
       };
@@ -330,56 +344,41 @@ Page({
   },
   //筛选条件确定
   confirm(){
+    var minAndMax = this.data.minAndMax;
+    var selectConditionId = this.data.selectConditionId;
+    var selectObj = {};
+    for(let key in selectConditionId){
+      if(selectConditionId.hasOwnProperty(key)){
+        if(selectConditionId[key] > -1  && key.indexOf('Text') < 0 ){
+          selectObj[key] = selectConditionId[key];
+        }
+      }
+    }
     this.setData({
       areaOrFilter:'',
       page_num:1,
     });
-    if(!this.objectEmpty()(this.data.selectConditionId)){
+    if(!this.objectEmpty()(selectObj)){
       this.setData({fetchAll:false});
-      let selectConditionId = this.data.selectConditionId
-      let obj = Object.assign({},this.data.selectConditionId);
+      let obj = Object.assign({},selectObj);
       this.data.areaType == 'metro'? obj.subway = this.data.resultAreaId : obj.region = this.data.resultAreaId;
+      minAndMax.minArea ? obj.minArea = minAndMax.minArea : '';
+      minAndMax.maxArea ? obj.maxArea = minAndMax.maxArea : '';
+      minAndMax.minPrice ? obj.minPrice = minAndMax.minPrice : '';
+      minAndMax.maxPrice ? obj.maxPrice = minAndMax.maxPrice : '';
       this.get_house_list(obj,true);
     }else{
       var obj = {
         pageNo:this.data.page_num,
       }
       this.data.areaType == 'metro'? obj.subway = this.data.resultAreaId : obj.region = this.data.resultAreaId;
+      minAndMax.minArea ? obj.minArea = minAndMax.minArea : '';
+      minAndMax.maxArea ? obj.maxArea = minAndMax.maxArea : '';
+      minAndMax.minPrice ? obj.minPrice = minAndMax.minPrice : '';
+      minAndMax.maxPrice ? obj.maxPrice = minAndMax.maxPrice : '';
       this.get_house_list(obj,true);
     }
     this.detectionFilter();
-  },
-  //检测筛选显示文案
-  detectionFilter(){
-    var condition = this.data.selectConditionId;
-    var n = 0;
-    for(let key in condition){
-      if(condition.hasOwnProperty(key)){
-        if(key.indexOf('Text')>-1 && condition[key] != ''){
-              this.setData({
-                filterText: condition[key]
-              });
-        }
-        if(condition[key] != '' && key.indexOf('Text') < 0 ){
-          n = n + 1;
-        }
-      }
-    }
-    if(n==0){
-      this.setData({
-        showFilterText: false,
-        filterText:''
-      })
-    }else if(n > 1){
-      this.setData({
-        showFilterText: true,
-        filterText:'多选'
-      })
-    }else{
-      this.setData({
-        showFilterText: true,
-      })
-    }
   },
   objectEmpty(){
     let flag = true;
@@ -397,6 +396,101 @@ Page({
         }
       }
       return flag;
+    }
+  },
+  //检测筛选显示文案
+  detectionFilter(){
+    var condition = this.data.selectConditionId;
+    var minAndMax = this.data.minAndMax;
+    var n = 0;
+    for(let key in condition){
+      if(condition.hasOwnProperty(key)){
+        if(key.indexOf('Text')>-1 && condition[key] != ''){
+              this.setData({
+                filterText: condition[key]
+              });
+        }
+        if(condition[key] > -1  && key.indexOf('Text') < 0 ){
+          n = n + 1;
+        }
+      }
+    }
+    if(minAndMax.minArea && !minAndMax.maxArea){
+      n = n + 1;
+      this.setData({
+        showFilterText: true,
+        filterText:minAndMax.minArea + '㎡以上'
+      })
+    }else if (!minAndMax.minArea && minAndMax.maxArea){
+      n = n + 1;
+      this.setData({
+        showFilterText: true,
+        filterText: '0㎡～' + minAndMax.maxArea + '㎡'
+      })
+    }else if(minAndMax.minArea && minAndMax.maxArea){
+      n = n + 1;
+      this.setData({
+        showFilterText: true,
+        filterText:minAndMax.minArea + '㎡～' + minAndMax.maxArea + '㎡'
+      })
+    }
+
+    if(minAndMax.minPrice && !minAndMax.maxPrice){
+      n = n + 1;
+      this.setData({
+        showFilterText: true,
+        filterText:minAndMax.minPrice + '元/月以上'
+      })
+    }else if(!minAndMax.minPrice && minAndMax.maxPrice){
+      n = n + 1;
+      this.setData({
+        showFilterText: true,
+        filterText:'0～'+minAndMax.maxPrice+'元/月'
+      })
+    }else if(minAndMax.minPrice && minAndMax.maxPrice){
+      n = n + 1;
+      this.setData({
+        showFilterText: true,
+        filterText:minAndMax.minPrice+'～'+minAndMax.maxPrice + '元/月'
+      })
+    }
+    if(n==0){
+      this.setData({
+        showFilterText: false,
+        filterText:''
+      })
+    }else if(n > 1){
+      this.setData({
+        showFilterText: true,
+        filterText:'多选'
+      })
+    }else{
+      this.setData({
+        showFilterText: true,
+      })
+    }
+  },
+  //手动输入最大最小值搜索
+  inputEnter(e){
+    var type = e.currentTarget.dataset.type;
+    var value = e.detail.value;
+    switch (type){
+      case 'minArea':
+        this.data.minAndMax.minArea = value;
+        this.setData({minAndMax:this.data.minAndMax});
+        break;
+      case 'maxArea':
+        this.data.minAndMax.maxArea = value;
+        this.setData({minAndMax:this.data.minAndMax});
+        break;
+      case 'minPrice':
+        this.data.minAndMax.minPrice = value;
+        this.setData({minAndMax:this.data.minAndMax});
+        break;
+      case 'maxPrice':
+        this.data.minAndMax.maxPrice = value;
+        this.setData({minAndMax:this.data.minAndMax});
+        break;
     }
   },
   onReady:function(){
@@ -452,6 +546,17 @@ Page({
     }else{
       let obj = {pageNo:this.data.page_num};
       this.get_house_list(obj);
+    }
+  },
+  focus(e){
+    var type = e.currentTarget.dataset.type;
+    if(type == 'minArea' || type == 'maxArea'){
+      this.data.selectConditionId.area = -1;
+      this.setData({selectConditionId:this.data.selectConditionId})
+    }
+    if(type == 'minPrice' || type == 'maxPrice'){
+      this.data.selectConditionId.price = -1;
+      this.setData({selectConditionId:this.data.selectConditionId});
     }
   },
   onHide(){

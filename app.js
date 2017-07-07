@@ -26,6 +26,7 @@ App({
   },
   getCondition(cb){
     http.get('/api/mansion/condition',{city:this.globalData.serverCity}).then(res => {
+      this.globalData.region = res.data;
       if(cb && typeof cb == 'function'){
         cb(res.data);
       }
@@ -36,7 +37,8 @@ App({
   },
   globalData:{
     userInfo:null,
-    serverCity:'广州市'
+    serverCity:'广州市',
+    region:null
   },
   setGlobalData(key,value){
     this.globalData[key] = value;

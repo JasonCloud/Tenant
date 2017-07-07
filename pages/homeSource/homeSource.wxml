@@ -59,10 +59,12 @@
                             <image src="{{tabType[item] == item ? '../../images/btn_up_check.png':'../../images/btn_down.png'}}" mode="aspectFill" wx:if="{{index>1}}"/>
                         </view>
 
-                        <view class="dynamicInput">
-                            <input type="text" placeholder="最小"/>
+                        <view class="dynamicInput" wx:if="{{item == 'area' || item == 'price'}}">
+                            <input type="text" value="{{item == 'area' ? minAndMax.minArea : minAndMax.minPrice}}" placeholder="最小"
+                                   bindinput="inputEnter" data-type="{{item == 'area' ? 'minArea' : 'minPrice'}}" bindfocus="focus"/>
                             ～
-                            <input type="text" placeholder="最大"/>
+                            <input type="text" value="{{item == 'area' ? minAndMax.maxArea : minAndMax.maxPrice}}" placeholder="最大"
+                                   bindinput="inputEnter" data-type="{{item == 'area' ? 'maxArea' : 'maxPrice'}}" bindfocus="focus"/>
                         </view>
 
                         <view class="child-box" catchtap="selectConditionId" wx:if="{{index == 1 || index == 0 || tabType[item] == item}}">

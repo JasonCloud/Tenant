@@ -366,3 +366,92 @@ scroll-view{
 .font24{
     font-size: 24rpx !important;
 }
+/*推荐房源*/
+.container .recommend-list{
+    padding-left: 30rpx;
+    /*padding-bottom: 40rpx;*/
+    background-color: #ffffff;
+    margin-top:20rpx;
+}
+.container .recommend-list .title{
+    text-align: center;
+    padding: 20rpx 0;
+    font-size: 36rpx;
+}
+.container .recommend-list .item{
+    display: flex;
+    padding: 20rpx 0;
+    border-bottom: 1rpx solid #eeeeee;
+}
+.container .recommend-list .item:last-child{
+    border-bottom: none;
+}
+.container .recommend-list .item .left{
+    width: 235rpx;
+    height: 185rpx;
+    flex-shrink: 0;
+    position: relative;
+}
+.container .recommend-list .item .rented-info{
+    background-color:rgba(255,255,255,0.7);
+    font-size: 22rpx;
+    color: #141414;
+    padding: 4rpx 8rpx;
+    border-radius: 8rpx 0 0 0;
+    position:absolute;
+    bottom: 0;
+    right: 0;
+}
+.container .recommend-list .item .left image{
+    width: 100%;
+    height: 100%;
+}
+.container .recommend-list .item .right{
+    margin-left: 20rpx;
+}
+.container .recommend-list .right .item_child{
+    padding-bottom: 8rpx;
+}
+.container .recommend-list .right .item_child:first-child{
+    display: flex;
+    align-items: center;
+    /*padding-bottom: 20rpx;*/
+}
+.container .recommend-list .right .item_child .ico{
+    width: 40rpx;
+    height: 40rpx;
+}
+.container .recommend-list .item_child text{
+    display: block;
+    font-size: 24rpx;
+    color: #a8a8a8;
+}
+.container .recommend-list .tags text{
+    font-size: 22rpx;
+}
+.container .recommend-list .item_child .h1{
+    color: #141414;
+    font-size: 32rpx;
+}
+.container .recommend-list .item_child .h2{
+    color: #555;
+    font-size: 28rpx;
+}
+.container .recommend-list .item_child:last-child{
+    display: flex;
+    padding-bottom: 0;
+}
+.container .recommend-list .item_child .span{
+    color:#66b3ff;
+    padding:4rpx 10rpx;
+    border: 1rpx solid #66b3ff;
+    border-radius: 42rpx;
+    margin-left: 6rpx;
+    flex-wrap: wrap;
+}
+.container .recommend-list .info{
+    padding: 30rpx 0 ;
+    font-size: 28rpx;
+    color:#707070;
+    text-align: center;
+}

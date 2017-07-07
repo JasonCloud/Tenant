@@ -1,6 +1,14 @@
 <!--pages/houseLook/houseLook.wxml-->
 <view class="container">
-    <image src="{{detailObj.bannerImage}}" class="bg" mode="aspectFill"></image>
+    <swiper indicator-dots="{{detailObj.carousels.length > 1}}" indicator-active-color="#fff"
+            autoplay="{{true}}" interval="4000" duration="500" circular="{{true}}">
+        <block wx:for="{{detailObj.carousels}}">
+            <swiper-item>
+                <image class="bg" src="{{item}}" mode="aspectFill"/>
+            </swiper-item>
+        </block>
+    </swiper>
+    <!--<image class="bg" src="{{detailObj.bannerImage}}" mode="aspectFill"/>-->
     <!--<view class="bg" style="background-image: url({{detailObj.bannerImage}})"></view>-->
     <view class="cover">
         <view class="price color_14"><text class="red price-text">{{detailObj.totalPrice}}</text>/月</view>

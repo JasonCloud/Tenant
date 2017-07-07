@@ -81,13 +81,10 @@
         </view>
         <picker-view indicator-class="indicator" style="width: 100%; height: 400rpx;" bindchange="addressChange">
             <picker-view-column>
-                <view wx:for="{{province}}" style="line-height: 50px; text-align: center">{{item.name}}</view>
+                <view wx:for="{{region}}" style="line-height: 50px; text-align: center">{{item.wordName}}</view>
             </picker-view-column>
             <picker-view-column>
-                <view wx:for="{{cityArr}}" style="line-height: 50px; text-align: center;">{{item.name}}</view>
-            </picker-view-column>
-            <picker-view-column>
-                <view wx:for="{{areaArr}}" style="line-height: 50px; text-align: center;">{{item.name}}</view>
+                <view wx:for="{{region[currentRegionValue].allChildrenKeyword}}" style="line-height: 50px; text-align: center;">{{item.wordName}}</view>
             </picker-view-column>
         </picker-view>
     </view>

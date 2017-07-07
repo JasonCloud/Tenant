@@ -22,6 +22,7 @@ Page({
     areaState:0,
     showSeeMore:false ,
     onLoadend:false, //标记数据是否加载完
+    groups:[{"id":30,"name":"七号小镇创意园","image":"https://zua.51feijin.com/store/product/1498138564448.png","area":null,"minArea":0,"maxArea":0,"region":"番禺区-万博/南村","price":"0.0","highlight":1,"addTop":1,"hot":1,"apartmentCount":3,"labels":[{"name":"第五代创意园"}]},{"id":15,"name":"保利洛克维","image":"https://zua.51feijin.com/store/product/1497781487106.png","area":null,"minArea":311,"maxArea":311,"region":"天河区-珠江新城","price":"43540.0","highlight":1,"addTop":1,"hot":1,"apartmentCount":26,"labels":[{"name":"地铁口"},{"name":"方正实用"}]},{"id":129,"name":"中旅商务大厦","image":"https://zua.51feijin.com/store/product/1498617192478.jpg","area":null,"minArea":0,"maxArea":0,"region":"天河区-林和","price":"0.0","highlight":0,"addTop":0,"hot":0,"apartmentCount":0,"labels":[{"name":"甲级写字楼"}]},{"id":81,"name":"中泰北塔大厦","image":"https://zua.51feijin.com/store/product/1498468614718.jpg","area":null,"minArea":0,"maxArea":0,"region":"天河区-林和","price":"0.0","highlight":0,"addTop":0,"hot":0,"apartmentCount":3,"labels":[{"name":"甲级写字楼"}]},{"id":80,"name":"新达成广场","image":"https://zua.51feijin.com/store/product/1498468133697.jpg","area":null,"minArea":0,"maxArea":0,"region":"越秀区-环市东/区庄","price":"0.0","highlight":0,"addTop":0,"hot":0,"apartmentCount":0,"labels":[{"name":"甲级写字楼"}]},{"id":79,"name":"宜安大厦","image":"https://zua.51feijin.com/store/product/1498466761935.jpg","area":null,"minArea":0,"maxArea":0,"region":"越秀区-环市东/区庄","price":"0.0","highlight":0,"addTop":0,"hot":0,"apartmentCount":0,"labels":[{"name":"甲级写字楼"}]},{"id":78,"name":"天伦大厦","image":"https://zua.51feijin.com/store/product/1498466392643.jpg","area":null,"minArea":0,"maxArea":0,"region":"越秀区-环市东/区庄","price":"0.0","highlight":0,"addTop":0,"hot":0,"apartmentCount":3,"labels":[{"name":"甲级写字楼"}]},{"id":77,"name":"创举商务大厦","image":"https://zua.51feijin.com/store/product/1498466080927.jpg","area":null,"minArea":0,"maxArea":0,"region":"越秀区-北京路商圈","price":"0.0","highlight":0,"addTop":0,"hot":0,"apartmentCount":0,"labels":[{"name":"甲级写字楼"}]},{"id":76,"name":"凯华国际中心","image":"https://zua.51feijin.com/store/product/1498466014333.png","area":null,"minArea":0,"maxArea":0,"region":"天河区-珠江新城","price":"0.0","highlight":0,"addTop":0,"hot":0,"apartmentCount":0,"labels":[{"name":"超甲级写字楼"}]},{"id":75,"name":"中侨大厦","image":"https://zua.51feijin.com/store/product/1498465692646.jpg","area":null,"minArea":0,"maxArea":0,"region":"越秀区-环市东/区庄","price":"0.0","highlight":0,"addTop":0,"hot":0,"apartmentCount":0,"labels":[{"name":"甲级写字楼"}]}]
    },
   //预约看房提交
   formSubmit(e){
@@ -317,7 +318,7 @@ Page({
   get_house_detail(id){
     http.get('/api/mansion/detail',{id:id}).then(res => {
       let obj = this.initDetailData(res.data);
-      util.hiddenLoading(loadingTimer)
+      util.hiddenLoading(loadingTimer);
       this.setData({
         detailObject: obj,
         phone_num:obj.telephone,
@@ -339,9 +340,17 @@ Page({
     });
     return obj;
   },
+    //跳转到详情
+    gotoDetail(e){
+        let id = e.currentTarget.dataset.id;
+        let apartmentCount = e.currentTarget.dataset.apartmentcount;
+        wx.redirectTo({
+            url:`../homeDetail/homeDetail?id=${id}&apartmentCount=${apartmentCount}`
+        })
+    },
   onLoad:function(options){
     // 页面初始化 options为页面跳转所带来的参数
-    loadingTimer = util.showLoading();
+
     this.get_house_detail(options.id);
     this.setData({
         id:options.id,
@@ -351,6 +360,7 @@ Page({
   },
   onReady:function(){
     // 页面渲染完成
+      loadingTimer = util.showLoading();
   },
   onShow:function(){
     // 页面显示

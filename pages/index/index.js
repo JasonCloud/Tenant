@@ -127,7 +127,6 @@ Page({
   },
   //选择搜索区域
   regionChange(e){
-    console.log('ppppp');
     this.setData({
       currentRegionValue:e.detail.value[0],
     })
@@ -223,6 +222,7 @@ Page({
                 serverCity:'广州市'
               })
             }
+            util.hiddenLoading(loadingTimer);
             that.getCondition();
           },
           fail:function(err){
@@ -237,7 +237,6 @@ Page({
   getCondition(){
     var that = this;
     app.getCondition(res=>{
-      util.hiddenLoading(loadingTimer);
       that.setData({
         currentArea:res.area.allChildrenKeyword,
         currentRegion:res.region.allChildrenKeyword
