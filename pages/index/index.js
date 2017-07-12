@@ -27,7 +27,8 @@ Page({
     currentRegion:[], //当前搜索区域
     currentAreaValue:0, //当前搜索面积选中的值
     currentRegionValue:0, //当前搜索区域选中的值
-    currentRegionId: -1, //当前选择城市ID
+    regionId: -1, //当前选择城市ID
+    specificId:-1, //具体区域
     currentAreaId:-1, //当前选择面积ID
     showAreaSelect: false,
     showRegionSelect: false,
@@ -91,10 +92,11 @@ Page({
       showAreaSelect: false
     });
     //按确认
-    if(e.currentTarget.dataset.type == 'confirm' && this.data.currentRegionId == -1){
+    if(e.currentTarget.dataset.type == 'confirm' && this.data.regionId == -1 && this.data.specificId == -1){
       this.setData({
         regionText:this.data.currentRegion[0].wordName + " " + this.data.currentRegion[0].allChildrenKeyword[0].wordName,
-        currentRegionId: this.data.currentRegion[0].allChildrenKeyword[0].id
+        specificId:this.data.currentRegion[0].allChildrenKeyword[0].id,
+        regionId: this.data.currentRegion[0].id,
       })
     }
     //按取消
@@ -127,13 +129,17 @@ Page({
   },
   //选择搜索区域
   regionChange(e){
+    var data = this.data;
     this.setData({
       currentRegionValue:e.detail.value[0],
     })
     this.setData({
-      currentRegionId:this.data.currentRegion[this.data.currentRegionValue].allChildrenKeyword[e.detail.value[1]].id,
-      regionText:this.data.currentRegion[this.data.currentRegionValue].wordName + ' ' + this.data.currentRegion[this.data.currentRegionValue].allChildrenKeyword[e.detail.value[1]].wordName,
+      specificId:data.currentRegion[data.currentRegionValue].allChildrenKeyword[e.detail.value[1]].id ,
+      regionId:data.currentRegion[data.currentRegionValue].id,
+      regionText:data.currentRegion[data.currentRegionValue].wordName + ' ' + data.currentRegion[data.currentRegionValue].allChildrenKeyword[e.detail.value[1]].wordName,
+      last: data.currentRegion[data.currentRegionValue].allChildrenKeyword[e.detail.value[1]].wordName == '不限' ? false : true
     });
+    console.log(this.data.specificId,this.data.regionId);
   },
   areaChange(e){
     this.setData({
@@ -144,14 +150,17 @@ Page({
   },
   //搜索
   search(){
+    console.log();
     util.setStorage('searchObj',{
-      region:this.data.currentRegionId > -1 ? this.data.currentRegionId : '',
+      region:this.data.regionId > -1 ? this.data.regionId : '',
+      specificId:this.data.specificId > -1 ? this.data.specificId : '',
       area:this.data.currentAreaId > -1 ? this.data.currentAreaId : '',
+      last:this.data.last
     });
     var regionText = this.data.regionText.split(' ');
     var filterText = '';
     if(regionText.length >1 && regionText[1] == '不限'){
-      filterText = regionText[0];
+      filterText = regionText[0] == '不限' ? '' : regionText[0];
     }else if(regionText.length >1 && regionText[0] != '不限' && regionText[1] != '不限'){
       filterText = regionText[1];
     }
@@ -159,12 +168,18 @@ Page({
       areaText: filterText,
       filterText:this.data.areaText != '面积' ? this.data.areaText : '',
     });
+
     this.setData({
       currentAreaId: -1,
       currentRegionId: -1,
       regionText:'区域',
       areaText:'面积',
     });
+    console.log({
+      region:this.data.currentRegionId > -1 ? this.data.currentRegionId : '',
+      area:this.data.currentAreaId > -1 ? this.data.currentAreaId : '',
+      last:this.data.last
+    })
     wx.switchTab({
       url: '../homeSource/homeSource'
     });

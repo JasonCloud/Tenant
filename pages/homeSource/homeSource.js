@@ -12,7 +12,7 @@ Page({
     areaType:'area',//默认选择为区域
     filterType:'', //选项类型
     page_num:1, //当前页数
-    resultAreaId:'', //区域筛选的id
+    resultAreaId:-1, //区域筛选的id
     upChoiceValue:'',//价格排序图标控制
     tabType:{ //展开控制
       area:'',
@@ -24,21 +24,22 @@ Page({
     },
     selectConditionId:{
       areaText:'',
-      area:-1,
+      area:0,
       priceText:'',
-      price:-1,
+      price:0,
       subwayPerimeterText:'',
-      subwayPerimeter:-1,
+      subwayPerimeter:'',
       landmarkBuildingText:'',
-      landmarkBuilding:-1,
+      landmarkBuilding:'',
       officeText:'',
-      office:-1,
+      office:'',
       creativeGardenText:'',
-      creativeGarden:-1
+      creativeGarden:''
     },
     condition:{},//所有的筛选条件
-    selectId:-1,//区域选择二级id
+    selectId:0,//区域选择二级id
     selectText:'', //区域选择二级名字
+    selectRegionId: 0,//区域选择三级选中id
     areaOrFilter:'',//区域和筛选切换
     listOne:[],
     listTow:[],
@@ -159,27 +160,32 @@ Page({
       page_num:1,
       fetchAll:false,
     });
-    if(id==0){
+    if(wordName == '不限'){
+      console.log(this.data.selectText,'ooppp',wordName)
       let obj = {
         pageNo:this.data.page_num,
       };
       this.setData({
-        areaText:this.data.selectText,
+        areaText:this.data.selectText == '不限' ? '' : this.data.selectText,
       });
       this.data.areaType == 'metro'? obj.subway = this.data.selectId : obj.region = this.data.selectId;
-      this.get_house_list(obj,true);
-    }
-    if(this.data.resultAreaId != id){
+      this.get_house_list(obj,true).then(()=>{
+        this.setData({
+          selectRegionId:id
+        })
+      });
+    }else if(this.data.resultAreaId != id){
       let obj = {
         pageNo:this.data.page_num,
       };
       this.setData({
-        areaText:wordName
+        areaText:wordName == '不限' ? '' : wordName
       });
       this.data.areaType == 'metro'? obj.subway = id : obj.region = id;
       this.get_house_list(obj,true).then(res => {
         this.setData({
-          resultAreaId:id
+          resultAreaId:id,
+          selectRegionId:id
         });
       })
     }
@@ -204,8 +210,8 @@ Page({
      if(!!arr){
        arr.forEach(res => {
          // res.price = res.price.replace(/\D/g,'')
-         var priceArr = res.price.split('-');
-         res.price = priceArr.length > 1 ? priceArr[0]+res.price.replace(/[\d|-]/g,'').replace('以上','')+'起' : res.price.replace('以上','起');
+         // var priceArr = res.price.split('-');
+         // res.price = priceArr.length > 1 ? priceArr[0]+res.price.replace(/[\d|-]/g,'').replace('以上','')+'起' : res.price.replace('以上','起');
        })
        if(!loadend){
          util.hiddenLoading(loadingTimer);
@@ -247,17 +253,18 @@ Page({
     let id = e.target.dataset.id;
     let wordName = e.target.dataset.wordname;
     if(this.data.listOne[index]){
-      // console.log('选择城市');
       this.setData({
         listTow:this.data.listOne[index]['allChildrenKeyword'],
         selectId:id,
-        selectText:wordName
+        selectText:wordName,
+        selectIndex:index
       })
     }else{
       this.setData({
         listTow:[],
         selectId:id,
-        selectText:wordName
+        selectText:wordName,
+        selectIndex:index
       })
     }
 
@@ -296,8 +303,8 @@ Page({
 
   },
   getCondition(){
-    app.getCondition(res => {
-      console.log(res);
+    let res = app.globalData.region;
+    if(res){
       let condition = this.initCondition(res);
       console.log(condition);
       this.setData({
@@ -305,7 +312,21 @@ Page({
         listOne:condition.region.allChildrenKeyword,
         listTow:condition.region.allChildrenKeyword.length > 0 ? condition.region.allChildrenKeyword[0].allChildrenKeyword:[],
       });
-    });
+    }else{
+      let timer = setInterval(()=>{
+        let data = app.globalData.region;
+        if(data){
+          clearInterval(timer)
+          let condition = this.initCondition(data);
+          console.log(condition);
+          this.setData({
+            condition:condition,
+            listOne:condition.region.allChildrenKeyword,
+            listTow:condition.region.allChildrenKeyword.length > 0 ? condition.region.allChildrenKeyword[0].allChildrenKeyword:[],
+          });
+        }
+      },500);
+    }
   },
   //显示筛选数据的处理
   initCondition(condition){
@@ -410,7 +431,7 @@ Page({
                 filterText: condition[key]
               });
         }
-        if(condition[key] > -1  && key.indexOf('Text') < 0 ){
+        if(condition[key] > 0  && key.indexOf('Text') < 0 ){
           n = n + 1;
         }
       }
@@ -498,26 +519,76 @@ Page({
   },
   onShow:function(){
     // 页面显示
-    var obj = util.getStorage('searchObj');
+    var searchData = util.getStorage('searchObj');
     var filterText = util.getStorage('filterText');
-    if(obj || filterText){
+    console.log(searchData,filterText);
+    if(searchData || filterText){
       this.setData({
         page_num:1
       });
-      this.getCondition();
       if(filterText){
         filterText.showFilterText = filterText.filterText ? true : false;
         this.setData(filterText);
         util.removeStorage('filterText');
       }
-      if(obj){
-        obj.pageNo = 1;
-        obj.cityName = app.globalData.serverCity;
-        this.get_house_list(obj,true);
-        util.removeStorage('searchObj');
+      console.log(this.data.listOne,this.data.listOne.length,this.data.listOne.length > 0);
+      if(this.data.listOne.length > 0){
+        if(searchData){
+          var obj = {};
+          obj.pageNo = 1;
+          searchData.area ? obj.area = searchData.area : '';
+          searchData.last ? (searchData.specificId ? obj.region = searchData.specificId : ''): (searchData.region ? obj.region = searchData.region : '');
+          obj.cityName = app.globalData.serverCity;
+          this.get_house_list(obj,true);
+          var listTwo = [];
+          this.data.listOne.map((item,index)=>{
+            if(item.id == searchData.region){
+              listTwo = this.data.listOne[index].allChildrenKeyword;
+            }
+          });
+          searchData.area ? this.data.selectConditionId.area = searchData.area : '';
+          this.setData({
+            selectId:searchData.region,
+            selectRegionId:searchData.specificId,
+            listTow:listTwo,
+            selectConditionId:this.data.selectConditionId
+          });
+          util.removeStorage('searchObj');
+        }else{
+          this.get_house_list({pageNo:1},true);
+        }
       }else{
-        this.get_house_list({pageNo:1},true);
+        var regionTimer = setInterval(()=>{
+          if(this.data.listOne.length > 0){
+            clearInterval(regionTimer);
+            if(searchData){
+              var obj = {};
+              obj.pageNo = 1;
+              searchData.area ? obj.area = searchData.area : '';
+              searchData.last ? (searchData.specificId ? obj.region = searchData.specificId : ''): (searchData.region ? obj.region = searchData.region : '');
+              obj.cityName = app.globalData.serverCity;
+              this.get_house_list(obj,true);
+              var listTwo = [];
+              this.data.listOne.map((item,index)=>{
+                if(item.id == searchData.region){
+                  listTwo = this.data.listOne[index].allChildrenKeyword;
+                }
+              });
+              searchData.area ? this.data.selectConditionId.area = searchData.area : '';
+              this.setData({
+                selectId:searchData.region,
+                selectRegionId:searchData.specificId,
+                listTow:listTwo,
+                selectConditionId:this.data.selectConditionId
+              });
+              util.removeStorage('searchObj');
+            }else{
+              this.get_house_list({pageNo:1},true);
+            }
+          }
+        },500)
       }
+
     }
   },
   onUnload:function(){

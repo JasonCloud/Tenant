@@ -48,13 +48,13 @@
         <!--备注-->
         <view class="remarks" wx:if="{{!showAddressSelect}}">
             <view class="title">备注</view>
-            <textarea bindfocus="focus" data-type="remarks" bindinput="input" placeholder="描述需要怎样的房源（例如：凹凸凹创意园10-100平方）"
+            <textarea bindfocus="focus" data-type="remarks" bindinput="input" placeholder="请描述你的房源信息"
                   fixed="{{true}}" placeholder-class="placeholder" maxlength="-1" value="{{remarks}}" bindfocus="focusAndBlur" bindblur="focusAndBlur">
             </textarea>
         </view>
         <view class="pseudo-textarea" wx:else>
             <view class="title">备注</view>
-            <view class="placeholder textarea" wx:if="{{!remarks}}">描述需要怎样的房源（例如：凹凸凹创意园10-100平方）</view>
+            <view class="placeholder textarea" wx:if="{{!remarks}}">请描述你的房源信息</view>
             <view class="content textarea" wx:else>{{remarks}}</view>
         </view>
         <button  form-type="submit" disabled="{{btnDisabled}}" bindtap="submit">确认并提交</button>

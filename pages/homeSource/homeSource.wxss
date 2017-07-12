@@ -143,7 +143,7 @@ page{
     overflow: auto;
 }
 .container .nav-box .filter-condition .item-box{
-    margin-bottom: 40rpx;
+    margin-bottom: 100rpx;
 }
 .container .nav-box .filter-condition .item{
     padding: 30rpx 0;
@@ -217,7 +217,10 @@ page{
     display: flex;
     justify-content: space-around;
     align-items: center;
-    margin-bottom: 20rpx;
+    /*margin-bottom: 20rpx;*/
+    position:fixed;
+    bottom:0;
+    left:0;
 }
 .container .filter-condition .btn-box button{
     border-radius: 0;

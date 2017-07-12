@@ -37,14 +37,16 @@
                 </view>
                 <view class="item" catchtap="changeCity">
                     <block wx:for="{{listOne}}" wx:key="idx" wx:for-index="idx">
-                        <view class="{{selectId == item.id ? 'checked' : ''}}" data-id="{{item.id}}" data-index="{{idx}}" data-fatherId="{{item.fatherId}}" data-wordname="{{item.wordName}}">
+                        <view class="{{selectId == item.id ? 'checked' : ''}}" data-id="{{item.id}}" data-index="{{idx}}" data-fatherId="{{item.fatherId}}"
+                              data-wordname="{{item.wordName}}">
                             {{item.wordName}}
                         </view>
                     </block>
                 </view>
                 <view class="item">
                     <block wx:for="{{listTow}}" wx:key="idx" wx:for-index="idx" wx:if="{{selectId!=-1}}">
-                        <view class="item-child" data-id="{{item.id}}"  data-fatherId="{{item.fatherId}}" catchtap="choiceArea" data-wordname="{{item.wordName}}">
+                        <view class="{{selectRegionId ==  item.id ? 'checked item-child': 'item-child'}}" data-id="{{item.id}}"
+                              data-fatherId="{{item.fatherId}}" catchtap="choiceArea" data-wordname="{{item.wordName}}" data-index="{{idx}}">
                             {{item.wordName}}
                         </view>
                     </block>
@@ -101,7 +103,7 @@
                         <image src="../../images/ding.png" class="ico" wx:if="{{item.addTop==1}}"></image>
                     </view>
                     <view class="item_child">
-                        <text class="h2">{{item.price}}</text>
+                        <text class="h2">{{item.price}}元/㎡/月</text>
                     </view>
                     <view class="item_child">
                         <text>{{item.region}} | {{item.area}}</text>

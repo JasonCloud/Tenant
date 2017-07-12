@@ -1,4 +1,4 @@
-<view class="container" wx:if="{{onLoadend}}">
+<view class="container" wx:if="{{showPage}}">
     <swiper indicator-dots="{{detailObject.carousels.length > 1}}" indicator-active-color="#fff"
             autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular="{{true}}">
         <block wx:for="{{detailObject.carousels}}">
@@ -20,12 +20,14 @@
         <view class="filter-box">
             <scroll-view scroll-x>
                 <view class="filter-condition">
-                    <view bindtap="areaFilter" class="{{areaState == 0 ? 'item checked':'item'}}" data-state="0">全部</view>
-                    <view bindtap="areaFilter" class="{{areaState == 1 ? 'item-number checked':'item-number'}}" data-state="1">0-100㎡</view>
+                    <view wx:for="{{areaFilter}}" bindtap="areaFilter"
+                          class="{{areaState == index ? (index == 0 ? 'item checked': 'item-number checked'): (index ==0 ? 'item' : 'item-number')}}"
+                          data-state="{{index}}" data-area_id="{{item.id}}">{{item.wordName == '不限' ? '全部' : item.wordName}}</view>
+                    <!--<view bindtap="areaFilter" class="{{areaState == 1 ? 'item-number checked':'item-number'}}" data-state="1">0-100㎡</view>
                     <view bindtap="areaFilter" class="{{areaState == 2 ? 'item-number checked':'item-number'}}" data-state="2">100-200㎡</view>
                     <view bindtap="areaFilter" class="{{areaState == 3 ? 'item-number checked':'item-number'}}" data-state="3">200-300㎡</view>
                     <view bindtap="areaFilter" class="{{areaState == 4 ? 'item-number checked':'item-number'}}" data-state="4">300-500㎡</view>
-                    <view bindtap="areaFilter" class="{{areaState == 5 ? 'item-number checked':'item-number'}}" data-state="5">500㎡以上</view>
+                    <view bindtap="areaFilter" class="{{areaState == 5 ? 'item-number checked':'item-number'}}" data-state="5">500㎡以上</view>-->
                 </view>
             </scroll-view>
         </view>
@@ -39,6 +41,8 @@
                         <text>精装</text>
                     </view>
                 </view>
+                <view class="not-data" wx:if="{{list.length <= 0}}">没有相应的房源</view>
+                <view class="loadMore font24" catchtap="seeMore" wx:if="{{allShowSeeMore}}">点击查看更多</view>
             </block>
             <block wx:if="{{areaState > 0}}">
                 <block wx:if="{{filterList.length > 0}}">
@@ -52,8 +56,8 @@
                     </view>
                 </block>
                 <view class="not-data" wx:else>没有相应的房源</view>
+                <view class="loadMore font24" catchtap="seeMore" wx:if="{{showSeeMore}}">点击查看更多</view>
             </block>
-            <view class="loadMore font24" catchtap="seeMore" wx:if="{{showSeeMore}}">点击查看更多</view>
         </view>
     </block>
     <view class="done-recording margin-bottom-20" wx:if="{{detailObject.orders.length > 0}}">
@@ -171,9 +175,9 @@
         </view>
     </view>
     <!--推荐房源-->
-    <view class="recommend-list">
+    <view class="recommend-list" wx:if="{{detailObject.groups.length > 0}}">
         <view class="title">推荐房源</view>
-        <block wx:for="{{groups}}" wx:key="index">
+        <block wx:for="{{detailObject.groups}}" wx:key="index">
             <view class="item" catchtap="gotoDetail" data-id="{{item.id}}" data-apartmentcount="{{item.apartmentCount}}">
                 <view class="left">
                     <image src="{{item.image}}" mode="aspectFill"></image>
@@ -182,7 +186,7 @@
 
                 <view class="right">
                     <view class="item_child">
-                        <text class="h1">{{item.name}}</text>
+                        <text class="h1">{{item.name}}元/㎡/月</text>
                         <image src="../../images/jingpin.png" class="ico" wx:if="{{item.highlight==1}}"></image>
                         <image src="../../images/ding.png" class="ico" wx:if="{{item.addTop==1}}"></image>
                     </view>

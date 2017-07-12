@@ -52,8 +52,8 @@ Page({
             if(!!arr){
                 arr.forEach(res => {
                     // res.price = res.price.replace(/\D/g,'')
-                    var priceArr = res.price.split('-');
-                    res.price = priceArr.length > 1 ? priceArr[0]+res.price.replace(/[\d|-]/g,'').replace('以上','')+'起' : res.price.replace('以上','起');
+                    // var priceArr = res.price.split('-');
+                    // res.price = priceArr.length > 1 ? priceArr[0]+res.price.replace(/[\d|-]/g,'').replace('以上','')+'起' : res.price.replace('以上','起');
                 })
                 this.setData({
                     list:reset ? arr : Array.prototype.concat(this.data.list,arr)

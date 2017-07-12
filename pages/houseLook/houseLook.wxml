@@ -11,7 +11,7 @@
     <!--<image class="bg" src="{{detailObj.bannerImage}}" mode="aspectFill"/>-->
     <!--<view class="bg" style="background-image: url({{detailObj.bannerImage}})"></view>-->
     <view class="cover">
-        <view class="price color_14"><text class="red price-text">{{detailObj.totalPrice}}</text>/月</view>
+        <view class="price color_14"><text class="red price-text">{{detailObj.totalPrice}}</text>元/月</view>
         <view class="item">
             <view class="item_flex">
                     <view class="color_55 unit_price">单位</view>
