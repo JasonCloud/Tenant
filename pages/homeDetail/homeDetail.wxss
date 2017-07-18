@@ -376,7 +376,7 @@ scroll-view{
 .container .recommend-list .title{
     text-align: center;
     padding: 20rpx 0;
-    font-size: 36rpx;
+    font-size: 32rpx;
 }
 .container .recommend-list .item{
     display: flex;
@@ -411,6 +411,9 @@ scroll-view{
 }
 .container .recommend-list .right .item_child{
     padding-bottom: 8rpx;
+    display:flex;
+    align-items: center;
+    flex-wrap: nowrap;
 }
 .container .recommend-list .right .item_child:first-child{
     display: flex;
@@ -436,6 +439,10 @@ scroll-view{
 .container .recommend-list .item_child .h2{
     color: #555;
     font-size: 28rpx;
+    display:block;
+}
+.container .recommend-list .item_child .price{
+    color:#ff6060;
 }
 .container .recommend-list .item_child:last-child{
     display: flex;

@@ -103,10 +103,10 @@
                         <image src="../../images/ding.png" class="ico" wx:if="{{item.addTop==1}}"></image>
                     </view>
                     <view class="item_child">
-                        <text class="h2">{{item.price}}元/㎡/月</text>
+                        <text class="h2 price">{{item.price}}</text><text class="h2">元/㎡/月起</text>
                     </view>
                     <view class="item_child">
-                        <text>{{item.region}} | {{item.area}}</text>
+                        <text>{{item.region}} | {{item.minArea}}～{{item.maxArea}}㎡</text>
                     </view>
                     <view class="item_child tags" wx:if="{{item.labels.length > 0}}">
                         <text class="span" wx:for="{{item.labels}}" wx:for-item="label">{{label.name}}</text>

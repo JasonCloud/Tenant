@@ -73,6 +73,9 @@ Page({
   },
   changeServerCity(e){
     var city = e.currentTarget.dataset.city;
+    if(city == app.globalData.serverCity){
+      return;
+    }
     loadingTimer = util.showLoading();
     app.setGlobalData('serverCity',city);
     this.getCondition();
@@ -134,10 +137,10 @@ Page({
       currentRegionValue:e.detail.value[0],
     })
     this.setData({
-      specificId:data.currentRegion[data.currentRegionValue].allChildrenKeyword[e.detail.value[1]].id ,
+      specificId:data.currentRegion[data.currentRegionValue].allChildrenKeyword[e.detail.value[1]].id , //具体地点id
       regionId:data.currentRegion[data.currentRegionValue].id,
       regionText:data.currentRegion[data.currentRegionValue].wordName + ' ' + data.currentRegion[data.currentRegionValue].allChildrenKeyword[e.detail.value[1]].wordName,
-      last: data.currentRegion[data.currentRegionValue].allChildrenKeyword[e.detail.value[1]].wordName == '不限' ? false : true
+      last: data.currentRegion[data.currentRegionValue].allChildrenKeyword[e.detail.value[1]].wordName == '不限' ? false : true, //标注区域选项具体地点是否选了不限
     });
     console.log(this.data.specificId,this.data.regionId);
   },
@@ -263,6 +266,7 @@ Page({
     if(city){
       http.get('/api/home/index',{cityName:city}).then(res=>{
         onLoadend = true;
+        util.hiddenLoading(loadingTimer);
         this.setData({
           dataObj:res.data
         })

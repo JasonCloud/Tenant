@@ -12,7 +12,7 @@ Page({
     areaType:'area',//默认选择为区域
     filterType:'', //选项类型
     page_num:1, //当前页数
-    resultAreaId:-1, //区域筛选的id
+    resultAreaId:'', //区域筛选的id
     upChoiceValue:'',//价格排序图标控制
     tabType:{ //展开控制
       area:'',
@@ -196,6 +196,7 @@ Page({
   //获取房源列表
   get_house_list(obj,reset=false){
     obj.pageSize = this.data.pageSize;
+      obj.cityName = app.globalData.serverCity;
    return http.get('/api/mansion/list',obj).then(res => {
      if(res.data.result.length < this.data.pageSize){
        this.setData({
@@ -375,14 +376,16 @@ Page({
         }
       }
     }
+    console.log(selectObj,'........');
     this.setData({
       areaOrFilter:'',
       page_num:1,
     });
+      console.log(!this.objectEmpty()(selectObj));
     if(!this.objectEmpty()(selectObj)){
       this.setData({fetchAll:false});
-      let obj = Object.assign({},selectObj);
-      this.data.areaType == 'metro'? obj.subway = this.data.resultAreaId : obj.region = this.data.resultAreaId;
+      let obj = Object.assign({},this.objFilter(selectObj));
+        this.data.areaType == 'metro'? (this.data.resultAreaId ? obj.subway = this.data.resultAreaId : '') : (this.data.resultAreaId ? obj.region = this.data.resultAreaId :'');
       minAndMax.minArea ? obj.minArea = minAndMax.minArea : '';
       minAndMax.maxArea ? obj.maxArea = minAndMax.maxArea : '';
       minAndMax.minPrice ? obj.minPrice = minAndMax.minPrice : '';
@@ -392,7 +395,7 @@ Page({
       var obj = {
         pageNo:this.data.page_num,
       }
-      this.data.areaType == 'metro'? obj.subway = this.data.resultAreaId : obj.region = this.data.resultAreaId;
+      this.data.areaType == 'metro'? (this.data.resultAreaId ? obj.subway = this.data.resultAreaId : '') : (this.data.resultAreaId ? obj.region = this.data.resultAreaId :'');
       minAndMax.minArea ? obj.minArea = minAndMax.minArea : '';
       minAndMax.maxArea ? obj.maxArea = minAndMax.maxArea : '';
       minAndMax.minPrice ? obj.minPrice = minAndMax.minPrice : '';
@@ -400,6 +403,15 @@ Page({
       this.get_house_list(obj,true);
     }
     this.detectionFilter();
+  },
+  objFilter(obj){
+      var effecitveObj = {};
+      for(let key in obj){
+          if(obj.hasOwnProperty(key)&&obj[key]){
+             effecitveObj[key] = obj[key];
+          }
+      }
+      return effecitveObj;
   },
   objectEmpty(){
     let flag = true;
@@ -521,7 +533,6 @@ Page({
     // 页面显示
     var searchData = util.getStorage('searchObj');
     var filterText = util.getStorage('filterText');
-    console.log(searchData,filterText);
     if(searchData || filterText){
       this.setData({
         page_num:1
@@ -531,14 +542,16 @@ Page({
         this.setData(filterText);
         util.removeStorage('filterText');
       }
-      console.log(this.data.listOne,this.data.listOne.length,this.data.listOne.length > 0);
       if(this.data.listOne.length > 0){
         if(searchData){
           var obj = {};
           obj.pageNo = 1;
-          searchData.area ? obj.area = searchData.area : '';
-          searchData.last ? (searchData.specificId ? obj.region = searchData.specificId : ''): (searchData.region ? obj.region = searchData.region : '');
-          obj.cityName = app.globalData.serverCity;
+          searchData.area > -1 ? obj.area = searchData.area : '';
+          searchData.last > -1 ? (searchData.specificId ? obj.region = searchData.specificId : ''): (searchData.region ? obj.region = searchData.region : '');
+          searchData.subwayPerimeter > -1 ? obj.subwayPerimeter = searchData.subwayPerimeter : '';
+          searchData.landmarkBuilding > -1 ? obj.landmarkBuilding = searchData.landmarkBuilding : '';
+          searchData.office > -1 ? obj.office = searchData.office : '';
+          searchData.creativeGarden > -1 ? obj.creativeGarden = searchData.creativeGarden : '';
           this.get_house_list(obj,true);
           var listTwo = [];
           this.data.listOne.map((item,index)=>{
@@ -561,30 +574,33 @@ Page({
         var regionTimer = setInterval(()=>{
           if(this.data.listOne.length > 0){
             clearInterval(regionTimer);
-            if(searchData){
-              var obj = {};
-              obj.pageNo = 1;
-              searchData.area ? obj.area = searchData.area : '';
-              searchData.last ? (searchData.specificId ? obj.region = searchData.specificId : ''): (searchData.region ? obj.region = searchData.region : '');
-              obj.cityName = app.globalData.serverCity;
-              this.get_house_list(obj,true);
-              var listTwo = [];
-              this.data.listOne.map((item,index)=>{
-                if(item.id == searchData.region){
-                  listTwo = this.data.listOne[index].allChildrenKeyword;
-                }
-              });
-              searchData.area ? this.data.selectConditionId.area = searchData.area : '';
-              this.setData({
-                selectId:searchData.region,
-                selectRegionId:searchData.specificId,
-                listTow:listTwo,
-                selectConditionId:this.data.selectConditionId
-              });
-              util.removeStorage('searchObj');
-            }else{
-              this.get_house_list({pageNo:1},true);
-            }
+              if(searchData){
+                  var obj = {};
+                  obj.pageNo = 1;
+                  searchData.area > -1 ? obj.area = searchData.area : '';
+                  searchData.last > -1 ? (searchData.specificId ? obj.region = searchData.specificId : ''): (searchData.region ? obj.region = searchData.region : '');
+                  searchData.subwayPerimeter > -1 ? obj.subwayPerimeter = searchData.subwayPerimeter : '';
+                  searchData.landmarkBuilding > -1 ? obj.landmarkBuilding = searchData.landmarkBuilding : '';
+                  searchData.office > -1 ? obj.office = searchData.office : '';
+                  searchData.creativeGarden > -1 ? obj.creativeGarden = searchData.creativeGarden : '';
+                  this.get_house_list(obj,true);
+                  var listTwo = [];
+                  this.data.listOne.map((item,index)=>{
+                      if(item.id == searchData.region){
+                          listTwo = this.data.listOne[index].allChildrenKeyword;
+                      }
+                  });
+                  searchData.area ? this.data.selectConditionId.area = searchData.area : '';
+                  this.setData({
+                      selectId:searchData.region,
+                      selectRegionId:searchData.specificId,
+                      listTow:listTwo,
+                      selectConditionId:this.data.selectConditionId
+                  });
+                  util.removeStorage('searchObj');
+              }else{
+                  this.get_house_list({pageNo:1},true);
+              }
           }
         },500)
       }

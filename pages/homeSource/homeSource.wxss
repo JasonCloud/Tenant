@@ -279,6 +279,9 @@ page{
 }
 .container .list .right .item_child{
     padding-bottom: 8rpx;
+    display:flex;
+    align-items: center;
+    flex-wrap: nowrap;
 }
 .container .list .right .item_child:first-child{
     display: flex;
@@ -304,6 +307,10 @@ page{
 .container .list .item_child .h2{
     color: #555;
     font-size: 28rpx;
+    display:block;
+}
+.container .list .item_child .price{
+    color:#ff6060;
 }
 .container .list .item_child:last-child{
     display: flex;
